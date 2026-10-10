@@ -54,9 +54,12 @@ const I18N = {
     fPrev: 'كتاب سابق', fPrevV: 'السبتيون: منهجاً وغاية (1985)',
     tocTitle: 'المحتويات', toc: 'المحتويات', fontSmaller: 'تصغير الخط', fontLarger: 'تكبير الخط', goto: 'اذهب إلى صفحة',
     prev: 'السابق', next: 'التالي', reportTypo: 'أبلغ عن خطأ', copyLink: 'نسخ الرابط', copied: 'تم النسخ',
-    ocrNote: 'نص مستخرج آلياً من نسخة ممسوحة؛ قد تقع أخطاء، خاصة في الآيات والحواشي. إن رأيت خطأً فاضغط «أبلغ عن خطأ» في الصفحة.',
+    ocrNote: 'النص العربي مستخرج آلياً من نسخة ممسوحة؛ قد تقع أخطاء، خاصة في الآيات والحواشي. إن رأيت خطأً فاضغط «أبلغ عن خطأ» في الصفحة.',
     results: n => `${N(n)} صفحة`, noResults: 'لا توجد نتائج. جرّب كلمة أقصر أو بدون تشكيل.',
-    searchHint: 'ابحث بكلمة أو أكثر. لا يُشترط التشكيل، ولا التفريق بين الهمزات والألف.',
+    searchHint: 'ابحث بكلمة أو أكثر. لا يُشترط التشكيل، ولا التفريق بين الهمزات والألف. يمكنك أيضاً البحث بالإنجليزية في الترجمة.',
+    modeAr: 'العربية', modeEn: 'English', modeBoth: 'الاثنان', textLang: 'لغة النص',
+    trNote: 'الترجمة الإنجليزية أنجزها Claude (نموذج ذكاء اصطناعي من Anthropic) ولم يراجعها مترجم بشري. وترجمة الآيات القرآنية من النموذج نفسه وليست من ترجمة منشورة.',
+    authorNote: 'الآراء الواردة في الكتاب آراء المؤلف.',
     tryThese: 'جرّب:', all: 'الكل', more: 'المزيد', resultsFor: q => `نتائج البحث عن «${q}»`,
     themeLight: 'فاتح', themeSepia: 'ورقي', themeDark: 'داكن',
     loadError: 'تعذّر تحميل الكتاب. حدّث الصفحة وحاول مرة أخرى.',
@@ -104,9 +107,12 @@ const I18N = {
     fPrev: 'Earlier book', fPrevV: 'Al-Sabtiyyun: Manhajan wa Ghayah (1985)',
     tocTitle: 'Contents', toc: 'Contents', fontSmaller: 'Smaller text', fontLarger: 'Larger text', goto: 'Go to page',
     prev: 'Previous', next: 'Next', reportTypo: 'Report a typo', copyLink: 'Copy link', copied: 'Copied',
-    ocrNote: 'Text extracted automatically from a scan; errors are possible, especially in Qur’anic verses and footnotes. If you spot one, use “Report a typo” on that page.',
+    ocrNote: 'The Arabic text was extracted automatically from a scan; errors are possible, especially in Qur’anic verses and footnotes. If you spot one, use “Report a typo” on that page.',
     results: n => `${n} page${n === 1 ? '' : 's'}`, noResults: 'No results. Try a shorter word, or one without vowel marks.',
-    searchHint: 'Search for one or more Arabic words. Vowel marks are optional, and alef or hamza forms are treated alike.',
+    searchHint: 'Search in English (the translation) or Arabic (the original). In Arabic, vowel marks are optional and alef or hamza forms are treated alike.',
+    modeAr: 'العربية', modeEn: 'English', modeBoth: 'Both', textLang: 'Text',
+    trNote: 'The English translation was made by Claude (an AI model from Anthropic) and has not been reviewed by a human translator. Qur’anic verses are translated by the model, not taken from a published translation.',
+    authorNote: 'The views expressed in the book are the author’s.',
     tryThese: 'Try:', all: 'All', more: 'Show more', resultsFor: q => `Results for “${q}”`,
     themeLight: 'Light', themeSepia: 'Sepia', themeDark: 'Dark',
     loadError: 'The book could not be loaded. Refresh and try again.',
@@ -116,9 +122,10 @@ const I18N = {
 };
 
 const state = {
-  lang: store.get('lang') || ((navigator.language || 'ar').toLowerCase().startsWith('ar') ? 'ar' : 'en'),
+  lang: store.get('lang') === 'en' ? 'en' : 'ar', // Arabic unless the visitor has chosen EN
   size: parseFloat(store.get('size')) || 1.3,
-  site: null, pages: null, plain: null, sections: null, byPage: null,
+  site: null, pages: null, plain: null, pagesEn: null, plainEn: null, sections: null, byPage: null,
+  readPref: ['ar', 'en', 'both'].includes(store.get('readMode')) ? store.get('readMode') : null,
 };
 const t = k => I18N[state.lang][k] ?? k;
 const N = n => state.lang === 'ar' ? Number(n).toLocaleString('ar-EG', { useGrouping: false }) : String(n);
@@ -143,13 +150,22 @@ function loadPages() {
   });
   return pagesPromise;
 }
-function plainText() {
-  if (state.plain) return state.plain;
-  const box = document.createElement('div');
-  state.plain = {};
-  for (const [n, html] of Object.entries(state.pages)) { box.innerHTML = html; state.plain[n] = box.textContent.replace(/\s+/g, ' ').trim(); }
-  return state.plain;
+let pagesEnPromise;
+function loadPagesEn() {
+  pagesEnPromise ??= loadSite().then(d => d.hasEnglish ? fetch('data/pages-en.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }) : null)
+    .then(p => { state.pagesEn = p; return p; });
+  return pagesEnPromise;
 }
+const hasEn = () => !!state.site?.hasEnglish;
+function plainOf(pages, key) {
+  if (state[key]) return state[key];
+  const box = document.createElement('div');
+  state[key] = {};
+  for (const [n, html] of Object.entries(pages)) { box.innerHTML = html; state[key][n] = box.textContent.replace(/\s+/g, ' ').trim(); }
+  return state[key];
+}
+function plainText() { return plainOf(state.pages, 'plain'); }
+function plainTextEn() { return plainOf(state.pagesEn, 'plainEn'); }
 
 /* ---------- Arabic-aware matching ---------- */
 const DIAC = '[\\u064B-\\u065F\\u0670\\u0640\\u06D6-\\u06ED]*';
@@ -162,6 +178,7 @@ function wordRe(word) {
   for (const ch of word.replace(DIAC_STRIP, '')) {
     if (CLASS[ch]) out += `[${CLASS[ch]}]${DIAC}`;
     else if (/[0-9\u0660-\u0669\u06F0-\u06F9]/.test(ch)) { const d = digitVal(ch); out += `[${d}${String.fromCharCode(0x660 + d)}${String.fromCharCode(0x6F0 + d)}]`; }
+    else if (/[A-Za-z]/.test(ch)) out += ch + "['\u2019\u02BF\u02BE\u2018]?[\\u0300-\\u036f]*";
     else out += escRe(ch) + DIAC;
   }
   return out;
@@ -237,8 +254,8 @@ function viewHome(app) {
   <section class="hero"><div class="wrap hero-grid">
     <div>
       <div class="kicker">${t('kickerHome')}</div>
-      <h1 lang="ar">الدكتور حمدي عبد العال</h1>
-      <div class="en-name">${state.lang === 'ar' ? 'Dr. Hamdy Abdel Aal' : 'حمدي عبد العال'}</div>
+      <h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? 'الدكتور حمدي عبد العال' : 'Dr. Hamdy Abdel Aal'}</h1>
+      <div class="en-name">${state.lang === 'ar' ? 'Dr. Hamdy Abdel Aal' : '<bdi lang="ar">الدكتور حمدي عبد العال</bdi>'}</div>
       <p class="ded">${t('heroDed')}</p>
       <div class="row">
         <a class="btn" href="${resume ? readHref(resume) : '#/read'}">${resume ? t('continueRead') : t('readBook')}</a>
@@ -258,7 +275,8 @@ function viewHome(app) {
 
   <section class="section" style="padding-top:0"><div class="wrap">
     <div class="orn" aria-hidden="true"><svg><use href="#star"/></svg></div>
-    <div style="margin-top:2.5rem"><div class="kicker">${t('aboutKick')}</div><h2 lang="ar">${I18N.ar.bookTitle}</h2>
+    <div style="margin-top:2.5rem"><div class="kicker">${t('aboutKick')}</div><h2 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(t('bookTitle'))}</h2>
+    ${state.lang === 'en' ? `<p class="sans" style="margin:-.4rem 0 1rem;color:var(--muted)"><bdi lang="ar">${I18N.ar.bookTitle}</bdi></p>` : ''}
     <p class="lede">${t('aboutP1')}</p></div>
     <div class="tiles">
       ${[['ch1', 'j1', 17, 72], ['ch2', 'c1', 73, 144], ['ch3', 'i1', 145, 209]].map(([k, id, a, b]) => `
@@ -293,11 +311,11 @@ function viewBooks(app) {
   <div class="wrap"><div class="page-head"><div class="kicker">${t('navBooks')}</div><h1>${t('booksTitle')}</h1><p class="lede">${t('booksLead')}</p></div>
   <div class="shelf">
     <article class="book"><img src="assets/cover.jpg" width="104" height="158" alt="">
-      <div><span class="tag ok">${t('available')}</span><h3 lang="ar">${I18N.ar.bookTitle}</h3>
+      <div><span class="tag ok">${t('available')}</span><h3 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(t('bookTitle'))}</h3>${state.lang === 'en' ? `<p class="meta" style="margin:-.2rem 0 .5rem"><bdi lang="ar">${I18N.ar.bookTitle}</bdi></p>` : ''}
       <p class="meta">${t('publisher')}: ${t('pubPlace')}<br>${t('edition')}: ${t('ed1')}</p>
       <a class="btn" href="#/read">${t('readNow')}</a></div></article>
     <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
-      <div><span class="tag seek">${t('seeking')}</span><h3 lang="ar">السبتيون: منهجاً وغاية</h3>
+      <div><span class="tag seek">${t('seeking')}</span><h3 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? 'السبتيون: منهجاً وغاية' : 'Al-Sabtiyyun: Manhajan wa Ghayah'}</h3>${state.lang === 'en' ? `<p class="meta" style="margin:-.2rem 0 .5rem"><bdi lang="ar">السبتيون: منهجاً وغاية</bdi></p>` : ''}
       <p class="meta">${t('sabMeta')}</p><a class="btn ghost" href="${issueUrl()}" rel="noopener">${t('report')}</a></div></article>
     <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
       <div><span class="tag seek">${t('seeking')}</span><h3>${t('moreBooks')}</h3>
@@ -309,8 +327,8 @@ function viewBooks(app) {
 
 function viewAuthor(app) {
   app.innerHTML = `
-  <div class="wrap"><div class="page-head"><div class="kicker">${t('authorKick')}</div><h1 lang="ar">${I18N.ar.authorTitle}</h1>
-    <div class="sans" style="color:var(--muted)" dir="ltr">Dr. Hamdy Abdel Aal</div></div>
+  <div class="wrap"><div class="page-head"><div class="kicker">${t('authorKick')}</div><h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? I18N.ar.authorTitle : 'Dr. Hamdy Abdel Aal'}</h1>
+    <div class="sans" style="color:var(--muted)">${state.lang === 'ar' ? '<bdi dir="ltr">Dr. Hamdy Abdel Aal</bdi>' : `<bdi lang="ar">${I18N.ar.authorTitle}</bdi>`}</div></div>
   <div class="prose"><p>${t('authorP1')}</p><p>${t('authorP2')}</p></div>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
   <dl class="facts"><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fMain')}</dt><dd>${t('fMainV')}</dd><dt>${t('fPrev')}</dt><dd>${t('fPrevV')}</dd></dl>
@@ -338,8 +356,21 @@ function highlightIn(root, re) {
   return first;
 }
 
+function readMode(r) {
+  if (!hasEn()) return 'ar';
+  let mode = state.readPref || (state.lang === 'en' ? 'en' : 'ar');
+  const q = r.params.get('q') || '';
+  if (r.params.get('hl') != null) return mode === 'en' ? 'both' : mode;      // quote highlights live in the Arabic text
+  const arQ = /[\u0600-\u06FF]/.test(q), laQ = /[A-Za-z]/.test(q);
+  if (laQ && !arQ && mode === 'ar') mode = 'en';
+  if (arQ && mode === 'en') mode = 'both';
+  return mode;
+}
+
 async function viewRead(app, r) {
   await loadPages();
+  await loadPagesEn();
+  const mode = readMode(r);
   const secs = state.sections;
   let page = null, sec;
   if (r.seg[1] === 'p') { page = parseInt(r.seg[2], 10); sec = state.byPage.get(page); }
@@ -350,8 +381,8 @@ async function viewRead(app, r) {
     sec = secs[0]; page = null;
   }
   // Re-render only when the section changes (scroll tracking rewrites the hash within a section).
-  if (app.dataset.sec === sec.id && $('.doc', app)) { scrollToPage(page, r); return; }
-  app.dataset.sec = sec.id;
+  if (app.dataset.sec === sec.id && app.dataset.mode === mode && $('.doc', app)) { scrollToPage(page, r); return; }
+  app.dataset.sec = sec.id; app.dataset.mode = mode;
 
   const idx = secs.indexOf(sec), prev = secs[idx - 1], next = secs[idx + 1];
   let tocHTML = '', group = null;
@@ -362,10 +393,12 @@ async function viewRead(app, r) {
   }
   let body = '';
   for (let p = sec.start; p <= sec.end; p++) {
-    const h = state.pages[p]; if (!h) continue;
+    const ar = state.pages[p], en = mode === 'ar' ? null : state.pagesEn?.[p];
+    if (!ar && !en) continue;
     const typo = `${REPO}/issues/new?title=${encodeURIComponent((state.lang === 'ar' ? 'خطأ في الصفحة ' : 'Typo on page ') + p)}&body=${encodeURIComponent(`${location.origin}${location.pathname}#/read/p/${p}\n\n`)}`;
-    body += `<section class="page" id="p${p}" data-p="${p}" lang="ar" dir="rtl">
-      <div class="page-tools" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}"><a class="pn" href="${readHref(p)}" title="${esc(t('copyLink'))}" data-copy>${N(p)}</a><a class="rep" href="${typo}" rel="noopener">${esc(t('reportTypo'))}</a></div>${h}</section>`;
+    const arBox = `<div class="ar-text" lang="ar" dir="rtl">${ar || ''}</div>`, enBox = `<div class="en-text" lang="en" dir="ltr">${en || ''}</div>`;
+    body += `<section class="page ${mode}" id="p${p}" data-p="${p}">
+      <div class="page-tools" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}"><a class="pn" href="${readHref(p)}" title="${esc(t('copyLink'))}" data-copy>${N(p)}</a><a class="rep" href="${typo}" rel="noopener">${esc(t('reportTypo'))}</a></div>${mode === 'en' ? enBox : mode === 'ar' ? arBox : arBox + enBox}</section>`;
   }
   app.innerHTML = `
   <div class="reader">
@@ -374,14 +407,17 @@ async function viewRead(app, r) {
       <div class="bar" role="toolbar">
         <button type="button" class="toc-btn" id="tocBtn" aria-expanded="false" aria-controls="toc">☰ ${t('toc')}</button>
         <span class="grow" id="where"></span>
+        ${hasEn() ? `<span class="seg" role="group" aria-label="${esc(t('textLang'))}">${['ar', 'en', 'both'].map(m => `<button type="button" data-mode="${m}" aria-pressed="${m === mode}">${t('mode' + m[0].toUpperCase() + m.slice(1))}</button>`).join('')}</span>` : ''}
         <button type="button" id="fs-" aria-label="${esc(t('fontSmaller'))}">A−</button>
         <button type="button" id="fs+" aria-label="${esc(t('fontLarger'))}">A+</button>
         <label>${t('goto')} <input id="gotoIn" inputmode="numeric" type="text" aria-label="${esc(t('goto'))}" placeholder="${N(sec.start)}"></label>
         <div class="progress" aria-hidden="true"><i id="prog"></i></div>
       </div>
-      <div class="notice">${t('ocrNote')}</div>
+      <div class="notice">${mode === 'en' ? '' : esc(t('ocrNote')) + ' '}${mode === 'ar' ? '' : esc(t('trNote')) + ' '}${esc(t('authorNote'))}</div>
       <div class="sheet" id="sheet">
-        <header class="sec-title"><h1 lang="ar">${esc(sec.ar)}</h1>${state.lang === 'en' ? `<div class="en">${esc(sec.en)}</div>` : ''}</header>
+        <header class="sec-title">${mode === 'en'
+          ? `<h1 lang="en" dir="ltr">${esc(sec.en)}</h1><div class="en" lang="ar" dir="rtl">${esc(sec.ar)}</div>`
+          : `<h1 lang="ar">${esc(sec.ar)}</h1>${state.lang === 'en' ? `<div class="en">${esc(sec.en)}</div>` : ''}`}</header>
         ${body}
       </div>
       <nav class="sec-nav" aria-label="Sections">
@@ -397,6 +433,7 @@ function wireReader(sec, page, r) {
   const toc = $('#toc'), tocBtn = $('#tocBtn');
   tocBtn.onclick = () => { const o = toc.classList.toggle('open'); tocBtn.setAttribute('aria-expanded', o); };
   toc.onclick = e => { if (e.target.closest('a')) toc.classList.remove('open'); };
+  $$('[data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; store.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
   $('#fs-').onclick = () => { state.size = Math.max(1, +(state.size - .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#fs\\+').onclick = () => { state.size = Math.min(2.2, +(state.size + .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#gotoIn').onkeydown = e => {
@@ -413,8 +450,8 @@ function wireReader(sec, page, r) {
   // highlight: a whole quote (?hl=) or the search words (?q=)
   let re = null;
   const hl = r.params.get('hl'), q = r.params.get('q');
-  if (hl != null && state.site.quotes[hl]) re = new RegExp(joinRe(tokens(state.site.quotes[hl].text).map(wordRe)), 'gu');
-  else if (q) { const w = tokens(q).map(wordRe); if (w.length) re = new RegExp(w.join('|'), 'gu'); }
+  if (hl != null && state.site.quotes[hl]) re = new RegExp(joinRe(tokens(state.site.quotes[hl].text).map(wordRe)), 'giu');
+  else if (q) { const w = tokens(q).map(wordRe); if (w.length) re = new RegExp(w.join('|'), 'giu'); }
   if (re) highlightIn($('#sheet'), re);
 
   // current page tracking
@@ -454,22 +491,24 @@ async function viewSearch(app, r) {
   const q = (r.params.get('q') || '').trim();
   const chap = r.params.get('c') || '';
   app.dataset.sec = '';
-  const examples = ['الملة', 'النحلة', 'الوحي', 'التثليث', 'القرآن', 'إنجيل برنابا'];
+  const examplesAr = ['الملة', 'النحلة', 'الوحي', 'التثليث', 'القرآن', 'إنجيل برنابا'];
+  const examplesEn = ['milla', 'nihla', 'revelation', 'Trinity', 'Barnabas', 'Nicaea'];
   const head = `<div class="wrap results"><div class="page-head"><div class="kicker">${t('searchBook')}</div><h1>${q ? esc(t('resultsFor')(q)) : t('searchBook')}</h1></div>`;
   if (!q) {
-    app.innerHTML = `${head}<p class="lede">${t('searchHint')}</p><div class="examples"><span class="sans">${t('tryThese')}</span>${examples.map(x => `<a class="chip" lang="ar" href="#/search?q=${encodeURIComponent(x)}">${x}</a>`).join('')}</div></div>`;
+    app.innerHTML = `${head}<p class="lede">${t('searchHint')}</p><div class="examples"><span class="sans">${t('tryThese')}</span>${[...examplesAr.map(x => ['ar', x]), ...(hasEn() ? examplesEn.map(x => ['en', x]) : [])].sort(a => (a[0] === state.lang ? -1 : 1)).map(([l, x]) => `<a class="chip" lang="${l}" href="#/search?q=${encodeURIComponent(x)}">${x}</a>`).join('')}</div></div>`;
     $('#searchInput').focus();
     return;
   }
   app.innerHTML = `${head}<p class="loading">…</p></div>`;
-  await loadPages();
-  const plain = plainText();
+  await loadPages(); await loadPagesEn();
+  const useEn = hasEn() && /[A-Za-z]/.test(q) && !/[\u0600-\u06FF]/.test(q);
+  const plain = useEn ? plainTextEn() : plainText();
   const words = tokens(q);
   if (!words.length) { app.innerHTML = `${head}<p class="empty">${t('noResults')}</p></div>`; return; }
-  const regs = words.map(w => new RegExp(wordRe(w), 'u'));
-  const regsG = words.map(w => new RegExp(wordRe(w), 'gu'));
-  const phrase = words.length > 1 ? new RegExp(joinRe(words.map(wordRe)), 'u') : null;
-  const all = new RegExp(words.map(wordRe).join('|'), 'gu');
+  const regs = words.map(w => new RegExp(wordRe(w), 'iu'));
+  const regsG = words.map(w => new RegExp(wordRe(w), 'giu'));
+  const phrase = words.length > 1 ? new RegExp(joinRe(words.map(wordRe)), 'iu') : null;
+  const all = new RegExp(words.map(wordRe).join('|'), 'giu');
   const hits = [];
   for (const [n, text] of Object.entries(plain)) {
     if (!regs.every(re => re.test(text))) continue;
@@ -494,7 +533,7 @@ async function viewSearch(app, r) {
   };
   const card = h => { const s = state.byPage.get(h.page); return `<a class="hit" href="${readHref(h.page, '?q=' + encodeURIComponent(q))}">
       <div class="where"><b>${t('page')} ${N(h.page)}</b><span ${state.lang === 'en' ? '' : 'lang="ar"'}>${esc(secTitle(s))}</span></div>
-      <p lang="ar" dir="rtl">${snippet(h)}</p></a>`; };
+      <p lang="${useEn ? 'en' : 'ar'}" dir="${useEn ? 'ltr' : 'rtl'}">${snippet(h)}</p></a>`; };
   let limit = 20;
   const paint = () => {
     app.innerHTML = `${head}
