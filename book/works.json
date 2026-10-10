@@ -62,11 +62,29 @@
     "uoft": "Robarts, BJ1291 .A214 1985",
     "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181138-5193872&search=books",
     "publisherUrl": "https://darelkalam.com/ViewBook.php?id=248",
-    "libraries": [],
+    "libraries": [
+      {
+        "name": "College of Sharia Sciences Library (Oman)",
+        "url": "https://www.library.css.edu.om/search/standard/results/main?searchKeyword%5B0%5D=%D8%AD%D9%85%D8%AF%D9%8A+%D8%B9%D8%A8%D8%AF+%D8%A7%D9%84%D8%B9%D8%A7%D9%84&searchTarget%5B0%5D=TENxdWM5WCtEdFpnTkNuUlRyS0lZQT09&branches=3"
+      }
+    ],
     "topics": {
       "ar": "تعريف علم الأخلاق وغايته؛ المعيار الأخلاقي في الفلسفة اليونانية والحديثة (كانط وهوبز وبنثام)؛ المعيار الأخلاقي في الإسلام وإخفاق المعيار الوضعي.",
       "en": "The definition and aim of ethics; the moral criterion in Greek and modern philosophy (Kant, Hobbes, Bentham); the moral criterion in Islam and the failure of the positivist criterion."
-    }
+    },
+    "editions": [
+      {
+        "place": "Kuwait",
+        "year": 1985,
+        "edition": 3
+      },
+      {
+        "place": "Cairo",
+        "year": 2002,
+        "edition": 3,
+        "pages": 174
+      }
+    ]
   },
   {
     "id": "milla",
