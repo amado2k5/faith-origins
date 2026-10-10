@@ -57,7 +57,7 @@ const I18N = {
     results: n => `${N(n)} صفحة`, noResults: 'لا توجد نتائج. جرّب كلمة أقصر أو بدون تشكيل.',
     searchHint: 'ابحث بكلمة أو أكثر. لا يُشترط التشكيل، ولا التفريق بين الهمزات والألف. يمكنك أيضاً البحث بالإنجليزية في الترجمة.',
     libTitle: 'استعِر الكتب من المكتبات', libP: 'كتبه الثلاثة الأخرى ليست على الإنترنت بعد، لكنها مفهرسة في المكتبات. تذكر فهرسة مكتبات جامعة تورنتو الكتب الأربعة كلها. ويبحث رابط WorldCat عن المكتبات الأخرى.',
-    uoft: 'جامعة تورنتو', worldcat: 'WorldCat', neel: 'النيل والفرات', notOnline: 'ليس على الإنترنت بعد', heldBy: 'في مكتبات جامعة تورنتو', ed: 'ط', pp: 'ص', year: 'السنة', allUofT: 'كل كتبه في مكتبات تورنتو',
+    uoft: 'جامعة تورنتو', worldcat: 'WorldCat', neel: 'النيل والفرات', pubPage: 'صفحة الناشر', alsoHeld: 'توجد أيضاً في', topicsFrom: 'من فهرس الناشر', pubListing: 'قائمة الناشر لكتبه', notOnline: 'ليس على الإنترنت بعد', heldBy: 'في مكتبات جامعة تورنتو', ed: 'ط', pp: 'ص', year: 'السنة', allUofT: 'كل كتبه في مكتبات تورنتو',
     modeAr: 'العربية', modeEn: 'English', modeBoth: 'الاثنان', textLang: 'لغة النص',
     trNote: 'الترجمة الإنجليزية أنجزها Claude (نموذج ذكاء اصطناعي من Anthropic) ولم يراجعها مترجم بشري. وترجمة الآيات القرآنية من النموذج نفسه وليست من ترجمة منشورة.',
     authorNote: 'الآراء الواردة في الكتاب آراء المؤلف.',
@@ -111,7 +111,7 @@ const I18N = {
     results: n => `${n} page${n === 1 ? '' : 's'}`, noResults: 'No results. Try a shorter word, or one without vowel marks.',
     searchHint: 'Search in English (the translation) or Arabic (the original). In Arabic, vowel marks are optional and alef or hamza forms are treated alike.',
     libTitle: 'Borrow the books from libraries', libP: 'His other three books are not online yet, but they are catalogued in libraries. The University of Toronto’s catalogue lists all four. The WorldCat link searches for other libraries.',
-    uoft: 'U of Toronto', worldcat: 'WorldCat', neel: 'Neelwafurat', notOnline: 'Not online yet', heldBy: 'University of Toronto Libraries', ed: 'ed.', pp: 'pp.', year: 'Year', allUofT: 'All his books at Toronto',
+    uoft: 'U of Toronto', worldcat: 'WorldCat', neel: 'Neelwafurat', pubPage: 'Publisher', alsoHeld: 'Also held by', topicsFrom: 'From the publisher’s contents list', pubListing: 'The publisher’s list of his books', notOnline: 'Not online yet', heldBy: 'University of Toronto Libraries', ed: 'ed.', pp: 'pp.', year: 'Year', allUofT: 'All his books at Toronto',
     modeAr: 'العربية', modeEn: 'English', modeBoth: 'Both', textLang: 'Text',
     trNote: 'The English translation was made by Claude (an AI model from Anthropic) and has not been reviewed by a human translator. Qur’anic verses are translated by the model, not taken from a published translation.',
     authorNote: 'The views expressed in the book are the author’s.',
@@ -309,6 +309,7 @@ function issueUrl() {
 }
 
 const UOFT_AUTHOR = 'https://librarysearch.library.utoronto.ca/nde/search?vid=01UTORONTO_INST:UTORONTO_NDE&search_scope=UTL_AND_CI&mode=advanced&tab=Everything&query=creator,exact,%CA%BBAbd%20al-%CA%BB%C4%80l%E2%94%80%20%E1%B8%A4amd%C4%AB.&offset=0&lang=en';
+const PUBLISHER_AUTHOR = 'https://darelkalam.com/ViewAuthorBooks.php?id=75';
 const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(':')[0].split(' في ')[0])}`;
 const workTitle = w => state.lang === 'ar' ? w.ar : w.en;
 const workMeta = w => [`${w.publisher}, ${w.place}`, `${w.year}`, w.edition ? `${t('ed')} ${N(w.edition)}` : '', w.pages ? `${N(w.pages)} ${t('pp')}` : ''].filter(Boolean).join(' · ');
@@ -324,9 +325,11 @@ function viewBooks(app) {
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       <h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
       <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}<br><em>${esc(w.gloss)}</em></p>
-      <p class="meta">${esc(workMeta(w))}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}</p>
+      <p class="meta">${esc(workMeta(w))}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}</a>`).join(', ')}` : ''}</p>
+      ${w.topics ? `<p class="meta topics" lang="${state.lang}" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}">${esc(w.topics[state.lang])} <em>(${t('topicsFrom')})</em></p>` : ''}
       <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
         <a class="chip" href="${UOFT_AUTHOR}" rel="noopener">${t('uoft')}</a>
+        ${w.publisherUrl ? `<a class="chip" href="${w.publisherUrl}" rel="noopener">${t('pubPage')}</a>` : ''}
         <a class="chip" href="${worldcatUrl(w)}" rel="noopener">${t('worldcat')}</a>
         <a class="chip" href="${w.neelwafurat}" rel="noopener">${t('neel')}</a></p></div></article>`).join('')}
     <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
@@ -334,7 +337,7 @@ function viewBooks(app) {
       <p class="meta">${t('moreBooksMeta')}</p><a class="btn ghost" href="${issueUrl()}" rel="noopener">${t('report')}</a></div></article>
   </div>
   <section class="card" style="max-width:42rem;margin-bottom:1.5rem"><h2 style="font-size:1.5rem">${t('libTitle')}</h2><p>${t('libP')}</p>
-    <p class="row"><a class="btn" href="${UOFT_AUTHOR}" rel="noopener">${t('allUofT')}</a></p></section>
+    <p class="row"><a class="btn" href="${UOFT_AUTHOR}" rel="noopener">${t('allUofT')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></section>
   <section class="card" style="max-width:42rem;margin-bottom:3rem"><h2 style="font-size:1.5rem">${t('helpTitle')}</h2><p>${t('helpP')}</p>
     <ul class="checks">${t('h1').map(x => `<li>${esc(x)}</li>`).join('')}</ul></section></div>`;
 }
@@ -351,7 +354,7 @@ function viewAuthor(app) {
       <div class="sans" style="font-size:.8rem;color:var(--muted)">${esc(workMeta(w))}</div></div></li>`).join('')}</ol>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
   <dl class="facts"><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
-  <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a></p></div>`;
+  <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></div>`;
 }
 
 /* ---------- reader ---------- */

@@ -149,6 +149,10 @@ mark{background:var(--mark);color:var(--mark-ink);border-radius:3px;padding:0 .1
 .works li{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--line)}
 .works .yr{font-family:var(--sans);font-weight:700;color:var(--gold);min-width:3rem}
 .works b{font-size:1.2rem}
+.book .topics{font-size:.88rem;line-height:1.55;color:var(--ink)}
+.book .topics em{color:var(--muted)}
+.book .meta a{color:var(--green)}
+:root[data-theme=dark] .book .meta a{color:var(--gold)}
 .book .row .chip{font-size:.78rem;padding:.2rem .65rem}
 
 /* search page */
