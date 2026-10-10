@@ -48,6 +48,10 @@ def main():
         n = int(key)
         if "replace" in c:
             pages[n] = c["replace"]
+        for old, new in c.get("sub", []):
+            if old not in pages[n]:
+                fail(f"correction for page {n}: text not found: {old!r}")
+            pages[n] = pages[n].replace(old, new)
         for line in c.get("remove", []):
             if line not in pages[n]:
                 fail(f"correction for page {n}: line not found: {line!r}")
@@ -72,11 +76,17 @@ def main():
             fail(f"quote not found on page {q['page']}: {q['text'][:40]}…")
         quotes.append({**q, "text": tidy(q["text"])})
 
+    works = json.loads((BOOK / "works.json").read_text(encoding="utf-8"))
+    for w in works:
+        for k in ("id", "ar", "en", "gloss", "year", "publisher", "place", "neelwafurat"):
+            if k not in w:
+                fail(f"works.json: {w.get('id', '?')} lacks {k}")
+
     out_pages = {str(n): render(pages[n]) for n in covered if flat(re.sub(r"<[^>]+>", "", render(pages[n])))}
     OUT.mkdir(parents=True, exist_ok=True)
     en_file = BOOK / "al-milla-wal-nihla.en.md"
     (OUT / "pages.json").write_text(json.dumps(out_pages, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    (OUT / "site.json").write_text(json.dumps({"toc": toc, "quotes": quotes, "firstPage": covered[0], "lastPage": covered[-1], "hasEnglish": en_file.exists()},
+    (OUT / "site.json").write_text(json.dumps({"toc": toc, "quotes": quotes, "firstPage": covered[0], "lastPage": covered[-1], "hasEnglish": en_file.exists(), "works": works},
                                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     en_note = "no English translation yet"
     if en_file.exists():

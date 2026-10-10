@@ -2789,7 +2789,7 @@ When Umar (may God be pleased with him) was stabbed by the treacherous hand of A
 
 The six whom Umar had named met under the guard of Abu Talha al-Ansari, but they did not reach agreement. Abd al-Rahman ibn Awf then proposed that one of them withdraw and undertake to choose one of the remaining five, on condition that he swear by God to prefer what was right and not follow his own inclination. When no one withdrew, Abd al-Rahman removed himself, swore by God to prefer what was right, and they swore to him that they would accept whomever he chose.
 
-(42) On this see the author's Al-Saba'iyyun: Manhajan wa Ghaya (The Saba'ites: Method and Aim), Dar al-Qalam, Kuwait, 1985.
+(42) On this see the author's Al-Saba'iyyun: Manhajan wa Ghayah (The Saba'ites: Method and Aim), Dar al-Qalam, Kuwait, 1985.
 
 {182}------------------------------------------------
 
@@ -3357,7 +3357,7 @@ And our final prayer is: praise be to God, Lord of the worlds, who by His grace 
 - *Al-Islam wa al-Hadara al-Arabiyya* (Islam and Arab Civilisation). Lajnat al-Ta'lif wa al-Tarjama wa al-Nashr, Cairo, 1968, Muhammad Kurd Ali.
 - *Al-Tawrat wa al-Injil wa al-Qur'an al-Karim* (The Torah, the Gospel and the Noble Qur'an). Dar al-Kindi, Beirut, 1978.
 - *Al-Fitna al-Kubra* (The Great Sedition). Taha Husayn.
-- *Al-Sabtiyyun: Manhajan wa Ghayatan* (The Sabbatarians: Method and Aim), by the author. Dar al-Qalam, Kuwait, 1985.
+- *Al-Saba'iyyun: Manhajan wa Ghayah* (The Saba'ites: Method and Aim), by the author. Dar al-Qalam, Kuwait, 1985.
 - *Al-Siddiq Abu Bakr* (Abu Bakr the Truthful). Muhammad Husayn Haykal, Cairo, AH 1361.
 - *Tarikh al-Tabari* (The History of al-Tabari). Matba'at al-Istiqama, Cairo, 1939.
 - *Zad al-Ma'ad* (Provisions for the Hereafter). Dar al-Fikr, Beirut, 1972, Ibn Qayyim al-Jawziyya.
