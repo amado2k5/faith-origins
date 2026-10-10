@@ -19,6 +19,7 @@ to GitHub Pages on every push to `main` (`.github/workflows/pages.yml`).
 | `book/translation-guide.md` | Style rules and glossary the translation follows |
 | `book/corrections.json` | Hand corrections to the OCR text, applied at build time |
 | `book/toc.json` | Chapters and sections, with page ranges |
+| `book/works.json` | His known books (title, year, edition, publisher, library and catalogue links) shown on the Books and Author pages |
 | `book/quotes.json` | Quotations shown on the home page. The build fails if one is not found verbatim on its page |
 | `tools/build.py` | Turns the above into `site/data/site.json` and `site/data/pages.json` |
 | `site/` | The website (`index.html`, `assets/app.js`, `assets/style.css`, fonts, cover) |

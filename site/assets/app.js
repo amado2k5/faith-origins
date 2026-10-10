@@ -33,30 +33,31 @@ const I18N = {
     ch1: 'اليهودية', ch2: 'المسيحية', ch3: 'الإسلام',
     ch1d: 'النشأة، والكتب المقدسة، والعقائد، والفرق.', ch2d: 'النشأة، والأناجيل، والمجامع الكنسية، وإنجيل برنابا.', ch3d: 'القرآن الكريم، والخلاف التاريخي، والفرق الإسلامية.',
     helpKick: 'نبحث عن كتبه', helpTitle: 'هل لديك نسخة من أحد كتبه؟',
-    helpP: 'للدكتور حمدي عبد العال كتب أخرى نعمل على جمعها. أي خيط يساعدنا: نسخة، أو صورة غلاف، أو رقم في فهرس مكتبة، أو اسم ناشر.',
+    helpP: 'نعرف له أربعة كتب، ولا يتوفر منها هنا إلا «الملة والنحلة». نبحث عن نسخ الكتب الثلاثة الأخرى لمسحها ضوئياً ونشرها، وعن أي كتب أو مقالات أخرى له. أي خيط يساعدنا: نسخة، أو صورة غلاف، أو رقم في فهرس مكتبة، أو اسم ناشر.',
     helpBtn: 'أبلغنا عن كتاب', helpBooks: 'الكتب المعروفة',
     h1: ['نسخة ورقية أو ممسوحة من أي كتاب له', 'معلومات عن طبعة أو ناشر أو مكتبة تحتفظ بها', 'ذكريات أو صور أو مقالات عنه'],
     booksTitle: 'كتب الدكتور حمدي عبد العال', booksLead: 'الكتب المتاحة هنا، والكتب التي نبحث عنها.',
     available: 'متاح للقراءة', seeking: 'نبحث عن نسخة',
     publisher: 'الناشر', edition: 'الطبعة', pubPlace: 'دار القلم للنشر والتوزيع، الكويت', ed1: 'الأولى، 1409 هـ / 1989 م',
-    sab: 'السبتيون: منهجاً وغاية', sabMeta: 'دار القلم، الكويت، 1985. وردت الإشارة إليه في مراجع كتاب «الملة والنحلة».',
     moreBooks: 'كتب أخرى', moreBooksMeta: 'ما زال البحث جارياً.',
     readNow: 'اقرأ الآن', report: 'أبلغنا',
     reportTitle: 'أبلغنا عن كتاب للدكتور حمدي عبد العال',
     reportBody: 'اسم الكتاب:\nالناشر والسنة (إن عُرفا):\nأين رأيت الكتاب أو نسخته:\nملاحظات:\n',
     authorTitle: 'الدكتور حمدي عبد العال',
     authorKick: 'المؤلف',
-    authorP1: 'الدكتور حمدي عبد العال، كلية الشريعة، جامعة الكويت. كتب في مقارنة الأديان والفِرق، وصدر كتابه «الملة والنحلة في اليهودية والمسيحية والإسلام» عن دار القلم في الكويت سنة 1989.',
+    authorP1: 'الدكتور حمدي عبد العال، كلية الشريعة، جامعة الكويت. كتب في مقارنة الأديان والفِرق وفي العقيدة والأخلاق، وصدرت كتبه الأربعة المعروفة عن دار القلم في الكويت بين 1984 و1989.',
     authorP2: 'لا تذكر النسخة المتاحة لدينا من الكتاب نبذة عن حياته، وهذه الصفحة تقتصر على ما هو مطبوع فيها. سنضيف السيرة والصور والذكريات حين تكتمل.',
     works: 'مؤلفاته المعروفة', factsTitle: 'ما نعرفه',
     fAff: 'الصفة', fAffV: 'أستاذ بكلية الشريعة، جامعة الكويت (كما على الغلاف)',
     fMain: 'أشهر ما وصلنا', fMainV: 'الملة والنحلة في اليهودية والمسيحية والإسلام (1989)',
-    fPrev: 'كتاب سابق', fPrevV: 'السبتيون: منهجاً وغاية (1985)',
+    fWorks: 'مؤلفاته المعروفة', fWorksV: 'أربعة كتب صدرت عن دار القلم بالكويت بين 1984 و1989',
     tocTitle: 'المحتويات', toc: 'المحتويات', fontSmaller: 'تصغير الخط', fontLarger: 'تكبير الخط', goto: 'اذهب إلى صفحة',
     prev: 'السابق', next: 'التالي', reportTypo: 'أبلغ عن خطأ', copyLink: 'نسخ الرابط', copied: 'تم النسخ',
     ocrNote: 'النص العربي مستخرج آلياً من نسخة ممسوحة؛ قد تقع أخطاء، خاصة في الآيات والحواشي. إن رأيت خطأً فاضغط «أبلغ عن خطأ» في الصفحة.',
     results: n => `${N(n)} صفحة`, noResults: 'لا توجد نتائج. جرّب كلمة أقصر أو بدون تشكيل.',
     searchHint: 'ابحث بكلمة أو أكثر. لا يُشترط التشكيل، ولا التفريق بين الهمزات والألف. يمكنك أيضاً البحث بالإنجليزية في الترجمة.',
+    libTitle: 'استعِر الكتب من المكتبات', libP: 'كتبه الثلاثة الأخرى ليست على الإنترنت بعد، لكنها مفهرسة في المكتبات. تذكر فهرسة مكتبات جامعة تورنتو الكتب الأربعة كلها. ويبحث رابط WorldCat عن المكتبات الأخرى.',
+    uoft: 'جامعة تورنتو', worldcat: 'WorldCat', neel: 'النيل والفرات', notOnline: 'ليس على الإنترنت بعد', heldBy: 'في مكتبات جامعة تورنتو', ed: 'ط', pp: 'ص', year: 'السنة', allUofT: 'كل كتبه في مكتبات تورنتو',
     modeAr: 'العربية', modeEn: 'English', modeBoth: 'الاثنان', textLang: 'لغة النص',
     trNote: 'الترجمة الإنجليزية أنجزها Claude (نموذج ذكاء اصطناعي من Anthropic) ولم يراجعها مترجم بشري. وترجمة الآيات القرآنية من النموذج نفسه وليست من ترجمة منشورة.',
     authorNote: 'الآراء الواردة في الكتاب آراء المؤلف.',
@@ -86,30 +87,31 @@ const I18N = {
     ch1: 'Judaism', ch2: 'Christianity', ch3: 'Islam',
     ch1d: 'Origins, sacred books, beliefs and sects.', ch2d: 'Origins, the Gospels, the church councils, the Gospel of Barnabas.', ch3d: 'The Qur’an, the early disputes, and the Islamic sects.',
     helpKick: 'We are searching', helpTitle: 'Do you have a copy of one of his books?',
-    helpP: 'Dr. Hamdy Abdel Aal wrote other books we are trying to gather. Any lead helps: a copy, a photo of a cover, a library catalogue number, a publisher’s name.',
+    helpP: 'We know of four books, and only Al-Milla wa al-Nihla is readable here. We are looking for copies of the other three to scan and publish, and for anything else he wrote. Any lead helps: a copy, a photo of a cover, a library catalogue number, a publisher’s name.',
     helpBtn: 'Tell us about a book', helpBooks: 'Known books',
     h1: ['A paper or scanned copy of any of his books', 'Details of an edition, publisher or library that holds one', 'Memories, photographs or articles about him'],
     booksTitle: 'The books of Dr. Hamdy Abdel Aal', booksLead: 'What is available here, and what we are still looking for.',
     available: 'Available to read', seeking: 'Seeking a copy',
     publisher: 'Publisher', edition: 'Edition', pubPlace: 'Dar al-Qalam, Kuwait', ed1: 'First, 1409 AH / 1989',
-    sab: 'Al-Sabtiyyun: Manhajan wa Ghayah', sabMeta: 'Dar al-Qalam, Kuwait, 1985. Listed in the references of Al-Milla wa al-Nihla.',
     moreBooks: 'Other books', moreBooksMeta: 'The search continues.',
     readNow: 'Read now', report: 'Tell us',
     reportTitle: 'A book by Dr. Hamdy Abdel Aal',
     reportBody: 'Book title:\nPublisher and year (if known):\nWhere you saw it or a copy:\nNotes:\n',
     authorTitle: 'Dr. Hamdy Abdel Aal',
     authorKick: 'The author',
-    authorP1: 'Dr. Hamdy Abdel Aal, Faculty of Sharia, Kuwait University. He wrote on the comparative study of religions and sects; his book Al-Milla wa al-Nihla was published by Dar al-Qalam in Kuwait in 1989.',
+    authorP1: 'Dr. Hamdy Abdel Aal, Faculty of Sharia, Kuwait University. He wrote on the comparative study of religions and sects, on creed and on ethics. His four known books were all published by Dar al-Qalam in Kuwait between 1984 and 1989.',
     authorP2: 'The copy of the book we hold has no biography, so this page sticks to what is printed in it. A life story, photographs and memories will be added as they are gathered.',
     works: 'Known works', factsTitle: 'What we know',
     fAff: 'Affiliation', fAffV: 'Faculty of Sharia, Kuwait University (as printed on the cover)',
     fMain: 'Best-known work', fMainV: 'Al-Milla wa al-Nihla fi al-Yahudiyya wa al-Masihiyya wa al-Islam (1989)',
-    fPrev: 'Earlier book', fPrevV: 'Al-Sabtiyyun: Manhajan wa Ghayah (1985)',
+    fWorks: 'Known works', fWorksV: 'Four books, all published by Dar al-Qalam, Kuwait, between 1984 and 1989',
     tocTitle: 'Contents', toc: 'Contents', fontSmaller: 'Smaller text', fontLarger: 'Larger text', goto: 'Go to page',
     prev: 'Previous', next: 'Next', reportTypo: 'Report a typo', copyLink: 'Copy link', copied: 'Copied',
     ocrNote: 'The Arabic text was extracted automatically from a scan; errors are possible, especially in Qur’anic verses and footnotes. If you spot one, use “Report a typo” on that page.',
     results: n => `${n} page${n === 1 ? '' : 's'}`, noResults: 'No results. Try a shorter word, or one without vowel marks.',
     searchHint: 'Search in English (the translation) or Arabic (the original). In Arabic, vowel marks are optional and alef or hamza forms are treated alike.',
+    libTitle: 'Borrow the books from libraries', libP: 'His other three books are not online yet, but they are catalogued in libraries. The University of Toronto’s catalogue lists all four. The WorldCat link searches for other libraries.',
+    uoft: 'U of Toronto', worldcat: 'WorldCat', neel: 'Neelwafurat', notOnline: 'Not online yet', heldBy: 'University of Toronto Libraries', ed: 'ed.', pp: 'pp.', year: 'Year', allUofT: 'All his books at Toronto',
     modeAr: 'العربية', modeEn: 'English', modeBoth: 'Both', textLang: 'Text',
     trNote: 'The English translation was made by Claude (an AI model from Anthropic) and has not been reviewed by a human translator. Qur’anic verses are translated by the model, not taken from a published translation.',
     authorNote: 'The views expressed in the book are the author’s.',
@@ -306,33 +308,50 @@ function issueUrl() {
   return `${REPO}/issues/new?title=${encodeURIComponent(I18N[state.lang].reportTitle)}&body=${encodeURIComponent(I18N[state.lang].reportBody)}`;
 }
 
+const UOFT_AUTHOR = 'https://librarysearch.library.utoronto.ca/nde/search?vid=01UTORONTO_INST:UTORONTO_NDE&search_scope=UTL_AND_CI&mode=advanced&tab=Everything&query=creator,exact,%CA%BBAbd%20al-%CA%BB%C4%80l%E2%94%80%20%E1%B8%A4amd%C4%AB.&offset=0&lang=en';
+const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(':')[0].split(' في ')[0])}`;
+const workTitle = w => state.lang === 'ar' ? w.ar : w.en;
+const workMeta = w => [`${w.publisher}, ${w.place}`, `${w.year}`, w.edition ? `${t('ed')} ${N(w.edition)}` : '', w.pages ? `${N(w.pages)} ${t('pp')}` : ''].filter(Boolean).join(' · ');
+
 function viewBooks(app) {
+  const works = state.site.works;
   app.innerHTML = `
   <div class="wrap"><div class="page-head"><div class="kicker">${t('navBooks')}</div><h1>${t('booksTitle')}</h1><p class="lede">${t('booksLead')}</p></div>
   <div class="shelf">
-    <article class="book"><img src="assets/cover.jpg" width="104" height="158" alt="">
-      <div><span class="tag ok">${t('available')}</span><h3 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(t('bookTitle'))}</h3>${state.lang === 'en' ? `<p class="meta" style="margin:-.2rem 0 .5rem"><bdi lang="ar">${I18N.ar.bookTitle}</bdi></p>` : ''}
-      <p class="meta">${t('publisher')}: ${t('pubPlace')}<br>${t('edition')}: ${t('ed1')}</p>
-      <a class="btn" href="#/read">${t('readNow')}</a></div></article>
-    <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
-      <div><span class="tag seek">${t('seeking')}</span><h3 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? 'السبتيون: منهجاً وغاية' : 'Al-Sabtiyyun: Manhajan wa Ghayah'}</h3>${state.lang === 'en' ? `<p class="meta" style="margin:-.2rem 0 .5rem"><bdi lang="ar">السبتيون: منهجاً وغاية</bdi></p>` : ''}
-      <p class="meta">${t('sabMeta')}</p><a class="btn ghost" href="${issueUrl()}" rel="noopener">${t('report')}</a></div></article>
+    ${works.map(w => `
+    <article class="book">
+      ${w.online ? '<img src="assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
+      <h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
+      <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}<br><em>${esc(w.gloss)}</em></p>
+      <p class="meta">${esc(workMeta(w))}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}</p>
+      <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
+        <a class="chip" href="${UOFT_AUTHOR}" rel="noopener">${t('uoft')}</a>
+        <a class="chip" href="${worldcatUrl(w)}" rel="noopener">${t('worldcat')}</a>
+        <a class="chip" href="${w.neelwafurat}" rel="noopener">${t('neel')}</a></p></div></article>`).join('')}
     <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
       <div><span class="tag seek">${t('seeking')}</span><h3>${t('moreBooks')}</h3>
       <p class="meta">${t('moreBooksMeta')}</p><a class="btn ghost" href="${issueUrl()}" rel="noopener">${t('report')}</a></div></article>
   </div>
+  <section class="card" style="max-width:42rem;margin-bottom:1.5rem"><h2 style="font-size:1.5rem">${t('libTitle')}</h2><p>${t('libP')}</p>
+    <p class="row"><a class="btn" href="${UOFT_AUTHOR}" rel="noopener">${t('allUofT')}</a></p></section>
   <section class="card" style="max-width:42rem;margin-bottom:3rem"><h2 style="font-size:1.5rem">${t('helpTitle')}</h2><p>${t('helpP')}</p>
     <ul class="checks">${t('h1').map(x => `<li>${esc(x)}</li>`).join('')}</ul></section></div>`;
 }
 
 function viewAuthor(app) {
+  const works = state.site.works;
   app.innerHTML = `
   <div class="wrap"><div class="page-head"><div class="kicker">${t('authorKick')}</div><h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? I18N.ar.authorTitle : 'Dr. Hamdy Abdel Aal'}</h1>
     <div class="sans" style="color:var(--muted)">${state.lang === 'ar' ? '<bdi dir="ltr">Dr. Hamdy Abdel Aal</bdi>' : `<bdi lang="ar">${I18N.ar.authorTitle}</bdi>`}</div></div>
   <div class="prose"><p>${t('authorP1')}</p><p>${t('authorP2')}</p></div>
+  <h2 style="margin-top:2rem;font-size:1.5rem">${t('works')}</h2>
+  <ol class="works">${works.map(w => `<li><span class="yr">${w.year}</span><div><b lang="ar" dir="rtl">${esc(w.ar)}</b>
+      <div class="sans" style="font-size:.85rem;color:var(--muted)" dir="ltr" lang="en">${esc(w.en)} (${esc(w.gloss)})</div>
+      <div class="sans" style="font-size:.8rem;color:var(--muted)">${esc(workMeta(w))}</div></div></li>`).join('')}</ol>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
-  <dl class="facts"><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fMain')}</dt><dd>${t('fMainV')}</dd><dt>${t('fPrev')}</dt><dd>${t('fPrevV')}</dd></dl>
-  <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('works')}</a></p></div>`;
+  <dl class="facts"><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
+  <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a></p></div>`;
 }
 
 /* ---------- reader ---------- */

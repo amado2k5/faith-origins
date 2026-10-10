@@ -1,0 +1,14 @@
+[
+  {"id": "manhaj", "ar": "منهج السلف في العقيدة", "en": "Manhaj al-Salaf fi al-‘Aqida", "gloss": "The Method of the Righteous Predecessors in Creed",
+   "year": 1984, "edition": 1, "publisher": "Dar al-Qalam", "place": "Kuwait", "language": "ar",
+   "uoft": "Downsview", "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181559-5194315&search=books"},
+  {"id": "sabaiyyun", "ar": "السبئيون: منهجاً وغاية", "en": "Al-Saba’iyyun: Manhajan wa Ghayah", "gloss": "The Saba’ites: Method and Aim",
+   "year": 1985, "edition": 1, "pages": 117, "publisher": "Dar al-Qalam", "place": "Kuwait", "language": "ar",
+   "uoft": "Downsview, BP195 .S12 A22 1985", "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181328-5194077&search=books"},
+  {"id": "akhlaq", "ar": "الأخلاق ومعيارها بين الوضعية والدين", "en": "Al-Akhlaq wa Mi‘yaruha bayna al-Wad‘iyya wa al-Din", "gloss": "Ethics and Its Criterion: Between Man-Made Systems and Religion",
+   "year": 1985, "edition": 3, "publisher": "Dar al-Qalam", "place": "Kuwait", "language": "ar",
+   "uoft": "Robarts, BJ1291 .A214 1985", "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181138-5193872&search=books"},
+  {"id": "milla", "ar": "الملة والنحلة في اليهودية والمسيحية والإسلام", "en": "Al-Milla wa al-Nihla fi al-Yahudiyya wa al-Masihiyya wa al-Islam", "gloss": "Milla and Nihla in Judaism, Christianity and Islam",
+   "year": 1989, "edition": 1, "publisher": "Dar al-Qalam", "place": "Kuwait", "language": "ar", "online": true,
+   "uoft": "Robarts, BL80.2 .A125 1989", "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181550-5194306&search=books"}
+]
