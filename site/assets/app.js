@@ -2,6 +2,8 @@
 /* origins.faith: memorial and reading room for the books of Dr. Hamdy Abdel Aal.
    Hash-routed single page: #/ · #/read[/<section>|/p/<page>] · #/search?q= · #/books · #/author */
 
+// Replaced with the commit hash by the publish workflow, so a new deploy never serves stale scripts or data.
+const VERSION = '__V__';
 const REPO = 'https://github.com/amado2k5/faith-origins';
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -144,7 +146,7 @@ const secTitle = s => (state.lang === 'ar' ? s.ar : s.en);
 /* ---------- data ---------- */
 let sitePromise, pagesPromise;
 function loadSite() {
-  sitePromise ??= fetch('data/site.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+  sitePromise ??= fetch(`data/site.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
     state.site = d;
     state.sections = d.toc.filter(s => s.start != null);
     state.byPage = new Map();
@@ -154,7 +156,7 @@ function loadSite() {
   return sitePromise;
 }
 function loadPages() {
-  pagesPromise ??= Promise.all([loadSite(), fetch('data/pages.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })]).then(([, p]) => {
+  pagesPromise ??= Promise.all([loadSite(), fetch(`data/pages.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })]).then(([, p]) => {
     state.pages = p;
     return p;
   });
@@ -162,7 +164,7 @@ function loadPages() {
 }
 let pagesEnPromise;
 function loadPagesEn() {
-  pagesEnPromise ??= loadSite().then(d => d.hasEnglish ? fetch('data/pages-en.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }) : null)
+  pagesEnPromise ??= loadSite().then(d => d.hasEnglish ? fetch(`data/pages-en.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }) : null)
     .then(p => { state.pagesEn = p; return p; });
   return pagesEnPromise;
 }
