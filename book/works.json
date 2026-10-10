@@ -17,12 +17,27 @@
       {
         "name": "Princeton University Library",
         "url": "https://catalog.princeton.edu/catalog/994028653506421"
+      },
+      {
+        "name": "Kuwait University Libraries",
+        "note": "Sharia Library",
+        "url": "https://catalog.ku.edu.kw/search/?searchtype=a&searcharg=%D8%AD%D9%85%D8%AF%D9%8A+%D8%B9%D8%A8%D8%AF+%D8%A7%D9%84%D8%B9%D8%A7%D9%84&SORT=D&extended=1&SUBMIT=Search&searchlimits=&searchorigarg=a%7Bu062D%7D%7Bu0645%7D%7Bu062F%7D%7Bu064A%7D+%7Bu0645%7D%7Bu0635%7D%7Bu0637%7D%7Bu0641%7D%7Bu0649%7D+%7Bu0627%7D%7Bu0644%7D%7Bu0645%7D%7Bu0639%7D%7Bu0627%7D%7Bu0630%7D"
       }
     ],
     "topics": {
       "ar": "الدين وخصائص الدين الحق؛ العقيدة ومصادرها؛ التوحيد؛ التقليد والنظر؛ الإيمان والإسلام؛ دلالة القرآن على وجود الله؛ الأسماء والصفات؛ القدر وموقف السلف.",
       "en": "Religion and the marks of the true religion; creed and its sources; tawhid; imitation versus reasoning; faith and Islam; the Qur’an’s proofs of God; God’s names and attributes; divine decree (qadar) and the position of the salaf."
-    }
+    },
+    "editions": [
+      {
+        "place": "Kuwait",
+        "year": 1984
+      },
+      {
+        "place": "Kuwait",
+        "year": 1986
+      }
+    ]
   },
   {
     "id": "sabaiyyun",
@@ -63,6 +78,11 @@
     "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181138-5193872&search=books",
     "publisherUrl": "https://darelkalam.com/ViewBook.php?id=248",
     "libraries": [
+      {
+        "name": "Kuwait University Libraries",
+        "note": "Central Library",
+        "url": "https://catalog.ku.edu.kw/search/?searchtype=a&searcharg=%D8%AD%D9%85%D8%AF%D9%8A+%D8%B9%D8%A8%D8%AF+%D8%A7%D9%84%D8%B9%D8%A7%D9%84&SORT=D&extended=1&SUBMIT=Search&searchlimits=&searchorigarg=a%7Bu062D%7D%7Bu0645%7D%7Bu062F%7D%7Bu064A%7D+%7Bu0645%7D%7Bu0635%7D%7Bu0637%7D%7Bu0641%7D%7Bu0649%7D+%7Bu0627%7D%7Bu0644%7D%7Bu0645%7D%7Bu0639%7D%7Bu0627%7D%7Bu0630%7D"
+      },
       {
         "name": "College of Sharia Sciences Library (Oman)",
         "url": "https://www.library.css.edu.om/search/standard/results/main?searchKeyword%5B0%5D=%D8%AD%D9%85%D8%AF%D9%8A+%D8%B9%D8%A8%D8%AF+%D8%A7%D9%84%D8%B9%D8%A7%D9%84&searchTarget%5B0%5D=TENxdWM5WCtEdFpnTkNuUlRyS0lZQT09&branches=3"

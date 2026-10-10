@@ -1,6 +1,6 @@
 # origins.faith
 
-A memorial site for **Dr. Hamdy Abdel Aal** (حمدي عبد العال) and a reader for his books, starting with
+A memorial site for **Dr. Hamdy Abdel Aal** (حمدي عبد العال, 1934–1990), a professor at the Faculty of Sharia, Kuwait University, and a reader for his books, starting with
 *الملة والنحلة في اليهودية والمسيحية والإسلام* (Dar al-Qalam, Kuwait, 1989). Live at https://origins.faith.
 
 Read it by chapter, search the whole text (vowel marks and alef/hamza/ta-marbuta spellings are ignored), and jump to
@@ -19,6 +19,7 @@ to GitHub Pages on every push to `main` (`.github/workflows/pages.yml`).
 | `book/translation-guide.md` | Style rules and glossary the translation follows |
 | `book/corrections.json` | Hand corrections to the OCR text, applied at build time |
 | `book/toc.json` | Chapters and sections, with page ranges |
+| `book/author.json` | The author's dates (provided by his family), shown on the home and author pages |
 | `book/works.json` | His known books (title, year, edition, publisher, library and catalogue links) shown on the Books and Author pages |
 | `book/quotes.json` | Quotations shown on the home page. The build fails if one is not found verbatim on its page |
 | `tools/build.py` | Turns the above into `site/data/site.json` and `site/data/pages.json` |
