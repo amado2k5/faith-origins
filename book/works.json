@@ -22,6 +22,11 @@
         "name": "Kuwait University Libraries",
         "note": "Sharia Library",
         "url": "https://catalog.ku.edu.kw/search/?searchtype=a&searcharg=%D8%AD%D9%85%D8%AF%D9%8A+%D8%B9%D8%A8%D8%AF+%D8%A7%D9%84%D8%B9%D8%A7%D9%84&SORT=D&extended=1&SUBMIT=Search&searchlimits=&searchorigarg=a%7Bu062D%7D%7Bu0645%7D%7Bu062F%7D%7Bu064A%7D+%7Bu0645%7D%7Bu0635%7D%7Bu0637%7D%7Bu0641%7D%7Bu0649%7D+%7Bu0627%7D%7Bu0644%7D%7Bu0645%7D%7Bu0639%7D%7Bu0627%7D%7Bu0630%7D"
+      },
+      {
+        "name": "German union catalogue (K10plus)",
+        "note": "record 1148502742, 1984",
+        "url": "https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1148502742"
       }
     ],
     "topics": {
@@ -126,6 +131,11 @@
         "name": "Bibliotheca Alexandrina",
         "note": "copy barcode 0124658",
         "url": "https://archive.org/details/AAlexandrina-032617"
+      },
+      {
+        "name": "German union catalogue (K10plus)",
+        "note": "record 1092336060, 1989",
+        "url": "https://opac.k10plus.de/DB=2.299/PPNSET?PPN=1092336060"
       }
     ],
     "topics": {
