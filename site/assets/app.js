@@ -20,6 +20,7 @@ const I18N = {
     footNote: 'نصوص الكتب مستخرجة آلياً من نسخ ممسوحة ضوئياً وقد تحتوي على أخطاء. نرحّب بالتصحيح.',
     footHelp: 'ساعدنا في العثور على كتبه',
     footContact: 'للتواصل معنا، راسلونا على',
+    scanChip: 'نسخة ممسوحة (أرشيف الإنترنت)',
     orderTitle: 'اطلب كتبه', orderP: 'تعرض مكتبة النيل والفرات كتبه الأربعة طبعات ورقية يمكن طلبها. إن أردت نسختك الخاصة فاطلبها من هناك.', orderBtn: 'اطلب من النيل والفرات',
     kickerHome: 'في ذكرى المؤلف',
     heroDed: 'هذه مكتبة صغيرة لحفظ كتب الدكتور حمدي عبد العال، الذي كان أستاذاً بكلية الشريعة في جامعة الكويت، وإتاحتها للقراءة والبحث.',
@@ -77,6 +78,7 @@ const I18N = {
     footNote: 'Book texts are machine-extracted from scans and may contain errors. Corrections are welcome.',
     footHelp: 'Help find his books',
     footContact: 'To contact us, please email',
+    scanChip: 'Scan (Internet Archive)',
     orderTitle: 'Order his books', orderP: 'Neelwafurat lists all four of his books as paperbacks you can order. If you would like your own copy, you can order it there.', orderBtn: 'Order on Neelwafurat',
     kickerHome: 'In memory of the author',
     heroDed: 'A small library preserving the books of Dr. Hamdy Abdel Aal, who was a professor at the Faculty of Sharia, Kuwait University, and making them readable and searchable.',
@@ -338,6 +340,7 @@ function viewBooks(app) {
       ${w.topics ? `<p class="meta topics" lang="${state.lang}" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}">${esc(w.topics[state.lang])} <em>(${t('topicsFrom')})</em></p>` : ''}
       <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
         <a class="chip" href="${UOFT_AUTHOR}" rel="noopener">${t('uoft')}</a>
+        ${w.scan ? `<a class="chip" href="${w.scan.url}" rel="noopener">${t('scanChip')}</a>` : ''}
         ${w.publisherUrl ? `<a class="chip" href="${w.publisherUrl}" rel="noopener">${t('pubPage')}</a>` : ''}
         <a class="chip" href="${worldcatUrl(w)}" rel="noopener">${t('worldcat')}</a>
         <a class="chip" href="${w.neelwafurat}" rel="noopener">${t('neel')}</a></p></div></article>`).join('')}

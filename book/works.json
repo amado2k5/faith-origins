@@ -121,10 +121,20 @@
     "neelwafurat": "https://www.neelwafurat.com/itempage.aspx?id=egb181550-5194306&search=books",
     "pages": 216,
     "publisherUrl": "https://darelkalam.com/ViewBook.php?id=200",
-    "libraries": [],
+    "libraries": [
+      {
+        "name": "Bibliotheca Alexandrina",
+        "note": "copy barcode 0124658",
+        "url": "https://archive.org/details/AAlexandrina-032617"
+      }
+    ],
     "topics": {
       "ar": "الملة والنحلة في اليهودية والمسيحية والإسلام: كتبها وعقائدها وفرقها، وإنجيل برنابا.",
       "en": "Milla and nihla in Judaism, Christianity and Islam: the sacred books, beliefs and sects of each, and the Gospel of Barnabas."
+    },
+    "scan": {
+      "name": "Internet Archive",
+      "url": "https://archive.org/details/AAlexandrina-032617"
     }
   }
 ]
