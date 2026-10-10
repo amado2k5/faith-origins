@@ -20,6 +20,7 @@ const I18N = {
     footNote: 'نصوص الكتب مستخرجة آلياً من نسخ ممسوحة ضوئياً وقد تحتوي على أخطاء. نرحّب بالتصحيح.',
     footHelp: 'ساعدنا في العثور على كتبه',
     footContact: 'للتواصل معنا، راسلونا على',
+    orderTitle: 'اطلب كتبه', orderP: 'تعرض مكتبة النيل والفرات كتبه الأربعة طبعات ورقية يمكن طلبها. إن أردت نسختك الخاصة فاطلبها من هناك.', orderBtn: 'اطلب من النيل والفرات',
     kickerHome: 'في ذكرى المؤلف',
     heroDed: 'هذه مكتبة صغيرة لحفظ كتب الدكتور حمدي عبد العال، الذي كان أستاذاً بكلية الشريعة في جامعة الكويت، وإتاحتها للقراءة والبحث.',
     heroName: 'Dr. Hamdy Abdel Aal',
@@ -76,6 +77,7 @@ const I18N = {
     footNote: 'Book texts are machine-extracted from scans and may contain errors. Corrections are welcome.',
     footHelp: 'Help find his books',
     footContact: 'To contact us, please email',
+    orderTitle: 'Order his books', orderP: 'Neelwafurat lists all four of his books as paperbacks you can order. If you would like your own copy, you can order it there.', orderBtn: 'Order on Neelwafurat',
     kickerHome: 'In memory of the author',
     heroDed: 'A small library preserving the books of Dr. Hamdy Abdel Aal, who was a professor at the Faculty of Sharia, Kuwait University, and making them readable and searchable.',
     heroName: 'حمدي عبد العال',
@@ -313,6 +315,7 @@ function issueUrl() {
 }
 
 const UOFT_AUTHOR = 'https://librarysearch.library.utoronto.ca/nde/search?vid=01UTORONTO_INST:UTORONTO_NDE&search_scope=UTL_AND_CI&mode=advanced&tab=Everything&query=creator,exact,%CA%BBAbd%20al-%CA%BB%C4%80l%E2%94%80%20%E1%B8%A4amd%C4%AB.&offset=0&lang=en';
+const NEEL_AUTHOR = 'https://www.neelwafurat.com/locate.aspx?mode=1&search=author1&entry=%D8%AD%D9%85%D8%AF%D9%8A%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D8%B9%D8%A7%D9%84';
 const PUBLISHER_AUTHOR = 'https://darelkalam.com/ViewAuthorBooks.php?id=75';
 const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(':')[0].split(' في ')[0])}`;
 const lifespan = () => { const a = state.site.author; return `${N(a.born)} – ${N(a.died)}`; };
@@ -342,6 +345,8 @@ function viewBooks(app) {
       <div><span class="tag seek">${t('seeking')}</span><h3>${t('moreBooks')}</h3>
       <p class="meta">${t('moreBooksMeta')}</p><a class="btn ghost" href="${issueUrl()}" rel="noopener">${t('report')}</a></div></article>
   </div>
+  <section class="card" style="max-width:42rem;margin-bottom:1.5rem"><h2 style="font-size:1.5rem">${t('orderTitle')}</h2><p>${t('orderP')}</p>
+    <p class="row"><a class="btn" href="${NEEL_AUTHOR}" rel="noopener">${t('orderBtn')}</a></p></section>
   <section class="card" style="max-width:42rem;margin-bottom:1.5rem"><h2 style="font-size:1.5rem">${t('libTitle')}</h2><p>${t('libP')}</p>
     <p class="row"><a class="btn" href="${UOFT_AUTHOR}" rel="noopener">${t('allUofT')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></section>
   <section class="card" style="max-width:42rem;margin-bottom:3rem"><h2 style="font-size:1.5rem">${t('helpTitle')}</h2><p>${t('helpP')}</p>
@@ -360,7 +365,7 @@ function viewAuthor(app) {
       <div class="sans" style="font-size:.8rem;color:var(--muted)">${workLines(w).map(esc).join('<br>')}</div></div></li>`).join('')}</ol>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
   <dl class="facts"><dt>${t('fLife')}</dt><dd>${lifespan()}</dd><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
-  <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></div>`;
+  <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a><a class="btn ghost" href="${NEEL_AUTHOR}" rel="noopener">${t('orderBtn')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></div>`;
 }
 
 /* ---------- reader ---------- */
