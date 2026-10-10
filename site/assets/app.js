@@ -433,7 +433,7 @@ function wireReader(sec, page, r) {
   const toc = $('#toc'), tocBtn = $('#tocBtn');
   tocBtn.onclick = () => { const o = toc.classList.toggle('open'); tocBtn.setAttribute('aria-expanded', o); };
   toc.onclick = e => { if (e.target.closest('a')) toc.classList.remove('open'); };
-  $$('[data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; store.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
+  $$('.seg [data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; store.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
   $('#fs-').onclick = () => { state.size = Math.max(1, +(state.size - .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#fs\\+').onclick = () => { state.size = Math.min(2.2, +(state.size + .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#gotoIn').onkeydown = e => {
