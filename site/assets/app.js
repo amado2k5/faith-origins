@@ -312,7 +312,8 @@ const UOFT_AUTHOR = 'https://librarysearch.library.utoronto.ca/nde/search?vid=01
 const PUBLISHER_AUTHOR = 'https://darelkalam.com/ViewAuthorBooks.php?id=75';
 const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(':')[0].split(' في ')[0])}`;
 const workTitle = w => state.lang === 'ar' ? w.ar : w.en;
-const workMeta = w => [`${w.publisher}, ${w.place}`, `${w.year}`, w.edition ? `${t('ed')} ${N(w.edition)}` : '', w.pages ? `${N(w.pages)} ${t('pp')}` : ''].filter(Boolean).join(' · ');
+const edLine = (w, e) => [`${w.publisher}, ${e.place}`, `${e.year}`, e.edition ? `${t('ed')} ${N(e.edition)}` : '', e.pages ? `${N(e.pages)} ${t('pp')}` : ''].filter(Boolean).join(' · ');
+const workLines = w => (w.editions || [{ place: w.place, year: w.year, edition: w.edition, pages: w.pages }]).map(e => edLine(w, e));
 
 function viewBooks(app) {
   const works = state.site.works;
@@ -325,7 +326,7 @@ function viewBooks(app) {
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       <h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
       <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}<br><em>${esc(w.gloss)}</em></p>
-      <p class="meta">${esc(workMeta(w))}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}</a>`).join(', ')}` : ''}</p>
+      <p class="meta">${workLines(w).map(esc).join('<br>')}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}</a>`).join(', ')}` : ''}</p>
       ${w.topics ? `<p class="meta topics" lang="${state.lang}" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}">${esc(w.topics[state.lang])} <em>(${t('topicsFrom')})</em></p>` : ''}
       <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
         <a class="chip" href="${UOFT_AUTHOR}" rel="noopener">${t('uoft')}</a>
@@ -351,7 +352,7 @@ function viewAuthor(app) {
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('works')}</h2>
   <ol class="works">${works.map(w => `<li><span class="yr">${w.year}</span><div><b lang="ar" dir="rtl">${esc(w.ar)}</b>
       <div class="sans" style="font-size:.85rem;color:var(--muted)" dir="ltr" lang="en">${esc(w.en)} (${esc(w.gloss)})</div>
-      <div class="sans" style="font-size:.8rem;color:var(--muted)">${esc(workMeta(w))}</div></div></li>`).join('')}</ol>
+      <div class="sans" style="font-size:.8rem;color:var(--muted)">${workLines(w).map(esc).join('<br>')}</div></div></li>`).join('')}</ol>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
   <dl class="facts"><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
   <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></div>`;
