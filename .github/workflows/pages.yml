@@ -49,3 +49,28 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
+  # Optional: tell IndexNow engines (Bing, Yandex, Naver, ...) which pages changed. A failure here never fails the deploy.
+  indexnow:
+    needs: deploy
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install markdown
+      - run: python tools/build.py
+      - name: Ping IndexNow
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          sleep 60   # let GitHub Pages serve the new deploy first
+          if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$BEFORE" 2>/dev/null; then
+            python tools/indexnow.py --since "$BEFORE"
+          else
+            python tools/indexnow.py
+          fi
