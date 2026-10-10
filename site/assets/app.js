@@ -26,7 +26,7 @@ const I18N = {
     heroDed: 'هذه مكتبة صغيرة لحفظ كتب الدكتور حمدي عبد العال، الذي كان أستاذاً بكلية الشريعة في جامعة الكويت، وإتاحتها للقراءة والبحث.',
     heroName: 'Dr. Hamdy Abdel Aal',
     readBook: 'ابدأ القراءة', searchBook: 'ابحث في الكتاب', continueRead: 'تابع القراءة',
-    bookTitle: 'الملة والنحلة في اليهودية والمسيحية والإسلام',
+    bookTitle: 'الملة والنحلة - في اليهودية والمسيحية والإسلام',
     bookSub: 'اليهودية · المسيحية · الإسلام',
     anotherQuote: 'اقتباس آخر', inContext: 'اقرأ في سياقه',
     quotesTitle: 'من الكتاب', quotesKick: 'اقتباسات',
@@ -85,7 +85,7 @@ const I18N = {
     heroName: 'حمدي عبد العال',
     readBook: 'Start reading', searchBook: 'Search the book', continueRead: 'Continue reading',
     bookTitle: 'Al-Milla wa al-Nihla: Judaism, Christianity, Islam',
-    bookSub: 'الملة والنحلة في اليهودية والمسيحية والإسلام',
+    bookSub: 'الملة والنحلة - في اليهودية والمسيحية والإسلام',
     anotherQuote: 'Another quote', inContext: 'Read in context',
     quotesTitle: 'From the book', quotesKick: 'Quotations',
     unofficial: 'Unofficial translation',
@@ -319,7 +319,7 @@ function issueUrl() {
 const UOFT_AUTHOR = 'https://librarysearch.library.utoronto.ca/nde/search?vid=01UTORONTO_INST:UTORONTO_NDE&search_scope=UTL_AND_CI&mode=advanced&tab=Everything&query=creator,exact,%CA%BBAbd%20al-%CA%BB%C4%80l%E2%94%80%20%E1%B8%A4amd%C4%AB.&offset=0&lang=en';
 const NEEL_AUTHOR = 'https://www.neelwafurat.com/locate.aspx?mode=1&search=author1&entry=%D8%AD%D9%85%D8%AF%D9%8A%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D8%B9%D8%A7%D9%84';
 const PUBLISHER_AUTHOR = 'https://darelkalam.com/ViewAuthorBooks.php?id=75';
-const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(':')[0].split(' في ')[0])}`;
+const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(/\s-\s|:|\sفي\s/)[0].trim())}`;
 const lifespan = () => { const a = state.site.author; return `${N(a.born)} – ${N(a.died)}`; };
 const workTitle = w => state.lang === 'ar' ? w.ar : w.en;
 const edLine = (w, e) => [`${w.publisher}, ${e.place}`, `${e.year}`, e.edition ? `${t('ed')} ${N(e.edition)}` : '', e.pages ? `${N(e.pages)} ${t('pp')}` : ''].filter(Boolean).join(' · ');
