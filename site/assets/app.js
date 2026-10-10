@@ -8,13 +8,6 @@ const REPO = 'https://github.com/amado2k5/faith-origins';
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-// Language and reading-mode choices last only for the current browsing session, so every new visit starts in Arabic,
-// wherever the visitor is and whatever their browser language. (Older builds saved the choice permanently; clear it.)
-const sstore = {
-  get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
-  set(k, v) { try { sessionStorage.setItem(k, v); } catch { /* private mode */ } },
-};
-try { localStorage.removeItem('lang'); localStorage.removeItem('readMode'); } catch { /* ignore */ }
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch { /* private mode */ } },
@@ -143,10 +136,11 @@ const I18N = {
 };
 
 const state = {
-  lang: sstore.get('lang') === 'en' ? 'en' : 'ar', // Arabic unless the visitor pressed EN in this session
+  // First visit ever: Arabic, whatever the visitor's location or browser language. After that, the language they chose last.
+  lang: store.get('lang') === 'en' ? 'en' : 'ar',
   size: parseFloat(store.get('size')) || 1.3,
   site: null, pages: null, plain: null, pagesEn: null, plainEn: null, sections: null, byPage: null,
-  readPref: ['ar', 'en', 'both'].includes(sstore.get('readMode')) ? sstore.get('readMode') : null,
+  readPref: ['ar', 'en', 'both'].includes(store.get('readMode')) ? store.get('readMode') : null,
 };
 const t = k => I18N[state.lang][k] ?? k;
 const N = n => state.lang === 'ar' ? Number(n).toLocaleString('ar-EG', { useGrouping: false }) : String(n);
@@ -492,7 +486,7 @@ function wireReader(sec, page, r) {
   const toc = $('#toc'), tocBtn = $('#tocBtn');
   tocBtn.onclick = () => { const o = toc.classList.toggle('open'); tocBtn.setAttribute('aria-expanded', o); };
   toc.onclick = e => { if (e.target.closest('a')) toc.classList.remove('open'); };
-  $$('.seg [data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; sstore.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
+  $$('.seg [data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; store.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
   $('#fs-').onclick = () => { state.size = Math.max(1, +(state.size - .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#fs\\+').onclick = () => { state.size = Math.min(2.2, +(state.size + .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#gotoIn').onkeydown = e => {
@@ -612,7 +606,8 @@ $('#searchForm').addEventListener('submit', e => {
 });
 $('#themeBtn').addEventListener('click', cycleTheme);
 $('#langBtn').addEventListener('click', () => {
-  state.lang = state.lang === 'ar' ? 'en' : 'ar'; sstore.set('lang', state.lang);
+  state.lang = state.lang === 'ar' ? 'en' : 'ar'; store.set('lang', state.lang);
+  state.readPref = null; store.set('readMode', '');   // the reader follows the language just chosen
   applyI18n(); $('#app').dataset.sec = ''; route();
 });
 document.addEventListener('keydown', e => {
