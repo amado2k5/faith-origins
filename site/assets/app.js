@@ -16,11 +16,11 @@ const I18N = {
   ar: {
     skip: 'انتقل إلى المحتوى', navHome: 'الرئيسية', navRead: 'اقرأ', navBooks: 'الكتب', navAuthor: 'المؤلف',
     searchPh: 'ابحث في الكتاب', page: 'ص', pages: 'صفحة',
-    footDed: 'تكريماً لذكرى الدكتور حمدي عبد العال، أعدّه ابنه لحفظ كتبه وإتاحتها للقرّاء.',
+    footDed: 'تكريماً لذكرى الدكتور حمدي عبد العال (١٩٣٤–١٩٩٠)، أعدّه ابنه لحفظ كتبه وإتاحتها للقرّاء.',
     footNote: 'نصوص الكتب مستخرجة آلياً من نسخ ممسوحة ضوئياً وقد تحتوي على أخطاء. نرحّب بالتصحيح.',
     footHelp: 'ساعدنا في العثور على كتبه',
     kickerHome: 'في ذكرى المؤلف',
-    heroDed: 'هذا الموقع مكتبة صغيرة لحفظ كتب الدكتور حمدي عبد العال، أستاذ الشريعة بجامعة الكويت، وإتاحتها للقراءة والبحث.',
+    heroDed: 'هذه مكتبة صغيرة لحفظ كتب الدكتور حمدي عبد العال، الذي كان أستاذاً بكلية الشريعة في جامعة الكويت، وإتاحتها للقراءة والبحث.',
     heroName: 'Dr. Hamdy Abdel Aal',
     readBook: 'ابدأ القراءة', searchBook: 'ابحث في الكتاب', continueRead: 'تابع القراءة',
     bookTitle: 'الملة والنحلة في اليهودية والمسيحية والإسلام',
@@ -45,11 +45,12 @@ const I18N = {
     reportBody: 'اسم الكتاب:\nالناشر والسنة (إن عُرفا):\nأين رأيت الكتاب أو نسخته:\nملاحظات:\n',
     authorTitle: 'الدكتور حمدي عبد العال',
     authorKick: 'المؤلف',
-    authorP1: 'الدكتور حمدي عبد العال، كلية الشريعة، جامعة الكويت. كتب في مقارنة الأديان والفِرق وفي العقيدة والأخلاق، وصدرت كتبه الأربعة المعروفة عن دار القلم في الكويت بين 1984 و1989.',
-    authorP2: 'لا تذكر النسخة المتاحة لدينا من الكتاب نبذة عن حياته، وهذه الصفحة تقتصر على ما هو مطبوع فيها. سنضيف السيرة والصور والذكريات حين تكتمل.',
+    authorP1: 'الدكتور حمدي عبد العال (١٩٣٤–١٩٩٠) كان أستاذاً بكلية الشريعة في جامعة الكويت. كتب في مقارنة الأديان والفِرق وفي العقيدة والأخلاق، وصدرت كتبه الأربعة المعروفة عن دار القلم في الكويت بين 1984 و1989.',
+    authorP2: 'تعتمد هذه الصفحة على ما هو مطبوع في كتبه، وعلى سجلات المكتبات، وعلى ما تعرفه أسرته. سنضيف السيرة والصور والذكريات حين تكتمل.',
     works: 'مؤلفاته المعروفة', factsTitle: 'ما نعرفه',
-    fAff: 'الصفة', fAffV: 'أستاذ بكلية الشريعة، جامعة الكويت (كما على الغلاف)',
+    fAff: 'الصفة', fAffV: 'كان أستاذاً بكلية الشريعة، جامعة الكويت (كما على غلاف كتبه)',
     fMain: 'أشهر ما وصلنا', fMainV: 'الملة والنحلة في اليهودية والمسيحية والإسلام (1989)',
+    fLife: 'الحياة',
     fWorks: 'مؤلفاته المعروفة', fWorksV: 'أربعة كتب صدرت عن دار القلم بالكويت بين 1984 و1989',
     tocTitle: 'المحتويات', toc: 'المحتويات', fontSmaller: 'تصغير الخط', fontLarger: 'تكبير الخط', goto: 'اذهب إلى صفحة',
     prev: 'السابق', next: 'التالي', reportTypo: 'أبلغ عن خطأ', copyLink: 'نسخ الرابط', copied: 'تم النسخ',
@@ -70,11 +71,11 @@ const I18N = {
   en: {
     skip: 'Skip to content', navHome: 'Home', navRead: 'Read', navBooks: 'Books', navAuthor: 'Author',
     searchPh: 'Search the book', page: 'p.', pages: 'pages',
-    footDed: 'In memory of Dr. Hamdy Abdel Aal. His son built this site to preserve his books and make them readable.',
+    footDed: 'In memory of Dr. Hamdy Abdel Aal (1934–1990). His son built this site to preserve his books and make them readable.',
     footNote: 'Book texts are machine-extracted from scans and may contain errors. Corrections are welcome.',
     footHelp: 'Help find his books',
     kickerHome: 'In memory of the author',
-    heroDed: 'A small library preserving the books of Dr. Hamdy Abdel Aal, professor at the Faculty of Sharia, Kuwait University, and making them readable and searchable.',
+    heroDed: 'A small library preserving the books of Dr. Hamdy Abdel Aal, who was a professor at the Faculty of Sharia, Kuwait University, and making them readable and searchable.',
     heroName: 'حمدي عبد العال',
     readBook: 'Start reading', searchBook: 'Search the book', continueRead: 'Continue reading',
     bookTitle: 'Al-Milla wa al-Nihla: Judaism, Christianity, Islam',
@@ -99,11 +100,12 @@ const I18N = {
     reportBody: 'Book title:\nPublisher and year (if known):\nWhere you saw it or a copy:\nNotes:\n',
     authorTitle: 'Dr. Hamdy Abdel Aal',
     authorKick: 'The author',
-    authorP1: 'Dr. Hamdy Abdel Aal, Faculty of Sharia, Kuwait University. He wrote on the comparative study of religions and sects, on creed and on ethics. His four known books were all published by Dar al-Qalam in Kuwait between 1984 and 1989.',
-    authorP2: 'The copy of the book we hold has no biography, so this page sticks to what is printed in it. A life story, photographs and memories will be added as they are gathered.',
+    authorP1: 'Dr. Hamdy Abdel Aal (1934–1990) was a professor at the Faculty of Sharia, Kuwait University. He wrote on the comparative study of religions and sects, on creed and on ethics. His four known books were published by Dar al-Qalam between 1984 and 1989.',
+    authorP2: 'This page relies on what is printed in his books, on library records and on his family. A fuller life story, photographs and memories will be added as they are gathered.',
     works: 'Known works', factsTitle: 'What we know',
-    fAff: 'Affiliation', fAffV: 'Faculty of Sharia, Kuwait University (as printed on the cover)',
+    fAff: 'Position', fAffV: 'Professor at the Faculty of Sharia, Kuwait University (as printed on his book covers)',
     fMain: 'Best-known work', fMainV: 'Al-Milla wa al-Nihla fi al-Yahudiyya wa al-Masihiyya wa al-Islam (1989)',
+    fLife: 'Life',
     fWorks: 'Known works', fWorksV: 'Four books, all published by Dar al-Qalam, Kuwait, between 1984 and 1989',
     tocTitle: 'Contents', toc: 'Contents', fontSmaller: 'Smaller text', fontLarger: 'Larger text', goto: 'Go to page',
     prev: 'Previous', next: 'Next', reportTypo: 'Report a typo', copyLink: 'Copy link', copied: 'Copied',
@@ -257,7 +259,7 @@ function viewHome(app) {
     <div>
       <div class="kicker">${t('kickerHome')}</div>
       <h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? 'الدكتور حمدي عبد العال' : 'Dr. Hamdy Abdel Aal'}</h1>
-      <div class="en-name">${state.lang === 'ar' ? 'Dr. Hamdy Abdel Aal' : '<bdi lang="ar">الدكتور حمدي عبد العال</bdi>'}</div>
+      <div class="en-name">${state.lang === 'ar' ? 'Dr. Hamdy Abdel Aal' : '<bdi lang="ar">الدكتور حمدي عبد العال</bdi>'} · ${lifespan()}</div>
       <p class="ded">${t('heroDed')}</p>
       <div class="row">
         <a class="btn" href="${resume ? readHref(resume) : '#/read'}">${resume ? t('continueRead') : t('readBook')}</a>
@@ -311,6 +313,7 @@ function issueUrl() {
 const UOFT_AUTHOR = 'https://librarysearch.library.utoronto.ca/nde/search?vid=01UTORONTO_INST:UTORONTO_NDE&search_scope=UTL_AND_CI&mode=advanced&tab=Everything&query=creator,exact,%CA%BBAbd%20al-%CA%BB%C4%80l%E2%94%80%20%E1%B8%A4amd%C4%AB.&offset=0&lang=en';
 const PUBLISHER_AUTHOR = 'https://darelkalam.com/ViewAuthorBooks.php?id=75';
 const worldcatUrl = w => `https://search.worldcat.org/search?q=${encodeURIComponent(w.ar.split(':')[0].split(' في ')[0])}`;
+const lifespan = () => { const a = state.site.author; return `${N(a.born)} – ${N(a.died)}`; };
 const workTitle = w => state.lang === 'ar' ? w.ar : w.en;
 const edLine = (w, e) => [`${w.publisher}, ${e.place}`, `${e.year}`, e.edition ? `${t('ed')} ${N(e.edition)}` : '', e.pages ? `${N(e.pages)} ${t('pp')}` : ''].filter(Boolean).join(' · ');
 const workLines = w => (w.editions || [{ place: w.place, year: w.year, edition: w.edition, pages: w.pages }]).map(e => edLine(w, e));
@@ -326,7 +329,7 @@ function viewBooks(app) {
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       <h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
       <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}<br><em>${esc(w.gloss)}</em></p>
-      <p class="meta">${workLines(w).map(esc).join('<br>')}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}</a>`).join(', ')}` : ''}</p>
+      <p class="meta">${workLines(w).map(esc).join('<br>')}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}${l.note ? ` (${esc(l.note)})` : ''}</a>`).join(', ')}` : ''}</p>
       ${w.topics ? `<p class="meta topics" lang="${state.lang}" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}">${esc(w.topics[state.lang])} <em>(${t('topicsFrom')})</em></p>` : ''}
       <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
         <a class="chip" href="${UOFT_AUTHOR}" rel="noopener">${t('uoft')}</a>
@@ -347,14 +350,14 @@ function viewAuthor(app) {
   const works = state.site.works;
   app.innerHTML = `
   <div class="wrap"><div class="page-head"><div class="kicker">${t('authorKick')}</div><h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? I18N.ar.authorTitle : 'Dr. Hamdy Abdel Aal'}</h1>
-    <div class="sans" style="color:var(--muted)">${state.lang === 'ar' ? '<bdi dir="ltr">Dr. Hamdy Abdel Aal</bdi>' : `<bdi lang="ar">${I18N.ar.authorTitle}</bdi>`}</div></div>
+    <div class="sans" style="color:var(--muted)">${state.lang === 'ar' ? '<bdi dir="ltr">Dr. Hamdy Abdel Aal</bdi>' : `<bdi lang="ar">${I18N.ar.authorTitle}</bdi>`} · ${lifespan()}</div></div>
   <div class="prose"><p>${t('authorP1')}</p><p>${t('authorP2')}</p></div>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('works')}</h2>
   <ol class="works">${works.map(w => `<li><span class="yr">${w.year}</span><div><b lang="ar" dir="rtl">${esc(w.ar)}</b>
       <div class="sans" style="font-size:.85rem;color:var(--muted)" dir="ltr" lang="en">${esc(w.en)} (${esc(w.gloss)})</div>
       <div class="sans" style="font-size:.8rem;color:var(--muted)">${workLines(w).map(esc).join('<br>')}</div></div></li>`).join('')}</ol>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
-  <dl class="facts"><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
+  <dl class="facts"><dt>${t('fLife')}</dt><dd>${lifespan()}</dd><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
   <p class="row" style="margin-bottom:3rem"><a class="btn" href="#/read">${t('readBook')}</a><a class="btn ghost" href="#/books">${t('navBooks')}</a><a class="btn ghost" href="${PUBLISHER_AUTHOR}" rel="noopener">${t('pubListing')}</a></p></div>`;
 }
 

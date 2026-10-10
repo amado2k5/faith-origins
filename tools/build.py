@@ -77,6 +77,7 @@ def main():
         quotes.append({**q, "text": tidy(q["text"])})
 
     works = json.loads((BOOK / "works.json").read_text(encoding="utf-8"))
+    author = json.loads((BOOK / "author.json").read_text(encoding="utf-8"))
     for w in works:
         for k in ("id", "ar", "en", "gloss", "year", "publisher", "place", "neelwafurat"):
             if k not in w:
@@ -86,7 +87,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     en_file = BOOK / "al-milla-wal-nihla.en.md"
     (OUT / "pages.json").write_text(json.dumps(out_pages, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    (OUT / "site.json").write_text(json.dumps({"toc": toc, "quotes": quotes, "firstPage": covered[0], "lastPage": covered[-1], "hasEnglish": en_file.exists(), "works": works},
+    (OUT / "site.json").write_text(json.dumps({"toc": toc, "quotes": quotes, "firstPage": covered[0], "lastPage": covered[-1], "hasEnglish": en_file.exists(), "works": works, "author": author},
                                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     en_note = "no English translation yet"
     if en_file.exists():
