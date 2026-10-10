@@ -3,3 +3,10 @@ _site/
 site/data/
 .claude/
 __pycache__/
+# Written by tools/build.py
+site/en/
+site/book/
+site/author/
+site/books/
+site/sitemap.xml
+site/llms.txt

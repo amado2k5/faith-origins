@@ -20,11 +20,12 @@ jobs:
           python-version: "3.12"
       - run: pip install markdown
       # Fails the build if a quote is not found verbatim on its page, or the table of contents has gaps.
-      - name: Build book data
+      # Also writes the pre-rendered pages (site/book/, site/en/, ...), sitemap.xml and llms.txt.
+      - name: Build book data and pages
         run: python tools/build.py
       # Tag scripts, styles and data with the commit so browsers and CDNs fetch fresh copies after every deploy.
       - name: Version assets
-        run: sed -i "s/__V__/${GITHUB_SHA::10}/g" site/index.html site/assets/app.js
+        run: find site -name '*.html' -exec sed -i "s/__V__/${GITHUB_SHA::10}/g" {} + && sed -i "s/__V__/${GITHUB_SHA::10}/g" site/assets/app.js
       - uses: actions/configure-pages@v5
         if: github.event_name != 'pull_request'
       - uses: actions/upload-pages-artifact@v3
@@ -47,3 +48,29 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Optional: tell IndexNow engines (Bing, Yandex, Naver, ...) which pages changed. A failure here never fails the deploy.
+  indexnow:
+    needs: deploy
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install markdown
+      - run: python tools/build.py
+      - name: Ping IndexNow
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          sleep 60   # let GitHub Pages serve the new deploy first
+          if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$BEFORE" 2>/dev/null; then
+            python tools/indexnow.py --since "$BEFORE"
+          else
+            python tools/indexnow.py
+          fi

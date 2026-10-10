@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://origins.faith/sitemap.xml
+
+# origins.faith: a memorial site and reader for the books of Dr. Hamdy Abdel Aal.
+# Every page is public. There is no tracking, no account and no personal data.

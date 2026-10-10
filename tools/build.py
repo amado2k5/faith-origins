@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Build site/data/{site,pages}.json from book/*. Fails (exit 1) if the quotes, table of contents or pages do not line up.
+"""Build site/data/{site,pages}.json from book/*, and the pre-rendered pages, sitemap.xml and llms.txt (tools/static_pages.py).
+Fails (exit 1) if the quotes, table of contents or pages do not line up.
 
     pip install markdown && python tools/build.py
 """
 import json, re, sys
 from pathlib import Path
 import markdown
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from static_pages import Site  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOK = ROOT / "book"
@@ -89,7 +93,7 @@ def main():
     (OUT / "pages.json").write_text(json.dumps(out_pages, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (OUT / "site.json").write_text(json.dumps({"toc": toc, "quotes": quotes, "firstPage": covered[0], "lastPage": covered[-1], "hasEnglish": en_file.exists(), "works": works, "author": author},
                                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    en_note = "no English translation yet"
+    en_note, out_en = "no English translation yet", None
     if en_file.exists():
         en = split_pages(en_file.read_text(encoding="utf-8"))
         lacking = [n for n in out_pages if int(n) not in en or not flat(en[int(n)])]
@@ -98,12 +102,18 @@ def main():
         extra = [n for n in en if str(n) not in out_pages and flat(en[n])]
         if extra:
             fail(f"English translation has text on pages that have no Arabic: {extra}")
-        (OUT / "pages-en.json").write_text(json.dumps({n: render(en[int(n)], arabic=False) for n in out_pages},
-                                                      ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        out_en = {n: render(en[int(n)], arabic=False) for n in out_pages}
+        (OUT / "pages-en.json").write_text(json.dumps(out_en, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         en_note = f"{len(out_pages)} English pages"
     elif (OUT / "pages-en.json").exists():
         (OUT / "pages-en.json").unlink()
-    print(f"built {len(out_pages)} pages, {len(toc)} toc entries, {len(quotes)} quotes, {en_note}")
+    if out_en is None:
+        fail("the pre-rendered pages need the English translation")
+    for s in toc:
+        if "start" in s and not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", s.get("slug", "")):
+            fail(f"toc.json: section {s['id']} needs a lowercase slug for its URL")
+    n_html = Site(ROOT, toc, out_pages, out_en, quotes, works, author).build()
+    print(f"built {len(out_pages)} pages, {len(toc)} toc entries, {len(quotes)} quotes, {en_note}, {n_html} HTML pages + sitemap.xml + llms.txt")
 
 
 if __name__ == "__main__":

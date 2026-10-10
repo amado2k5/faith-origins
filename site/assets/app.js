@@ -1,10 +1,17 @@
 'use strict';
 /* origins.faith: memorial and reading room for the books of Dr. Hamdy Abdel Aal.
-   Hash-routed single page: #/ · #/read[/<section>|/p/<page>] · #/search?q= · #/books · #/author */
+   Hash-routed single page: #/ · #/read[/<section>|/p/<page>] · #/search?q= · #/books · #/author
+   The build (tools/static_pages.py) also writes pre-rendered pages: /en/ (this app, in English), /book/<slug>/ and /en/book/<slug>/
+   (one section, #p<page> for a page), /book/, /author/, /books/. On those, <html data-static> names the view and this script takes it over. */
 
 // Replaced with the commit hash by the publish workflow, so a new deploy never serves stale scripts or data.
 const VERSION = '__V__';
 const REPO = 'https://github.com/amado2k5/faith-origins';
+const HTML = document.documentElement.dataset;
+const ROOT = HTML.root || '';                       // '/' on pages below the site root, so data and assets resolve
+const PAGE_LANG = HTML.pageLang || null;            // the language the URL fixes (/en/…, or a pre-rendered Arabic page)
+const STATIC = HTML.static || null;                 // pre-rendered view: 'read:<section>' | 'index' | 'author' | 'books'
+const APP = PAGE_LANG === 'en' ? '/en/' : '/';      // where the hash routes live, from a pre-rendered page
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -137,7 +144,7 @@ const I18N = {
 
 const state = {
   // First visit ever: Arabic, whatever the visitor's location or browser language. After that, the language they chose last.
-  lang: store.get('lang') === 'en' ? 'en' : 'ar',
+  lang: PAGE_LANG || (store.get('lang') === 'en' ? 'en' : 'ar'),
   size: parseFloat(store.get('size')) || 1.3,
   site: null, pages: null, plain: null, pagesEn: null, plainEn: null, sections: null, byPage: null,
   readPref: ['ar', 'en', 'both'].includes(store.get('readMode')) ? store.get('readMode') : null,
@@ -149,7 +156,7 @@ const secTitle = s => (state.lang === 'ar' ? s.ar : s.en);
 /* ---------- data ---------- */
 let sitePromise, pagesPromise;
 function loadSite() {
-  sitePromise ??= fetch(`data/site.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+  sitePromise ??= fetch(`${ROOT}data/site.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
     state.site = d;
     state.sections = d.toc.filter(s => s.start != null);
     state.byPage = new Map();
@@ -159,7 +166,7 @@ function loadSite() {
   return sitePromise;
 }
 function loadPages() {
-  pagesPromise ??= Promise.all([loadSite(), fetch(`data/pages.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })]).then(([, p]) => {
+  pagesPromise ??= Promise.all([loadSite(), fetch(`${ROOT}data/pages.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })]).then(([, p]) => {
     state.pages = p;
     return p;
   });
@@ -167,7 +174,7 @@ function loadPages() {
 }
 let pagesEnPromise;
 function loadPagesEn() {
-  pagesEnPromise ??= loadSite().then(d => d.hasEnglish ? fetch(`data/pages-en.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }) : null)
+  pagesEnPromise ??= loadSite().then(d => d.hasEnglish ? fetch(`${ROOT}data/pages-en.json?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }) : null)
     .then(p => { state.pagesEn = p; return p; });
   return pagesEnPromise;
 }
@@ -219,7 +226,8 @@ function applyI18n() {
   $('#langBtn').textContent = t('langBtn');
   const th = d.dataset.theme;
   $('#themeBtn').title = $('#themeBtn').ariaLabel = `${t('theme' + th[0].toUpperCase() + th.slice(1))}`;
-  document.title = state.lang === 'ar' ? 'حمدي عبد العال · origins.faith' : 'Hamdy Abdel Aal · origins.faith';
+  if (!STATIC) document.title = state.lang === 'ar' ? 'حمدي عبد العال · origins.faith' : 'Hamdy Abdel Aal · origins.faith';
+  $('[data-contents]')?.setAttribute('href', state.lang === 'en' ? '/en/book/' : '/book/');
 }
 
 /* ---------- router ---------- */
@@ -229,6 +237,7 @@ function parseHash() {
   return { seg: path.split('/').filter(Boolean), params: new URLSearchParams(qs) };
 }
 async function route() {
+  if (STATIC) return hydrate();
   const r = parseHash();
   const app = $('#app');
   document.querySelectorAll('[data-nav]').forEach(a => a.removeAttribute('aria-current'));
@@ -250,9 +259,30 @@ async function route() {
   if (r.seg[0] !== 'read') window.scrollTo(0, 0);
 }
 
+// A pre-rendered page: hash routes belong to the app at / or /en/; #p<page> scrolls within a section.
+async function hydrate() {
+  if (location.hash.startsWith('#/')) { location.replace(APP + location.hash); return; }
+  const app = $('#app');
+  const [view, id] = STATIC.split(':');
+  try {
+    await loadSite();
+    const m = /^#p(\d+)$/.exec(location.hash);
+    if (view === 'read') await viewRead(app, { seg: ['read', id], params: new URLSearchParams(), page: m ? +m[1] : null });
+    else if (view === 'books') viewBooks(app);
+    else if (view === 'author') viewAuthor(app);
+  } catch (e) { console.error(e); }   // the pre-rendered page stays as it is
+}
+
 /* ---------- views ---------- */
 const lastRead = () => parseInt(store.get('lastPage'), 10) || null;
 const readHref = (page, extra = '') => `#/read/p/${page}${extra}`;
+const slugOf = id => state.site.toc.find(s => s.id === id).slug;
+const secHref = id => STATIC ? `${APP}book/${slugOf(id)}/` : `#/read/${id}`;
+const pageHref = p => {
+  if (!STATIC) return readHref(p);
+  const s = state.byPage.get(p);
+  return `${s && STATIC !== 'read:' + s.id ? secHref(s.id) : ''}#p${p}`;
+};
 const quoteHref = i => readHref(state.site.quotes[i].page, `?hl=${i}`);
 const arQuote = (q, cls = '') => `<blockquote lang="ar" dir="rtl"${cls ? ` class="${cls}"` : ''}>${q.partial ? '… ' : ''}${esc(q.text)}</blockquote>`;
 const quoteHTML = (q, i, cls = '') => {
@@ -281,7 +311,7 @@ function viewHome(app) {
         <a class="btn ghost" href="#/search">${t('searchBook')}</a>
       </div>
     </div>
-    <a class="cover" href="#/read" aria-label="${esc(t('bookTitle'))}"><img src="assets/cover.jpg" width="473" height="717" alt="${state.lang === 'ar' ? 'غلاف كتاب الملة والنحلة' : 'Cover of Al-Milla wa al-Nihla'}"></a>
+    <a class="cover" href="#/read" aria-label="${esc(t('bookTitle'))}"><img src="${ROOT}assets/cover.jpg" width="473" height="717" alt="${state.lang === 'ar' ? 'غلاف كتاب الملة والنحلة' : 'Cover of Al-Milla wa al-Nihla'}"></a>
   </div></section>
 
   <section class="band"><div class="wrap"><figure class="feature" id="feature" aria-live="polite"></figure></div></section>
@@ -306,7 +336,7 @@ function viewHome(app) {
     <div><div class="kicker">${t('helpKick')}</div><h2>${t('helpTitle')}</h2><p class="lede">${t('helpP')}</p>
       <ul class="checks">${t('h1').map(x => `<li>${esc(x)}</li>`).join('')}</ul>
       <p style="margin-top:1.5rem" class="row"><a class="btn" href="${issueUrl()}" rel="noopener">${t('helpBtn')}</a><a class="btn ghost" href="#/books">${t('helpBooks')}</a></p></div>
-    <a class="cover" href="#/books" style="max-width:12rem" aria-hidden="true" tabindex="-1"><img src="assets/cover.jpg" alt="" loading="lazy"></a>
+    <a class="cover" href="#/books" style="max-width:12rem" aria-hidden="true" tabindex="-1"><img src="${ROOT}assets/cover.jpg" alt="" loading="lazy"></a>
   </div></section>`;
 
   const feat = $('#feature');
@@ -341,7 +371,7 @@ function viewBooks(app) {
   <div class="shelf">
     ${works.map(w => `
     <article class="book">
-      ${w.online ? '<img src="assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      ${w.online ? '<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       ${state.lang === 'ar'
         ? `<h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
@@ -428,6 +458,7 @@ async function viewRead(app, r) {
   let page = null, sec;
   if (r.seg[1] === 'p') { page = parseInt(r.seg[2], 10); sec = state.byPage.get(page); }
   else if (r.seg[1]) sec = secs.find(s => s.id === r.seg[1]);
+  if (sec && r.page && state.byPage.get(r.page) === sec) page = r.page;
   if (!sec) {
     const lp = lastRead();
     if (!r.seg[1] && lp && state.byPage.get(lp)) { location.replace(readHref(lp)); return; }
@@ -442,16 +473,16 @@ async function viewRead(app, r) {
   for (const s of state.site.toc) {
     if (s.group !== group) { group = s.group; if (!s.heading && (group === 'front' || group === 'back')) tocHTML += `<div class="ch">${esc(t('groups')[group])}</div>`; }
     if (s.heading) tocHTML += `<div class="ch">${esc(secTitle(s))}</div>`;
-    else tocHTML += `<a href="#/read/${s.id}" ${s.id === sec.id ? 'aria-current="true"' : ''}><span ${state.lang === 'en' ? '' : 'lang="ar"'}>${esc(secTitle(s))}</span><span class="pg">${N(s.start)}</span></a>`;
+    else tocHTML += `<a href="${secHref(s.id)}" ${s.id === sec.id ? 'aria-current="true"' : ''}><span ${state.lang === 'en' ? '' : 'lang="ar"'}>${esc(secTitle(s))}</span><span class="pg">${N(s.start)}</span></a>`;
   }
   let body = '';
   for (let p = sec.start; p <= sec.end; p++) {
     const ar = state.pages[p], en = mode === 'ar' ? null : state.pagesEn?.[p];
     if (!ar && !en) continue;
-    const typo = `${REPO}/issues/new?title=${encodeURIComponent((state.lang === 'ar' ? 'خطأ في الصفحة ' : 'Typo on page ') + p)}&body=${encodeURIComponent(`${location.origin}${location.pathname}#/read/p/${p}\n\n`)}`;
+    const typo = `${REPO}/issues/new?title=${encodeURIComponent((state.lang === 'ar' ? 'خطأ في الصفحة ' : 'Typo on page ') + p)}&body=${encodeURIComponent(`${location.origin}${location.pathname}${pageHref(p)}\n\n`)}`;
     const arBox = `<div class="ar-text" lang="ar" dir="rtl">${ar || ''}</div>`, enBox = `<div class="en-text" lang="en" dir="ltr">${en || ''}</div>`;
     body += `<section class="page ${mode}" id="p${p}" data-p="${p}">
-      <div class="page-tools" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}"><a class="pn" href="${readHref(p)}" title="${esc(t('copyLink'))}" data-copy>${N(p)}</a><a class="rep" href="${typo}" rel="noopener">${esc(t('reportTypo'))}</a></div>${mode === 'en' ? enBox : mode === 'ar' ? arBox : arBox + enBox}</section>`;
+      <div class="page-tools" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}"><a class="pn" href="${pageHref(p)}" title="${esc(t('copyLink'))}" data-copy>${N(p)}</a><a class="rep" href="${typo}" rel="noopener">${esc(t('reportTypo'))}</a></div>${mode === 'en' ? enBox : mode === 'ar' ? arBox : arBox + enBox}</section>`;
   }
   app.innerHTML = `
   <div class="reader">
@@ -474,8 +505,8 @@ async function viewRead(app, r) {
         ${body}
       </div>
       <nav class="sec-nav" aria-label="Sections">
-        ${prev ? `<a href="#/read/${prev.id}"><small>${t('prev')}</small>${esc(secTitle(prev))}</a>` : '<span></span>'}
-        ${next ? `<a href="#/read/${next.id}"><small>${t('next')}</small>${esc(secTitle(next))}</a>` : '<span></span>'}
+        ${prev ? `<a href="${secHref(prev.id)}"><small>${t('prev')}</small>${esc(secTitle(prev))}</a>` : '<span></span>'}
+        ${next ? `<a href="${secHref(next.id)}"><small>${t('next')}</small>${esc(secTitle(next))}</a>` : '<span></span>'}
       </nav>
     </article>
   </div>`;
@@ -493,7 +524,7 @@ function wireReader(sec, page, r) {
     if (e.key !== 'Enter') return;
     const raw = e.target.value.replace(/[٠-٩]/g, d => d.charCodeAt(0) - 0x660);
     const n = parseInt(raw, 10);
-    if (state.byPage.has(n)) location.hash = readHref(n); else e.target.select();
+    if (state.byPage.has(n)) location.href = pageHref(n); else e.target.select();
   };
   $$('[data-copy]').forEach(a => a.addEventListener('click', e => {
     e.preventDefault(); history.replaceState(null, '', a.getAttribute('href'));
@@ -519,7 +550,7 @@ function wireReader(sec, page, r) {
     const io = new IntersectionObserver(es => {
       for (const e of es) if (e.isIntersecting) {
         const p = +e.target.dataset.p; set(p);
-        history.replaceState(null, '', readHref(p) + (location.hash.includes('?') ? '?' + location.hash.split('?')[1] : ''));
+        history.replaceState(null, '', pageHref(p) + (!STATIC && location.hash.includes('?') ? '?' + location.hash.split('?')[1] : ''));
       }
     }, { rootMargin: '-25% 0px -65% 0px' });
     $$('.page').forEach(el => io.observe(el));
@@ -608,6 +639,9 @@ $('#themeBtn').addEventListener('click', cycleTheme);
 $('#langBtn').addEventListener('click', () => {
   state.lang = state.lang === 'ar' ? 'en' : 'ar'; store.set('lang', state.lang);
   state.readPref = null; store.set('readMode', '');   // the reader follows the language just chosen
+  // A page whose URL fixes the language goes to its twin in the other language.
+  const twin = PAGE_LANG && document.querySelector(`link[rel=alternate][hreflang="${state.lang}"]`);
+  if (twin) { location.href = new URL(twin.href).pathname + location.hash; return; }
   applyI18n(); $('#app').dataset.sec = ''; route();
 });
 document.addEventListener('keydown', e => {
