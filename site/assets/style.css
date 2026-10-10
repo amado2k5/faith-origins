@@ -242,6 +242,8 @@ mark{background:var(--mark);color:var(--mark-ink);border-radius:3px;padding:0 .1
 .foot-star{width:1.8rem;height:1.8rem;color:var(--gold-soft);--paper:var(--green)}
 .foot-ded{font-size:1.3rem;margin:.6rem 0}
 .foot-note{font-family:var(--sans);font-size:.82rem;opacity:.8;margin:.4rem 0}
+.foot-contact{font-size:1.15rem;margin:.9rem 0 .4rem}
+.foot-contact a{font-family:var(--sans);font-size:1rem;font-weight:600}
 .foot-links{font-family:var(--sans);font-size:.85rem}
 .foot a{color:var(--gold-soft)}
 .loading{text-align:center;padding:4rem;color:var(--muted)}
