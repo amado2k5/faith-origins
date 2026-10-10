@@ -8,6 +8,13 @@ const REPO = 'https://github.com/amado2k5/faith-origins';
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+// Language and reading-mode choices last only for the current browsing session, so every new visit starts in Arabic,
+// wherever the visitor is and whatever their browser language. (Older builds saved the choice permanently; clear it.)
+const sstore = {
+  get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { sessionStorage.setItem(k, v); } catch { /* private mode */ } },
+};
+try { localStorage.removeItem('lang'); localStorage.removeItem('readMode'); } catch { /* ignore */ }
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch { /* private mode */ } },
@@ -64,7 +71,8 @@ const I18N = {
     searchHint: 'ابحث بكلمة أو أكثر. لا يُشترط التشكيل، ولا التفريق بين الهمزات والألف. يمكنك أيضاً البحث بالإنجليزية في الترجمة.',
     libTitle: 'استعِر الكتب من المكتبات', libP: 'كتبه الثلاثة الأخرى ليست على الإنترنت بعد، لكنها مفهرسة في المكتبات. تذكر فهرسة مكتبات جامعة تورنتو الكتب الأربعة كلها. ويبحث رابط WorldCat عن المكتبات الأخرى.',
     uoft: 'جامعة تورنتو', worldcat: 'WorldCat', neel: 'النيل والفرات', pubPage: 'صفحة الناشر', alsoHeld: 'توجد أيضاً في', topicsFrom: 'من فهرس الناشر', pubListing: 'قائمة الناشر لكتبه', notOnline: 'ليس على الإنترنت بعد', heldBy: 'في مكتبات جامعة تورنتو', ed: 'ط', pp: 'ص', year: 'السنة', allUofT: 'كل كتبه في مكتبات تورنتو',
-    modeAr: 'العربية', modeEn: 'English', modeBoth: 'الاثنان', textLang: 'لغة النص',
+    modeAr: 'العربية', modeEn: 'الإنجليزية', modeBoth: 'الاثنان', textLang: 'لغة النص',
+    brandName: 'حمدي عبد العال', arabicOriginal: 'النص العربي', arabicTitle: 'العنوان بالعربية',
     trNote: 'الترجمة الإنجليزية أنجزها Claude (نموذج ذكاء اصطناعي من Anthropic) ولم يراجعها مترجم بشري. وترجمة الآيات القرآنية من النموذج نفسه وليست من ترجمة منشورة.',
     authorNote: 'الآراء الواردة في الكتاب آراء المؤلف.',
     tryThese: 'جرّب:', all: 'الكل', more: 'المزيد', resultsFor: q => `نتائج البحث عن «${q}»`,
@@ -122,7 +130,8 @@ const I18N = {
     searchHint: 'Search in English (the translation) or Arabic (the original). In Arabic, vowel marks are optional and alef or hamza forms are treated alike.',
     libTitle: 'Borrow the books from libraries', libP: 'His other three books are not online yet, but they are catalogued in libraries. The University of Toronto’s catalogue lists all four. The WorldCat link searches for other libraries.',
     uoft: 'U of Toronto', worldcat: 'WorldCat', neel: 'Neelwafurat', pubPage: 'Publisher', alsoHeld: 'Also held by', topicsFrom: 'From the publisher’s contents list', pubListing: 'The publisher’s list of his books', notOnline: 'Not online yet', heldBy: 'University of Toronto Libraries', ed: 'ed.', pp: 'pp.', year: 'Year', allUofT: 'All his books at Toronto',
-    modeAr: 'العربية', modeEn: 'English', modeBoth: 'Both', textLang: 'Text',
+    modeAr: 'Arabic', modeEn: 'English', modeBoth: 'Both', textLang: 'Text',
+    brandName: 'Hamdy Abdel Aal', arabicOriginal: 'Arabic original', arabicTitle: 'Arabic title',
     trNote: 'The English translation was made by Claude (an AI model from Anthropic) and has not been reviewed by a human translator. Qur’anic verses are translated by the model, not taken from a published translation.',
     authorNote: 'The views expressed in the book are the author’s.',
     tryThese: 'Try:', all: 'All', more: 'Show more', resultsFor: q => `Results for “${q}”`,
@@ -134,10 +143,10 @@ const I18N = {
 };
 
 const state = {
-  lang: store.get('lang') === 'en' ? 'en' : 'ar', // Arabic unless the visitor has chosen EN
+  lang: sstore.get('lang') === 'en' ? 'en' : 'ar', // Arabic unless the visitor pressed EN in this session
   size: parseFloat(store.get('size')) || 1.3,
   site: null, pages: null, plain: null, pagesEn: null, plainEn: null, sections: null, byPage: null,
-  readPref: ['ar', 'en', 'both'].includes(store.get('readMode')) ? store.get('readMode') : null,
+  readPref: ['ar', 'en', 'both'].includes(sstore.get('readMode')) ? sstore.get('readMode') : null,
 };
 const t = k => I18N[state.lang][k] ?? k;
 const N = n => state.lang === 'ar' ? Number(n).toLocaleString('ar-EG', { useGrouping: false }) : String(n);
@@ -216,7 +225,7 @@ function applyI18n() {
   $('#langBtn').textContent = t('langBtn');
   const th = d.dataset.theme;
   $('#themeBtn').title = $('#themeBtn').ariaLabel = `${t('theme' + th[0].toUpperCase() + th.slice(1))}`;
-  document.title = state.lang === 'ar' ? 'حمدي عبد العال · Hamdy Abdel Aal' : 'Hamdy Abdel Aal · حمدي عبد العال';
+  document.title = state.lang === 'ar' ? 'حمدي عبد العال · origins.faith' : 'Hamdy Abdel Aal · origins.faith';
 }
 
 /* ---------- router ---------- */
@@ -251,12 +260,16 @@ async function route() {
 const lastRead = () => parseInt(store.get('lastPage'), 10) || null;
 const readHref = (page, extra = '') => `#/read/p/${page}${extra}`;
 const quoteHref = i => readHref(state.site.quotes[i].page, `?hl=${i}`);
-const quoteHTML = (q, i, cls = '') => `
+const arQuote = (q, cls = '') => `<blockquote lang="ar" dir="rtl"${cls ? ` class="${cls}"` : ''}>${q.partial ? '… ' : ''}${esc(q.text)}</blockquote>`;
+const quoteHTML = (q, i, cls = '') => {
+  const en = state.lang === 'en' && q.en;
+  return `
   <figure class="q ${cls}">
-    <blockquote lang="ar" dir="rtl">${q.partial ? '… ' : ''}${esc(q.text)}</blockquote>
-    ${state.lang === 'en' && q.en ? `<p class="en">${esc(q.en)}</p>` : ''}
+    ${en ? `<blockquote lang="en" dir="ltr" class="primary">${esc(q.en)}</blockquote>
+    <details class="orig"><summary>${t('arabicOriginal')}</summary>${arQuote(q, 'ar')}</details>` : arQuote(q)}
     <figcaption class="src"><span>${esc(t('bookTitle'))} · ${t('page')} ${N(q.page)}</span><a href="${quoteHref(i)}">${t('inContext')}</a></figcaption>
   </figure>`;
+};
 
 function viewHome(app) {
   const qs = state.site.quotes;
@@ -267,7 +280,7 @@ function viewHome(app) {
     <div>
       <div class="kicker">${t('kickerHome')}</div>
       <h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? 'الدكتور حمدي عبد العال' : 'Dr. Hamdy Abdel Aal'}</h1>
-      <div class="en-name">${state.lang === 'ar' ? 'Dr. Hamdy Abdel Aal' : '<bdi lang="ar">الدكتور حمدي عبد العال</bdi>'} · ${lifespan()}</div>
+      <div class="en-name">${state.lang === 'ar' ? `Dr. Hamdy Abdel Aal · ${lifespan()}` : lifespan()}</div>
       <p class="ded">${t('heroDed')}</p>
       <div class="row">
         <a class="btn" href="${resume ? readHref(resume) : '#/read'}">${resume ? t('continueRead') : t('readBook')}</a>
@@ -288,7 +301,6 @@ function viewHome(app) {
   <section class="section" style="padding-top:0"><div class="wrap">
     <div class="orn" aria-hidden="true"><svg><use href="#star"/></svg></div>
     <div style="margin-top:2.5rem"><div class="kicker">${t('aboutKick')}</div><h2 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(t('bookTitle'))}</h2>
-    ${state.lang === 'en' ? `<p class="sans" style="margin:-.4rem 0 1rem;color:var(--muted)"><bdi lang="ar">${I18N.ar.bookTitle}</bdi></p>` : ''}
     <p class="lede">${t('aboutP1')}</p></div>
     <div class="tiles">
       ${[['ch1', 'j1', 17, 72], ['ch2', 'c1', 73, 144], ['ch3', 'i1', 145, 209]].map(([k, id, a, b]) => `
@@ -306,8 +318,9 @@ function viewHome(app) {
   const feat = $('#feature');
   const show = () => {
     const q = qs[cur];
-    feat.innerHTML = `<blockquote lang="ar" dir="rtl">${q.partial ? '… ' : ''}${esc(q.text)}</blockquote>
-      ${state.lang === 'en' && q.en ? `<div class="en">${esc(q.en)}</div>` : ''}
+    const en = state.lang === 'en' && q.en;
+    feat.innerHTML = `${en ? `<blockquote lang="en" dir="ltr">${esc(q.en)}</blockquote>
+      <details class="orig"><summary>${t('arabicOriginal')}</summary>${arQuote(q, 'ar')}</details>` : arQuote(q)}
       <figcaption>${esc(t('bookTitle'))} · ${t('page')} ${N(q.page)} <a href="${quoteHref(cur)}">${t('inContext')}</a><button type="button" id="nextQ">${t('anotherQuote')}</button></figcaption>`;
     $('#nextQ').onclick = () => { cur = (cur + 1) % qs.length; show(); };
   };
@@ -336,8 +349,12 @@ function viewBooks(app) {
     <article class="book">
       ${w.online ? '<img src="assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
-      <h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
-      <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}<br><em>${esc(w.gloss)}</em></p>
+      ${state.lang === 'ar'
+        ? `<h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
+      <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}<br><em>${esc(w.gloss)}</em></p>`
+        : `<h3>${esc(w.gloss)}</h3>
+      <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">${esc(w.en)}</p>
+      <details class="orig"><summary>${t('arabicTitle')}</summary><span lang="ar" dir="rtl">${esc(w.ar)}</span></details>`}
       <p class="meta">${workLines(w).map(esc).join('<br>')}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}${l.note ? ` (${esc(l.note)})` : ''}</a>`).join(', ')}` : ''}</p>
       ${w.topics ? `<p class="meta topics" lang="${state.lang}" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}">${esc(w.topics[state.lang])} <em>(${t('topicsFrom')})</em></p>` : ''}
       <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
@@ -362,11 +379,15 @@ function viewAuthor(app) {
   const works = state.site.works;
   app.innerHTML = `
   <div class="wrap"><div class="page-head"><div class="kicker">${t('authorKick')}</div><h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${state.lang === 'ar' ? I18N.ar.authorTitle : 'Dr. Hamdy Abdel Aal'}</h1>
-    <div class="sans" style="color:var(--muted)">${state.lang === 'ar' ? '<bdi dir="ltr">Dr. Hamdy Abdel Aal</bdi>' : `<bdi lang="ar">${I18N.ar.authorTitle}</bdi>`} · ${lifespan()}</div></div>
+    <div class="sans" style="color:var(--muted)">${state.lang === 'ar' ? `<bdi dir="ltr">Dr. Hamdy Abdel Aal</bdi> · ${lifespan()}` : lifespan()}</div></div>
   <div class="prose"><p>${t('authorP1')}</p><p>${t('authorP2')}</p></div>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('works')}</h2>
-  <ol class="works">${works.map(w => `<li><span class="yr">${w.year}</span><div><b lang="ar" dir="rtl">${esc(w.ar)}</b>
-      <div class="sans" style="font-size:.85rem;color:var(--muted)" dir="ltr" lang="en">${esc(w.en)} (${esc(w.gloss)})</div>
+  <ol class="works">${works.map(w => `<li><span class="yr">${w.year}</span><div>${state.lang === 'ar'
+        ? `<b lang="ar" dir="rtl">${esc(w.ar)}</b>
+      <div class="sans" style="font-size:.85rem;color:var(--muted)" dir="ltr" lang="en">${esc(w.en)} (${esc(w.gloss)})</div>`
+        : `<b>${esc(w.gloss)}</b>
+      <div class="sans" style="font-size:.85rem;color:var(--muted)" dir="ltr" lang="en">${esc(w.en)}</div>
+      <details class="orig"><summary>${t('arabicTitle')}</summary><span lang="ar" dir="rtl">${esc(w.ar)}</span></details>`}
       <div class="sans" style="font-size:.8rem;color:var(--muted)">${workLines(w).map(esc).join('<br>')}</div></div></li>`).join('')}</ol>
   <h2 style="margin-top:2rem;font-size:1.5rem">${t('factsTitle')}</h2>
   <dl class="facts"><dt>${t('fLife')}</dt><dd>${lifespan()}</dd><dt>${t('fAff')}</dt><dd>${t('fAffV')}</dd><dt>${t('fWorks')}</dt><dd>${t('fWorksV')}</dd></dl>
@@ -454,7 +475,7 @@ async function viewRead(app, r) {
       <div class="notice">${mode === 'en' ? '' : esc(t('ocrNote')) + ' '}${mode === 'ar' ? '' : esc(t('trNote')) + ' '}${esc(t('authorNote'))}</div>
       <div class="sheet" id="sheet">
         <header class="sec-title">${mode === 'en'
-          ? `<h1 lang="en" dir="ltr">${esc(sec.en)}</h1><div class="en" lang="ar" dir="rtl">${esc(sec.ar)}</div>`
+          ? `<h1 lang="en" dir="ltr">${esc(sec.en)}</h1>`
           : `<h1 lang="ar">${esc(sec.ar)}</h1>${state.lang === 'en' ? `<div class="en">${esc(sec.en)}</div>` : ''}`}</header>
         ${body}
       </div>
@@ -471,7 +492,7 @@ function wireReader(sec, page, r) {
   const toc = $('#toc'), tocBtn = $('#tocBtn');
   tocBtn.onclick = () => { const o = toc.classList.toggle('open'); tocBtn.setAttribute('aria-expanded', o); };
   toc.onclick = e => { if (e.target.closest('a')) toc.classList.remove('open'); };
-  $$('.seg [data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; store.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
+  $$('.seg [data-mode]').forEach(b => b.onclick = () => { state.readPref = b.dataset.mode; sstore.set('readMode', state.readPref); $('#app').dataset.mode = ''; route(); });
   $('#fs-').onclick = () => { state.size = Math.max(1, +(state.size - .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#fs\\+').onclick = () => { state.size = Math.min(2.2, +(state.size + .1).toFixed(2)); store.set('size', state.size); applySize(); };
   $('#gotoIn').onkeydown = e => {
@@ -533,7 +554,7 @@ async function viewSearch(app, r) {
   const examplesEn = ['milla', 'nihla', 'revelation', 'Trinity', 'Barnabas', 'Nicaea'];
   const head = `<div class="wrap results"><div class="page-head"><div class="kicker">${t('searchBook')}</div><h1>${q ? esc(t('resultsFor')(q)) : t('searchBook')}</h1></div>`;
   if (!q) {
-    app.innerHTML = `${head}<p class="lede">${t('searchHint')}</p><div class="examples"><span class="sans">${t('tryThese')}</span>${[...examplesAr.map(x => ['ar', x]), ...(hasEn() ? examplesEn.map(x => ['en', x]) : [])].sort(a => (a[0] === state.lang ? -1 : 1)).map(([l, x]) => `<a class="chip" lang="${l}" href="#/search?q=${encodeURIComponent(x)}">${x}</a>`).join('')}</div></div>`;
+    app.innerHTML = `${head}<p class="lede">${t('searchHint')}</p><div class="examples"><span class="sans">${t('tryThese')}</span>${(state.lang === 'en' && hasEn() ? examplesEn.map(x => ['en', x]) : [...examplesAr.map(x => ['ar', x]), ...(hasEn() ? examplesEn.map(x => ['en', x]) : [])].sort(a => (a[0] === state.lang ? -1 : 1))).map(([l, x]) => `<a class="chip" lang="${l}" href="#/search?q=${encodeURIComponent(x)}">${x}</a>`).join('')}</div></div>`;
     $('#searchInput').focus();
     return;
   }
@@ -591,7 +612,7 @@ $('#searchForm').addEventListener('submit', e => {
 });
 $('#themeBtn').addEventListener('click', cycleTheme);
 $('#langBtn').addEventListener('click', () => {
-  state.lang = state.lang === 'ar' ? 'en' : 'ar'; store.set('lang', state.lang);
+  state.lang = state.lang === 'ar' ? 'en' : 'ar'; sstore.set('lang', state.lang);
   applyI18n(); $('#app').dataset.sec = ''; route();
 });
 document.addEventListener('keydown', e => {
