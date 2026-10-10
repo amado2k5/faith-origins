@@ -22,6 +22,9 @@ jobs:
       # Fails the build if a quote is not found verbatim on its page, or the table of contents has gaps.
       - name: Build book data
         run: python tools/build.py
+      # Tag scripts, styles and data with the commit so browsers and CDNs fetch fresh copies after every deploy.
+      - name: Version assets
+        run: sed -i "s/__V__/${GITHUB_SHA::10}/g" site/index.html site/assets/app.js
       - uses: actions/configure-pages@v5
         if: github.event_name != 'pull_request'
       - uses: actions/upload-pages-artifact@v3
