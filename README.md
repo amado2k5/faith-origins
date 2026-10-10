@@ -18,11 +18,14 @@ to GitHub Pages on every push to `main` (`.github/workflows/pages.yml`).
 | `book/al-milla-wal-nihla.en.md` | The English translation, same page markers. Made by Claude (Opus) following `book/translation-guide.md`; not reviewed by a human translator |
 | `book/translation-guide.md` | Style rules and glossary the translation follows |
 | `book/corrections.json` | Hand corrections to the OCR text, applied at build time |
-| `book/toc.json` | Chapters and sections, with page ranges |
+| `book/toc.json` | Chapters and sections, with page ranges and the `slug` of each section's URL (do not change a published slug) |
 | `book/author.json` | The author's dates (provided by his family), shown on the home and author pages |
 | `book/works.json` | His known books (title, year, edition, publisher, library and catalogue links) shown on the Books and Author pages |
 | `book/quotes.json` | Quotations shown on the home page. The build fails if one is not found verbatim on its page |
 | `tools/build.py` | Turns the above into `site/data/site.json` and `site/data/pages.json` |
+| `tools/static_pages.py` | Called by the build: pre-rendered pages for search engines and readers without JavaScript (`/book/<slug>/`, `/en/book/<slug>/`, `/book/`, `/author/`, `/books/`, `/en/...`), `sitemap.xml` and `llms.txt`. Not committed; `site/index.html` gets its SEO tags and home markup rewritten in place |
+| `tools/indexnow.py` | Pings IndexNow with the sitemap URLs (the workflow runs it after each deploy from `main`); the key is `site/<key>.txt` |
+| `SUBMISSION-CHECKLIST.md` | Sitemap, IndexNow key and search consoles to register the site with |
 | `site/` | The website (`index.html`, `assets/app.js`, `assets/style.css`, fonts, cover) |
 
 ```bash
