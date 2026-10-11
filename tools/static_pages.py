@@ -490,6 +490,10 @@ class Site:
                     f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{ORIGIN}{alts["ar"]}"/>'
             for l in LANGS:
                 rows.append(f"  <url>\n    <loc>{ORIGIN}{alts[l]}</loc>\n    <lastmod>{mod}</lastmod>{links}\n  </url>")
+        # Legal pages (site/terms/, site/privacy/, site/disclaimer/): one bilingual page each, hand-written.
+        for path in ("/terms/", "/privacy/", "/disclaimer/"):
+            src = self.site / path.strip("/") / "index.html"
+            rows.append(f"  <url>\n    <loc>{ORIGIN}{path}</loc>\n    <lastmod>{lastmod(self.root, [src])}</lastmod>\n  </url>")
         assert len(rows) < 50000
         (self.site / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
