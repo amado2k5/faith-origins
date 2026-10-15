@@ -1,7 +1,7 @@
 # Search engine submission checklist (origins.faith)
 
 Do these once, after the SEO pass is merged and the `Build and publish origins.faith` workflow has deployed it.
-Check first that the files are live: `curl -I https://origins.faith/sitemap.xml` and `curl https://origins.faith/336c2f98e0fc0a729f604d94270464c6.txt` should both answer 200.
+Check first that the files are live: `curl -I https://origins.faith/sitemap.xml` and `curl https://origins.faith/6877cc0a6d974df5ba767efff92ed177.txt` should both answer 200.
 
 ## Files to give the consoles
 
@@ -9,7 +9,7 @@ Check first that the files are live: `curl -I https://origins.faith/sitemap.xml`
 |---|---|
 | Sitemap (all 54 pages, with Arabic/English alternates) | https://origins.faith/sitemap.xml |
 | robots.txt (points to the sitemap) | https://origins.faith/robots.txt |
-| IndexNow key file | https://origins.faith/336c2f98e0fc0a729f604d94270464c6.txt |
+| IndexNow key file | https://origins.faith/6877cc0a6d974df5ba767efff92ed177.txt |
 | llms.txt (summary and page map for AI tools) | https://origins.faith/llms.txt |
 
 ## Consoles
