@@ -96,7 +96,19 @@ Definition of the Science of Ethics, Its Subject, and Its Goal
 
 {12}------------------------------------------------
 
+# Definition of Ethics
 
+Ethics are the foundation of religion.  
+It has been mentioned in the Book, as God Almighty says:  
+> "And We did not send any messenger except with the command to obey Him, and to follow the religion of the upright."  
+This is also mentioned in the Sunna, as the Prophet said:  
+> "The best of you in faith are those who are best in character."  
+The Qur'an is the one who created ethics.  
+Ethics are the essence of good life and a pattern of behavior that is followed, because the soul is inclined toward God and toward itself.  
+As for the meaning of ethics, it is:  
+• Establishing it in society.  
+(4:5)  
+(3) See *Ihya*
 
 {13}------------------------------------------------
 
@@ -640,7 +652,27 @@ The moral reward is unique among other types of rewards in that it is internal a
 
 {40}------------------------------------------------
 
+# Know First
 
+What is material or immaterial,  
+the judgment upon  
+short, little or  
+a material measure does it,  
+and other criteria,  
+the different ones.  
+As for the judgment  
+ugly, it calls for  
+and its criticism.  
+And if it is  
+does not call for solitude  
+the literary, because it  
+differed people in  
+the majority  
+the human seeks how much  
+those values, or.  
+And the behavior, I mean  
+as a living reality in 1-  
+in this way.
 
 {41}------------------------------------------------
 
@@ -659,7 +691,21 @@ The majority of philosophers, although they agree that the most prominent values
 
 {42}------------------------------------------------
 
+# The Moral Criterion
 
+And if the moral criterion, which is what we are concerned with in this context, is generally the first of the values or standards that a person should adhere to in behavior and as an ultimate goal, and since this matter has a serious impact on human life and destiny, it has made human thought, since its inception until now, engaged in an ongoing debate about the nature of this standard and its source, because it is the core of the moral problem and its essence.
+
+Therefore, we have decided to investigate the moral criterion, and that would be in two sources:
+
+The Human Source: By which I mean the theories whose source is human faculties such as reason, conscience, senses, or others. We will strive to be concise in presenting what has been offered in this field, ending with the conclusions that can be drawn, while taking into account the evaluation of the theories and principles presented in this field, and the extent of their value as standards for human ethics, and whether they are suitable to be the basis upon which a person relies to achieve his good and happiness.
+
+The Divine Source: And in proportion to the conclusions that can be drawn in the first field, we will trace another path to solve the problem, relying on higher faculties than human faculties and on a higher legislation represented in revelation.
+
+And since Islam is the last of the heavenly religions, encompassing their methods and objectives, it will be the main counterpart to the first approach.
+
+To clarify this, we will begin in the following chapters by presenting the solutions to the moral problem in Greek philosophy, then in modern philosophy, and then we will turn to Islam to learn about its guidance in this regard.
+
+We have started with Greek philosophy for the meaning expressed by Dr. Muhammad 'Abd al-Latif Draz, who said: "Perhaps the Greek philosophers were the first to divide philosophy into..."
 
 {43}------------------------------------------------
 
@@ -1021,11 +1067,22 @@ The Sensual Direction: or what is called the Doctrine of Utility, which is conce
 
 {69}------------------------------------------------
 
+# The Ethical Criterion
 
+1. They have two directions in it, which are:
+
+It is the intellect  
+The philosopher says:  
+The sensory one: or what is called  
+by its motives and it
 
 {70}------------------------------------------------
 
-
+# Chapter Two  
+The Moral Criterion in Modern Philosophy  
+And its two main directions are:  
+The Rational Direction: which is concerned with the motive of the moral act, not its results. The leader of this direction is the German philosopher Kant.  
+The Sensual Direction: or what is called the Utilitarianism school, which is concerned with the results of the act, not its motives. It is led by the two English philosophers Hobbes and Bentham.
 
 {71}------------------------------------------------
 
@@ -1242,11 +1299,30 @@ The Moral Criterion in Islam
 
 {87}------------------------------------------------
 
-
+# Chapter Three  
+The Moral Criterion in Islam
 
 {88}------------------------------------------------
 
+# The Failure of the Criterion
 
+We find that the criterion has failed  
+in dealing with the complex nature of man,  
+and they encountered contradictions.  
+They coincided in their views,  
+but they were unable  
+to reconcile the spiritual and the material  
+aspects of man. This confusion  
+in which philosophers have fallen  
+has led to their theories and contradictions:  
+and since they are  
+Sophists and those who weaken trust,  
+the criterion that should be  
+for happiness, and as a model  
+for humanity and a criterion  
+as it is something  
+classical, then do not be  
+those who capture minds.
 
 {89}------------------------------------------------
 
