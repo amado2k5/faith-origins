@@ -249,12 +249,12 @@ async function route() {
   $('#searchInput').value = r.seg[0] === 'search' ? (r.params.get('q') || '') : $('#searchInput').value;
   try {
     await loadSite();
-    if (!r.seg.length) viewHome(app);
+    if (!r.seg.length) await viewRandomBook(app);
     else if (r.seg[0] === 'read') await viewRead(app, r);
     else if (r.seg[0] === 'search') await viewSearch(app, r);
     else if (r.seg[0] === 'books') viewBooks(app);
     else if (r.seg[0] === 'author') viewAuthor(app);
-    else viewHome(app);
+    else await viewRandomBook(app);
   } catch (e) {
     console.error(e);
     app.innerHTML = `<p class="loading">${esc(t('loadError'))}</p>`;
@@ -273,10 +273,39 @@ async function hydrate() {
     if (view === 'read') await viewRead(app, { seg: ['read', id], params: new URLSearchParams(), page: m ? +m[1] : null });
     else if (view === 'books') viewBooks(app);
     else if (view === 'author') viewAuthor(app);
+    else if (view === 'home') await viewRandomBook(app);
   } catch (e) { console.error(e); }   // the pre-rendered page stays as it is
 }
 
 /* ---------- views ---------- */
+// The landing page: one of the four books, picked at random on each visit, with all of its text.
+const BOOK_FOLDERS = ['', 'book-2', 'book-3', 'book-4'];    // '' is the first book, at /book/
+const BOOK_WORK = { '': 'milla', 'book-2': 'manhaj', 'book-3': 'akhlaq', 'book-4': 'sabaiyyun' };
+async function viewRandomBook(app) {
+  const folder = BOOK_FOLDERS[Math.floor(Math.random() * BOOK_FOLDERS.length)];
+  const base = `${ROOT}${folder ? folder + '/' : ''}`;
+  const get = f => fetch(`${base}data/${f}?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  const site = await get('site.json');
+  const pages = await (state.lang === 'en' && site.hasEnglish ? get('pages-en.json') : get('pages.json'));
+  const work = site.works.find(w => w.id === BOOK_WORK[folder]);
+  const prefix = state.lang === 'en' ? '/en/' : '/';
+  const cover = folder ? `${ROOT}assets/covers/${folder}.jpg` : `${ROOT}assets/cover.jpg`;
+  const title = state.lang === 'ar' ? work.ar : work.en;
+  document.title = `${title} · origins.faith`;
+  app.innerHTML = `
+    <section class="wrap" style="padding-top:2rem">
+      <div class="page-head" style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
+        <img src="${cover}" width="160" height="243" alt="" style="border-radius:4px">
+        <div><div class="kicker">${esc(t('kickerHome'))}</div><h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(title)}</h1>
+        <p class="lede">${esc(work.gloss)}</p></div>
+      </div>
+      ${site.toc.map(s => s.heading
+        ? `<h2 class="ch">${esc(secTitle(s))}</h2>`
+        : `<section id="${s.id}"><h3><a href="${prefix}${folder || 'book'}/${s.slug}/">${esc(secTitle(s))}</a></h3>` +
+          Array.from({ length: s.end - s.start + 1 }, (_, i) => s.start + i).filter(n => pages[n])
+            .map(n => `<div class="page" id="p${n}"><span class="pg">${N(n)}</span>${pages[n]}</div>`).join('') + '</section>').join('')}
+    </section>`;
+}
 const lastRead = () => parseInt(store.get('lastPage'), 10) || null;
 const readHref = (page, extra = '') => `#/read/p/${page}${extra}`;
 const slugOf = id => state.site.toc.find(s => s.id === id).slug;
