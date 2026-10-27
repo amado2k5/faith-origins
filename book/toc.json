@@ -1,32 +1,239 @@
 [
-  {"id": "preface", "slug": "epigraph-and-preface", "ar": "الاستهلال والمقدمة", "en": "Epigraph and preface", "start": 4, "end": 8, "group": "front"},
-  {"id": "intro", "slug": "introduction", "ar": "تمهيد", "en": "Introduction: milla and nihla", "start": 9, "end": 16, "group": "front"},
-
-  {"id": "ch1", "ar": "الفصل الأول: اليهودية", "en": "Chapter 1: Judaism", "heading": true, "group": "ch1"},
-  {"id": "j1", "slug": "judaism-origins-and-development", "ar": "نشأتها وتطورها", "en": "Origins and development", "start": 17, "end": 24, "group": "ch1"},
-  {"id": "j2", "slug": "israelites-in-egypt", "ar": "الإسرائيليون في مصر", "en": "The Israelites in Egypt", "start": 25, "end": 26, "group": "ch1"},
-  {"id": "j3", "slug": "israelites-in-sinai", "ar": "بنو إسرائيل في سيناء", "en": "The Children of Israel in Sinai", "start": 27, "end": 31, "group": "ch1"},
-  {"id": "j4", "slug": "israelites-in-palestine", "ar": "الإسرائيليون في فلسطين", "en": "The Israelites in Palestine", "start": 32, "end": 40, "group": "ch1"},
-  {"id": "j5", "slug": "jewish-sacred-books", "ar": "كتبهم المقدسة", "en": "Their sacred books", "start": 41, "end": 43, "group": "ch1"},
-  {"id": "j6", "slug": "jewish-beliefs", "ar": "اعتقاداتهم", "en": "Their beliefs", "start": 44, "end": 47, "group": "ch1"},
-  {"id": "j7", "slug": "jewish-sects", "ar": "فرق اليهود", "en": "Jewish sects", "start": 48, "end": 49, "group": "ch1"},
-  {"id": "j8", "slug": "jewish-ethics", "ar": "أخلاق اليهود", "en": "Jewish ethics", "start": 50, "end": 62, "group": "ch1"},
-  {"id": "j9", "slug": "alteration-of-jewish-scriptures", "ar": "تحريف كتبهم المقدسة", "en": "The alteration of their sacred books", "start": 63, "end": 72, "group": "ch1"},
-
-  {"id": "ch2", "ar": "الفصل الثاني: المسيحية", "en": "Chapter 2: Christianity", "heading": true, "group": "ch2"},
-  {"id": "c1", "slug": "christianity-origins-and-development", "ar": "نشأتها وتطورها", "en": "Origins and development", "start": 73, "end": 78, "group": "ch2"},
-  {"id": "c2", "slug": "what-is-christianity", "ar": "ما المسيحية؟", "en": "What is Christianity?", "start": 79, "end": 101, "group": "ch2"},
-  {"id": "c3", "slug": "disciples-and-apostles", "ar": "الحواريون والرسل", "en": "The disciples and the apostles", "start": 102, "end": 103, "group": "ch2"},
-  {"id": "c4", "slug": "christian-books", "ar": "كتبهم", "en": "Their books", "start": 104, "end": 110, "group": "ch2"},
-  {"id": "c5", "slug": "christian-sects", "ar": "فرقهم", "en": "Christian sects", "start": 111, "end": 113, "group": "ch2"},
-  {"id": "c6", "slug": "christianity-as-the-church-formulated-it", "ar": "المسيحية كما وضعتها الكنيسة", "en": "Christianity as the Church formulated it", "start": 114, "end": 126, "group": "ch2"},
-  {"id": "c7", "slug": "gospel-of-barnabas", "ar": "إنجيل برنابا", "en": "The Gospel of Barnabas", "start": 127, "end": 144, "group": "ch2"},
-
-  {"id": "ch3", "ar": "الفصل الثالث: الإسلام", "en": "Chapter 3: Islam", "heading": true, "group": "ch3"},
-  {"id": "i1", "slug": "islam-historical-introduction", "ar": "مدخل تاريخي", "en": "Historical introduction", "start": 145, "end": 155, "group": "ch3"},
-  {"id": "i2", "slug": "the-quran", "ar": "القرآن الكريم", "en": "The Qur'an", "start": 156, "end": 172, "group": "ch3"},
-  {"id": "i3", "slug": "islamic-sects", "ar": "الفرق الإسلامية", "en": "Islamic sects", "start": 173, "end": 209, "group": "ch3"},
-
-  {"id": "end", "slug": "conclusion", "ar": "الخاتمة", "en": "Conclusion", "start": 210, "end": 212, "group": "back"},
-  {"id": "refs", "slug": "references", "ar": "المراجع", "en": "References", "start": 213, "end": 214, "group": "back"}
+  {
+    "id": "preface",
+    "slug": "epigraph-and-preface",
+    "ar": "الاستهلال والمقدمة",
+    "en": "Epigraph and preface",
+    "start": 0,
+    "end": 8,
+    "group": "front"
+  },
+  {
+    "id": "intro",
+    "slug": "introduction",
+    "ar": "تمهيد",
+    "en": "Introduction: milla and nihla",
+    "start": 9,
+    "end": 16,
+    "group": "front"
+  },
+  {
+    "id": "ch1",
+    "ar": "الفصل الأول: اليهودية",
+    "en": "Chapter 1: Judaism",
+    "heading": true,
+    "group": "ch1"
+  },
+  {
+    "id": "j1",
+    "slug": "judaism-origins-and-development",
+    "ar": "نشأتها وتطورها",
+    "en": "Origins and development",
+    "start": 17,
+    "end": 24,
+    "group": "ch1"
+  },
+  {
+    "id": "j2",
+    "slug": "israelites-in-egypt",
+    "ar": "الإسرائيليون في مصر",
+    "en": "The Israelites in Egypt",
+    "start": 25,
+    "end": 26,
+    "group": "ch1"
+  },
+  {
+    "id": "j3",
+    "slug": "israelites-in-sinai",
+    "ar": "بنو إسرائيل في سيناء",
+    "en": "The Children of Israel in Sinai",
+    "start": 27,
+    "end": 31,
+    "group": "ch1"
+  },
+  {
+    "id": "j4",
+    "slug": "israelites-in-palestine",
+    "ar": "الإسرائيليون في فلسطين",
+    "en": "The Israelites in Palestine",
+    "start": 32,
+    "end": 40,
+    "group": "ch1"
+  },
+  {
+    "id": "j5",
+    "slug": "jewish-sacred-books",
+    "ar": "كتبهم المقدسة",
+    "en": "Their sacred books",
+    "start": 41,
+    "end": 43,
+    "group": "ch1"
+  },
+  {
+    "id": "j6",
+    "slug": "jewish-beliefs",
+    "ar": "اعتقاداتهم",
+    "en": "Their beliefs",
+    "start": 44,
+    "end": 47,
+    "group": "ch1"
+  },
+  {
+    "id": "j7",
+    "slug": "jewish-sects",
+    "ar": "فرق اليهود",
+    "en": "Jewish sects",
+    "start": 48,
+    "end": 49,
+    "group": "ch1"
+  },
+  {
+    "id": "j8",
+    "slug": "jewish-ethics",
+    "ar": "أخلاق اليهود",
+    "en": "Jewish ethics",
+    "start": 50,
+    "end": 62,
+    "group": "ch1"
+  },
+  {
+    "id": "j9",
+    "slug": "alteration-of-jewish-scriptures",
+    "ar": "تحريف كتبهم المقدسة",
+    "en": "The alteration of their sacred books",
+    "start": 63,
+    "end": 72,
+    "group": "ch1"
+  },
+  {
+    "id": "ch2",
+    "ar": "الفصل الثاني: المسيحية",
+    "en": "Chapter 2: Christianity",
+    "heading": true,
+    "group": "ch2"
+  },
+  {
+    "id": "c1",
+    "slug": "christianity-origins-and-development",
+    "ar": "نشأتها وتطورها",
+    "en": "Origins and development",
+    "start": 73,
+    "end": 78,
+    "group": "ch2"
+  },
+  {
+    "id": "c2",
+    "slug": "what-is-christianity",
+    "ar": "ما المسيحية؟",
+    "en": "What is Christianity?",
+    "start": 79,
+    "end": 101,
+    "group": "ch2"
+  },
+  {
+    "id": "c3",
+    "slug": "disciples-and-apostles",
+    "ar": "الحواريون والرسل",
+    "en": "The disciples and the apostles",
+    "start": 102,
+    "end": 103,
+    "group": "ch2"
+  },
+  {
+    "id": "c4",
+    "slug": "christian-books",
+    "ar": "كتبهم",
+    "en": "Their books",
+    "start": 104,
+    "end": 110,
+    "group": "ch2"
+  },
+  {
+    "id": "c5",
+    "slug": "christian-sects",
+    "ar": "فرقهم",
+    "en": "Christian sects",
+    "start": 111,
+    "end": 113,
+    "group": "ch2"
+  },
+  {
+    "id": "c6",
+    "slug": "christianity-as-the-church-formulated-it",
+    "ar": "المسيحية كما وضعتها الكنيسة",
+    "en": "Christianity as the Church formulated it",
+    "start": 114,
+    "end": 126,
+    "group": "ch2"
+  },
+  {
+    "id": "c7",
+    "slug": "gospel-of-barnabas",
+    "ar": "إنجيل برنابا",
+    "en": "The Gospel of Barnabas",
+    "start": 127,
+    "end": 144,
+    "group": "ch2"
+  },
+  {
+    "id": "ch3",
+    "ar": "الفصل الثالث: الإسلام",
+    "en": "Chapter 3: Islam",
+    "heading": true,
+    "group": "ch3"
+  },
+  {
+    "id": "i1",
+    "slug": "islam-historical-introduction",
+    "ar": "مدخل تاريخي",
+    "en": "Historical introduction",
+    "start": 145,
+    "end": 155,
+    "group": "ch3"
+  },
+  {
+    "id": "i2",
+    "slug": "the-quran",
+    "ar": "القرآن الكريم",
+    "en": "The Qur'an",
+    "start": 156,
+    "end": 172,
+    "group": "ch3"
+  },
+  {
+    "id": "i3",
+    "slug": "islamic-sects",
+    "ar": "الفرق الإسلامية",
+    "en": "Islamic sects",
+    "start": 173,
+    "end": 209,
+    "group": "ch3"
+  },
+  {
+    "id": "end",
+    "slug": "conclusion",
+    "ar": "الخاتمة",
+    "en": "Conclusion",
+    "start": 210,
+    "end": 212,
+    "group": "back"
+  },
+  {
+    "id": "refs",
+    "slug": "references",
+    "ar": "المراجع",
+    "en": "References",
+    "start": 213,
+    "end": 214,
+    "group": "back"
+  },
+  {
+    "id": "contents",
+    "slug": "contents-and-download-notice",
+    "ar": "محتويات الكتاب والتنزيل",
+    "en": "Contents and download notice",
+    "start": 215,
+    "end": 217,
+    "group": "back"
+  }
 ]
