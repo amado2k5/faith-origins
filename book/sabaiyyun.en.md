@@ -1354,7 +1354,9 @@ I say, although this method is scientifically limited in danger due to its weakn
 
 {76}------------------------------------------------
 
-And the unseen things, and this is the wandering or the quicksand pit into which the Sabians led the Muslims with their method of interpretation.
+> And the unseen things, and this is the wandering or the quicksand pit into which the Sabeans pushed the Muslims by their method of interpretation.
+Wa
+(1)
 
 {77}------------------------------------------------
 
