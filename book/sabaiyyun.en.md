@@ -991,7 +991,61 @@ Furthermore, the Sabians, through this idea, created factions of extremists who 
 
 {52}------------------------------------------------
 
+# Translation guide: Al-Milla wa al-Nihla (Arabic to English)
 
+Rules every translator (human or model) follows, so a book translated in pieces reads as one voice.
+
+## Principles
+- **Faithful, complete, readable.** Translate every heading, paragraph, quotation and footnote. Do not summarise, skip, soften,
+  sharpen or comment. The author's argument and tone are his; the translation does not endorse or correct them.
+- Natural scholarly English, not word-for-word. Keep the author's sentence rhythm where it can be done without strain.
+- The text is OCR from a scan. Silently repair obvious OCR slips (missing hamza, a swapped letter, a split word) when the
+  meaning is clear from context. If a passage is truly unreadable, write `[illegible]` and keep going. Never invent text.
+- Keep the Markdown structure: `#`/`##`/`###` headings, paragraphs, lists, `---` rules and `<sup>` as in the source.
+- Footnotes: the source marks them `(١)`, `(٢)`…; write `(1)`, `(2)`… and keep each footnote text. Translate titles of cited
+  Arabic works as `Transliterated Title (English gloss)` on first use in a footnote, e.g. `Al-Fitna al-Kubra (The Great Sedition)`.
+- Numbers: Western digits. Hijri years as `AH 1409`, Gregorian years as is.
+
+## Religious formulae
+- `عليه السلام` after a prophet: `(peace be upon him)`. `ﷺ`: `(peace and blessings be upon him)`.
+  `رضي الله عنه`: `(may God be pleased with him)`. `رحمه الله`: `(may God have mercy on him)`.
+  Use them as the author does; do not drop or add them.
+- Names: use the conventional English form: Moses, Jesus, Mary, Abraham, Paul, Muhammad, Abu Bakr, Uthman, Ali.
+
+## Quotations from scripture
+- **Qur'anic verses** (marked with ﴿ ﴾ or with a sura name and verse number in the footnote): translate faithfully into your own
+  English, in a blockquote (`> `), followed by the reference as the source gives it, e.g. `(Al Imran 3:19)`. Do not copy any
+  published translation word for word. Where the OCR garbled a verse, identify it from context and translate the verse itself.
+  Add no commentary.
+- **Bible and Talmud passages quoted in Arabic**: translate from the Arabic as quoted (do not substitute a published English
+  Bible). Mark them as blockquotes.
+- **Hadith**: translate the text; keep the narrator and source as given.
+
+## Glossary (use consistently)
+| Arabic | English |
+|---|---|
+| الملة / الملل | *milla* (religion as God revealed it) / *milal*. Gloss once per chapter, then plain *milla* |
+| النحلة / النحل | *nihla* (a claim or doctrine put forward by human beings) / *nihal*. Gloss once per chapter, then plain *nihla* |
+| الملة والنحلة | *Al-Milla wa al-Nihla* (title); in prose "milla and nihla" |
+| الوحي | revelation |
+| كلمة الله / كلمة الإنسان (البشر) | the Word of God / the word of man |
+| التحريف | alteration (*tahrif*) of scripture |
+| أهل الكتاب | People of the Book |
+| الأحبار | rabbis |
+| بنو إسرائيل | the Children of Israel; الإسرائيليون = the Israelites |
+| التوراة / العهد القديم / الأناجيل / العهد الجديد | the Torah / the Old Testament / the Gospels / the New Testament |
+| التلمود | the Talmud |
+| إنجيل برنابا | the Gospel of Barnabas |
+| الحواريون / الرسل | the disciples / the apostles |
+| التثليث | the Trinity; الصلب والفداء / التكفير = the crucifixion and redemption / atonement |
+| المجمع الكنسي | church council (Council of Nicaea, etc.) |
+| الملكانية / النسطورية / اليعقوبية | Melkites / Nestorians / Jacobites |
+| القراءون / السامرة / الفريسيون / الصدوقيون | Karaites / Samaritans / Pharisees / Sadducees |
+| الخوارج / الشيعة / الإمامية / الزيدية | Kharijites / the Shia / the Imamiyya / the Zaydiyya |
+| المعتزلة / الأشاعرة | the Mu'tazila / the Ash'arites |
+| السلف الصالح | the righteous predecessors (*salaf*) |
+| الإعجاز | inimitability (*i'jaz*) of the Qur'an |
+| السنة | the Sunna |
 
 {53}------------------------------------------------
 
@@ -1078,7 +1132,16 @@ Indeed, the narrator has exonerated God from this. All of this is a claim of hyp
 
 {60}------------------------------------------------
 
-
+And they say, as is attributed to the Imam Ja'far al-Sadiq, that he said: "Taqiyya is my religion and the religion of my ancestors." (2)  
+And they interpret the verse of God Almighty: "The believers should not take disbelievers as allies instead of believers. And whoever does that, then there is no way for him to be from God at all, except out of necessity, and God warns you. And to God is your return." (9), and the verse of God Almighty: "Except for one who is forced, while his heart is at rest in faith." (5). With regard to these texts, their argument does not hold unless they consider anyone who differs from them in an issue they believe to be a disbeliever. This is what the extremists have actually done. The Shi'ites, in their entirety, disbelieve in the Companions of the Prophet and those who supported them among the Muslims, as a justification for the stance of 'Ali and al-Hasan, may God be pleased with them, from one side, and as evidence for the validity of taqiyya from another side. As for those among them who felt that this justification was weak, they declared themselves disbelievers to escape the dilemma: "So from their saying that all the Companions disbelieved after the death of the Prophet, because they denied the imamate of 'Ali, and that 'Ali disbelieved when he handed over the leadership to Abu Bakr, then 'Umar, then 'Uthman, and then most of them said that 'Ali and those who followed him returned to Islam, because 'Ali called to himself after the killing of 'Uthman, and that he and they were before that apostates from Islam, disbelievers and polytheists, and among them are those who attribute the sin to the Prophet, because he did not clarify this matter, which would have been a clarification of the issue." (6)  
+God is exalted above that.  
+All of this is a claim of hypocrisy. So, if taqiyya goes beyond its limit without a restriction, it becomes hypocrisy in the legal sense. Therefore, we see scholars who affirm it permitting its use only in the land of disbelief. Some of them even say that the preferable course is to abandon it in all circumstances, taking into account the stance of Bilal, may God be pleased with him, and of Habbib ibn Zayd al-Ansari, who was beheaded by Musaylimah the Liar to disbelieve in Muhammad and to affirm the truth of Musaylimah until his soul departed. The preferable course is for the Muslim to remain steadfast in his religion, even if he is killed. (7)  
+(3) The previous, 208  
+(4) Al-Imran / 28  
+(5) An-Nahl / 106  
+(6) The Chapter / 183/4  
+(7) See for example, Tafsir al-Iskandari, 348/2.  
+60
 
 {61}------------------------------------------------
 
@@ -1099,7 +1162,21 @@ By the way
 
 {62}------------------------------------------------
 
+# The Beginning of Knowledge
 
+And the beginning of belief,  
+All of that is the characteristic,  
+And the beginning of the matter,  
+Most of it, that he was  
+A claim in thought,  
+The one who claims, whereas  
+Allah the Exalted, and He is the one who issues the rulings  
+Scattered a complete idea, and  
+We incline toward the allegiance to the one  
+Who was sent with a message from one who accepts  
+One of them, and indeed  
+He was a man from the tribe of Sabae who is called  
+And it is
 
 {63}------------------------------------------------
 
@@ -1527,7 +1604,14 @@ Just as not every believer in a certain call is suitable or worthy of calling to
 
 {96}------------------------------------------------
 
+# The Religion and the Doctrine
 
+Its aim is falsehood and evil and the suffering of mankind. Thus, there is a contradiction between the two calls, a contradiction between opposites, between construction and destruction, between truth and falsehood, between knowledge and ignorance, between virtue and vice, between happiness and suffering, between light and darkness. From here, it was necessary that the one who calls from among the Sabians should be the exact opposite in image of the Islamic caller. Just as he who is not a scholar and a believer and who is full of high values and by nature inclined toward reform and sacrifice for the good and happiness of mankind cannot be a suitable caller to truth and goodness, so too, the one who calls to that call cannot be suitable except one who disbelieves in truth and goodness, stripped of all values and ideals, and by nature inclined toward corruption, suffering, and the misery of mankind, and toward extinguishing the light of truth and suppressing the desire for good in his heart. Thus, this is a fierce and bitter struggle between a caller to God and a caller to Satan. The victory in it depends upon the decree of God, according to which the greater number of them are patient and sincere in their call and its objectives, and who know their method and goals. This is what the greatest tyrant understood when he said to his Lord:  
+> "(By Your might, I will surely mislead them all, except Your servants among them who are purified)" (1).  
+And this is the meaning of the division in the saying of God Most High:  
+> "(By time, indeed, mankind is in loss, except those who have believed and done righteous deeds and urged one another to truth and urged one another to patience)" (2).  
+
+Just as not every believer in a certain call is suitable or worthy of calling to it, so too, not every one who responds to this call is suitable to be a member of its group or a caller among its callers. For we must here distinguish between those who responded to some of the ideas of this call, believed in them, and held them to be true, and those who are the creators of this thought, who are the first to know its falsity, yet adopted it as a means among their means of deception and destruction. The ideas sown by the wicked, which became for the first group a principle and a belief, were for the proponents of the call a method and a means. The danger of those who respond to this thought is that they first call to it, considering it a belief they hold. Every believer is eager to call others to what he believes.
 
 {97}------------------------------------------------
 
@@ -1746,7 +1830,20 @@ Lean toward it, and each one of them gives the impression that you are among the
 
 {108}------------------------------------------------
 
-
+For the Kharijites, a question remains:  
+As for them,  
+they have not yet ceased to be obstinate  
+in the fundamentals,  
+and their positions remain upright,  
+due to the consensus of their followers.  
+As for  
+their methods,  
+they lead to discord,  
+and the calamity of the  
+Mudhabbah.  
+(12) He said:  
+A part  
+of prayer.
 
 {109}------------------------------------------------
 
