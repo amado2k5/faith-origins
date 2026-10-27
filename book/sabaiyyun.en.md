@@ -851,92 +851,18 @@ They also argue that if imamate is one of the fundamental principles of religion
 
 {47}------------------------------------------------
 
-# Translation guide: Al-Milla wa al-Nihla (Arabic to English)
+# The Argument
 
-Rules every translator (human or model) follows, so a book translated in pieces reads as one voice.
+We must establish it only through explicit, widely transmitted texts, as is the case with other principles and presumptions.  
+If such a text were found, the reasons for transmitting it and acting upon it would be sufficient, as with the other pillars of Islam.
 
-## Principles
-- **Faithful, complete, readable.** Translate every heading, paragraph, quotation and footnote. Do not summarise, skip, soften,  
-  sharpen or comment. The author's argument and tone are his; the translation does not endorse or correct them.
-- Natural scholarly English, not word-for-word. Keep the author's sentence rhythm where it can be done without strain.
-- The text is OCR from a scan. Silently repair obvious OCR slips (missing hamza, a swapped letter, a split word) when the  
-  meaning is clear from context. If a passage is truly unreadable, write `[illegible]` and keep going. Never invent text.
-- Keep the Markdown structure: `#`/`##`/`###` headings, paragraphs, lists, `---` rules and `<sup>` as in the source.
-- Footnotes: the source marks them `(١)`, `(٢)`…; write `(1)`, `(2)`… and keep each footnote text. Translate titles of cited  
-  Arabic works as `Transliterated Title (English gloss)` on first use in a footnote, e.g. `Al-Fitna al-Kubra (The Great Sedition)`.
-- Numbers: Western digits. Hijri years as `AH 1409`, Gregorian years as is.
+Then, indeed, the battle of texts between you and those who hold your opinion, that imamate originates from revelation, is balanced, perhaps even tilting in favor of your opponents, such as the Bukhariyya, who cite texts they consider to be more numerous and accurate than yours. For example, they cite the appointment of Abu Bakr by the Prophet to lead the prayer during his last illness, and the Messenger did not replace him, so he remained an imam after him, and similarly in other matters. Therefore, it is reported that Ali, may God be pleased with him, said to him when he pledged allegiance to him: "You were the leader of the Messenger of God in the matter of our religion, so should we not make you the leader in the matter of our worldly affairs?" And among their narrations is what is reported about the Prophet ﷺ, that he said: "It is not fitting for a people who have Abu Bakr among them that anyone should precede him," and his saying: "God and His Messenger will not accept anything but Abu Bakr," and his saying: "My partner in my religion and my companion, whose companionship I have made obligatory for him in the cave, and my successor in my community." Likewise, what the Rawandiyya have stated.  
 
-## Religious formulae
-- `عليه السلام` after a prophet: `(peace be upon him)`. `ﷺ`: `(peace and blessings be upon him)`.  
-  `رضي الله عنه`: `(may God be pleased with him)`. `رحمه الله`: `(may God have mercy on him)`.  
-  Use them as the author does; do not drop or add them.
-- Names: use the conventional English form: Moses, Jesus, Mary, Abraham, Paul, Muhammad, Abu Bakr, Uthman, Ali.
+Similarly, the differences among the Shias themselves in identifying the Imams from the sons of Ali: if there had been a decisive text, this dispute would have been resolved.  
+They also cite what was reported from Ali, may God be pleased with him, of his preference for Abu Bakr and Umar, may God be pleased with them, when he learned that Abdullah ibn Saba was slandering them and ordered his killing, so he fled. And it was widely reported from him that he said: "The best of this community after its Prophet is Abu Bakr, then Umar, and this is agreed upon by the early Shias." And what Al-Bukhari reported from the narration of Muhammad ibn al-Hanafiya, who said to his father: "O father, who is the best of the people after the Messenger of God?" He replied: "Do you not know, my son?" He said: "No," he said: "Abu Bakr." He said: "Then who?" He said: "Umar."  
 
-## Quotations from scripture
-- **Qur'anic verses** (marked with ﴿ ﴾ or with a sura name and verse number in the footnote): translate faithfully into your own  
-  English, in a blockquote (`> `), followed by the reference as the source gives it, e.g. `(Al Imran 3:19)`. Do not copy any  
-  published translation word for word. Where the OCR garbled a verse, identify it from context and translate the verse itself.  
-  Add no commentary.
-- **Bible and Talmud passages quoted in Arabic**: translate from the Arabic as quoted (do not substitute a published English  
-  Bible). Mark them as blockquotes.
-- **Hadith**: translate the text; keep the narrator and source as given.
-
-## Glossary (use consistently)
-| Arabic | English |
-|---|---|
-| الملة / الملل | *milla* (religion as God revealed it) / *milal*. Gloss once per chapter, then plain *milla* |
-| النحلة / النحل | *nihla* (a claim or doctrine put forward by human beings) / *nihal*. Gloss once per chapter, then plain *nihla* |
-| الملة والنحلة | *Al-Milla wa al-Nihla* (title); in prose "milla and nihla" |
-| الوحي | revelation |
-| كلمة الله / كلمة الإنسان (البشر) | the Word of God / the word of man |
-| التحريف | alteration (*tahrif*) of scripture |
-| أهل الكتاب | People of the Book |
-| الأحبار | rabbis |
-| بنو إسرائيل | the Children of Israel; الإسرائيليون = the Israelites |
-| التوراة / العهد القديم / الأناجيل / العهد الجديد | the Torah / the Old Testament / the Gospels / the New Testament |
-| التلمود | the Talmud |
-| إنجيل برنابا | the Gospel of Barnabas |
-| الحواريون / الرسل | the disciples / the apostles |
-| التثليث | the Trinity; الصلب والفداء / التكفير = the crucifix and redemption / atonement |
-| المجمع الكنسي | church council (Council of Nicaea, etc.) |
-| الملكانية / النسطورية / اليعقوبية | Melkites / Nestorians / Jacobites |
-| القراءون / السامرة / الفريسيون / الصدوقيون | Karaites / Samaritans / Pharisees / Sadducees |
-| الخوارج / الشيعة / الإمامية / الزيدية | Kharijites / the Shia / the Imamiyya / the Zaydiyya |
-| المعتزلة / الأشاعرة | the Mu'tazila / the Ash'arites |
-| السلف الصالح | the righteous predecessors (*salaf*) |
-| الإعجاز | inimitability (*i'jaz*) of the Qur'an |
-| السنة | the Sunna |
-
-
-PAGE:
-Strike.
-We direct  
-to establish it except by explicit, widely transmitted text, and its status in this regard is like that of the other principles and conditions.  
-And if such a text were found, the reasons for transmitting it and acting upon it would be sufficient, as in the other pillars of Islam.  
-They are  
-Then, indeed, the battle of texts between you and those who hold your opinion regarding the source of the Imamate, is balanced, nay, perhaps it leans in favor of your opponents, such as the Bakkariyya,  
-except that we  
-who consider the texts supporting the Imamate of Abu Bakr to be more numerous and sounder than your texts. Such as what they cite from the appointment of the Prophet for Abu Bakr in the leadership of prayer  
-during, he  
-his last illness, and the Messenger followed his example and did not remove him. So he remained an Imam after him in it,  
-and likewise in other matters. Therefore, it was reported that Ali, may God be pleased with him, said to him when he pledged allegiance to him, "You were the leader  
-of the  
-Messenger of God in our religious affairs, so should we not make you the leader in our worldly affairs?" And among what they report from the Prophet that he  
-said: "(It is not fitting for a people who have Abu Bakr among them that anyone should precede him)" and his saying: "(Allah  
-and His Messenger do not accept except Abu Bakr)" and his saying: "(My partner in my religion and my companion whom I have made my companion in  
-the cave and my successor in my community)" (16) and likewise what the Rawandiyya have said.  
-Muslim  
-And like the disagreement among the Shias themselves in appointing the Imams from the sons of Ali, if there was a decisive text, this disagreement would have been settled.  
-From it  
-They also cite what was reported from Ali, may God be pleased with him, of his preference for Abu Bakr and Umar  
-may God be pleased with them, when he learned that Abdullah ibn Saba was defaming them, he requested his killing, and he fled, and it was widely reported  
-from him the saying: "The best of this nation after its Prophet is Abu Bakr, then Umar, and this is agreed upon by  
-the old Shias, and like what Al-Bukhari reported from the hadith of Muhammad ibn al-Hanafiya that he said to his father: "O  
-father, who is the best of people after the Messenger of God?" He said: "O my son, do you not know?" He said: "No,"  
-he said: "Abu Bakr." He said: "Then who?" He said: "Umar" (17)  
-(16) See Sharh al-Mawaqif by Al-Ajami 365/8 - Al-Sa'ada Press - Cairo 1907.  
-(17) See Al-Nabawayat 143-141 - Ibn Taymiyya - Al-Salafiyya Press - Cairo 1386 AH and Al-Bukhari and Muslim -  
-Book of the Virtues of the Companions.
+(16) See *Sharh al-Mawaqi3* by Al-Iji, 8/365 - Al-Sa3ada Press, Cairo 1907.  
+(17) See *Al-Nabawayat* 141-143 - Ibn Taymiyya - Al-Salafiya Press, Cairo 1386 AH, and Al-Bukhari and Muslim - *Kitab Fada3il al-Sahaba*.
 
 {48}------------------------------------------------
 
@@ -991,61 +917,31 @@ Furthermore, the Sabians, through this idea, created factions of extremists who 
 
 {52}------------------------------------------------
 
-# Translation guide: Al-Milla wa al-Nihla (Arabic to English)
-
-Rules every translator (human or model) follows, so a book translated in pieces reads as one voice.
-
-## Principles
-- **Faithful, complete, readable.** Translate every heading, paragraph, quotation and footnote. Do not summarise, skip, soften,
-  sharpen or comment. The author's argument and tone are his; the translation does not endorse or correct them.
-- Natural scholarly English, not word-for-word. Keep the author's sentence rhythm where it can be done without strain.
-- The text is OCR from a scan. Silently repair obvious OCR slips (missing hamza, a swapped letter, a split word) when the
-  meaning is clear from context. If a passage is truly unreadable, write `[illegible]` and keep going. Never invent text.
-- Keep the Markdown structure: `#`/`##`/`###` headings, paragraphs, lists, `---` rules and `<sup>` as in the source.
-- Footnotes: the source marks them `(١)`, `(٢)`…; write `(1)`, `(2)`… and keep each footnote text. Translate titles of cited
-  Arabic works as `Transliterated Title (English gloss)` on first use in a footnote, e.g. `Al-Fitna al-Kubra (The Great Sedition)`.
-- Numbers: Western digits. Hijri years as `AH 1409`, Gregorian years as is.
-
-## Religious formulae
-- `عليه السلام` after a prophet: `(peace be upon him)`. `ﷺ`: `(peace and blessings be upon him)`.
-  `رضي الله عنه`: `(may God be pleased with him)`. `رحمه الله`: `(may God have mercy on him)`.
-  Use them as the author does; do not drop or add them.
-- Names: use the conventional English form: Moses, Jesus, Mary, Abraham, Paul, Muhammad, Abu Bakr, Uthman, Ali.
-
-## Quotations from scripture
-- **Qur'anic verses** (marked with ﴿ ﴾ or with a sura name and verse number in the footnote): translate faithfully into your own
-  English, in a blockquote (`> `), followed by the reference as the source gives it, e.g. `(Al Imran 3:19)`. Do not copy any
-  published translation word for word. Where the OCR garbled a verse, identify it from context and translate the verse itself.
-  Add no commentary.
-- **Bible and Talmud passages quoted in Arabic**: translate from the Arabic as quoted (do not substitute a published English
-  Bible). Mark them as blockquotes.
-- **Hadith**: translate the text; keep the narrator and source as given.
-
-## Glossary (use consistently)
-| Arabic | English |
-|---|---|
-| الملة / الملل | *milla* (religion as God revealed it) / *milal*. Gloss once per chapter, then plain *milla* |
-| النحلة / النحل | *nihla* (a claim or doctrine put forward by human beings) / *nihal*. Gloss once per chapter, then plain *nihla* |
-| الملة والنحلة | *Al-Milla wa al-Nihla* (title); in prose "milla and nihla" |
-| الوحي | revelation |
-| كلمة الله / كلمة الإنسان (البشر) | the Word of God / the word of man |
-| التحريف | alteration (*tahrif*) of scripture |
-| أهل الكتاب | People of the Book |
-| الأحبار | rabbis |
-| بنو إسرائيل | the Children of Israel; الإسرائيليون = the Israelites |
-| التوراة / العهد القديم / الأناجيل / العهد الجديد | the Torah / the Old Testament / the Gospels / the New Testament |
-| التلمود | the Talmud |
-| إنجيل برنابا | the Gospel of Barnabas |
-| الحواريون / الرسل | the disciples / the apostles |
-| التثليث | the Trinity; الصلب والفداء / التكفير = the crucifixion and redemption / atonement |
-| المجمع الكنسي | church council (Council of Nicaea, etc.) |
-| الملكانية / النسطورية / اليعقوبية | Melkites / Nestorians / Jacobites |
-| القراءون / السامرة / الفريسيون / الصدوقيون | Karaites / Samaritans / Pharisees / Sadducees |
-| الخوارج / الشيعة / الإمامية / الزيدية | Kharijites / the Shia / the Imamiyya / the Zaydiyya |
-| المعتزلة / الأشاعرة | the Mu'tazila / the Ash'arites |
-| السلف الصالح | the righteous predecessors (*salaf*) |
-| الإعجاز | inimitability (*i'jaz*) of the Qur'an |
-| السنة | the Sunna |
+```markdown
+But  
+rather,  
+it is the shortest  
+way to achieve it,  
+so they  
+say:  
+"Abandon  
+their religion and their world,  
+O people,  
+from you, the saying:  
+from the family of Ali  
+in a hadith  
+in the Book of the House in the  
+Masalik  
+Elijah and the boundary  
+we are the ones who are  
+[illegible]/milla for him in it  
+and his agent  
+929 for him, milla  
+Anas al-Tah  
+The Book 120  
+The Or /  
+The Hier
+```
 
 {53}------------------------------------------------
 
@@ -1727,91 +1623,20 @@ The first: Limiting himself to the principle of the doctrine, which is the inval
 
 {105}------------------------------------------------
 
-# Translation guide: Al-Milla wa al-Nihla (Arabic to English)
+Answer A
 
-Rules every translator (human or model) follows, so a book translated in pieces reads as one voice.
+• And that  
+he said to him: His descendants are Ali, Fatima, and their children.  
 
-## Principles
-- **Faithful, complete, readable.** Translate every heading, paragraph, quotation and footnote. Do not summarise, skip, soften,
-  sharpen or comment. The author's argument and tone are his; the translation does not endorse or correct them.
-- Natural scholarly English, not word-for-word. Keep the author's sentence rhythm where it can be done without strain.
-- The text is OCR from a scan. Silently repair obvious OCR slips (missing hamza, a swapped letter, a split word) when the
-  meaning is clear from context. If a passage is truly unreadable, write `[illegible]` and keep going. Never invent text.
-- Keep the Markdown structure: `#`/`##`/`###` headings, paragraphs, lists, `---` rules and `<sup>` as in the source.
-- Footnotes: the source marks them `(١)`, `(٢)`…; write `(1)`, `(2)`… and keep each footnote text. Translate titles of cited
-  Arabic works as `Transliterated Title (English gloss)` on first use in a footnote, e.g. `Al-Fitna al-Kubra (The Great Sedition)`.
-- Numbers: Western digits. Hijri years as `AH 1409`, Gregorian years as is.
+Second: If the invitee accepts the previous principle, he is told that the apparent (ẓāhir) has two meanings. One is the meaning taken from the literal wording, and this is the purpose of it for the governance of the common people. The second is the inner meaning, which is the true intended purpose, which is alluded to by the literal wording, and this meaning is exclusive to the Imams.  
+And thus, he is gradually led to weaken his trust in the literal wording until he has no refuge from reason or religion. For the seeker of truth, he may turn to reason, but reason will be corrupted for him by the instruction from the Infallible Imam. Or he may turn to the text, and if it is immediately made clear to him that the literal meaning of the text is not at all the intended meaning, he might reject it. He would accept the wording but reject its meaning by affirming that it has an inner meaning in addition to its literal meaning, and this inner meaning is the original purpose of God and the true goal He intended through the literal wording of the text.  
 
-## Religious formulae
-- `عليه السلام` after a prophet: `(peace be upon him)`. `ﷺ`: `(peace and blessings be upon him)`.
-  `رضي الله عنه`: `(may God be pleased with him)`. `رحمه الله`: `(may God have mercy on him)`.
-  Use them as the author does; do not drop or add them.
-- Names: use the conventional English form: Moses, Jesus, Mary, Abraham, Paul, Muhammad, Abu Bakr, Uthman, Ali.
+Third: Not openly opposing all prevailing schools of thought. Rather, he chooses the one most accepting of superstitions, such as the Shīʿa of the Ahl al-Bayt from the Rafḍa and the Sufis. The reason for this is that the caller respects the social nature of human beings and their tendency toward belonging and fear of deviating from convention and imitation.  
 
-## Quotations from scripture
-- **Qur'anic verses** (marked with ﴿ ﴾ or with a sura name and verse number in the footnote): translate faithfully into your own
-  English, in a blockquote (`> `), followed by the reference as the source gives it, e.g. `(Al Imran 3:19)`. Do not copy any
-  published translation word for word. Where the OCR garbled a verse, identify it from context and translate the verse itself.
-  Add no commentary.
-- **Bible and Talmud passages quoted in Arabic**: translate from the Arabic as quoted (do not substitute a published English
-  Bible). Mark them as blockquotes.
-- **Hadith**: translate the text; keep the narrator and source as given.
+Fourth: He makes it easy for him to dissent and depart from the group and its beliefs, and its respect for the text and reason, and acceptance of what the caller offers him in terms of ideas. He convinces himself that falsehood is easy to recognize, whereas truth is subtle and only the exceptional can grasp it. This is the reason for the small number of followers, for people are enemies of what they do not know. If he sees him hesitating or fearing to deviate from the common, he tells him secretly that certain scholars and prominent individuals, who have a high status in his eyes, secretly believe in this doctrine and are among its advocates. It is good that none of them are from the land of the invitee so that he cannot easily consult them. Then he promises him positions and rule when their call is revealed and they seize power and authority.  
 
-## Glossary (use consistently)
-| Arabic | English |
-|---|---|
-| الملة / الملل | *milla* (religion as God revealed it) / *milal*. Gloss once per chapter, then plain *milla* |
-| النحلة / النحل | *nihla* (a claim or doctrine put forward by human beings) / *nihal*. Gloss once per chapter, then plain *nihla* |
-| الملة والنحلة | *Al-Milla wa al-Nihla* (title); in prose "milla and nihla" |
-| الوحي | revelation |
-| كلمة الله / كلمة الإنسان (البشر) | the Word of God / the word of man |
-| التحريف | alteration (*tahrif*) of scripture |
-| أهل الكتاب | People of the Book |
-| الأحبار | rabbis |
-| بنو إسرائيل | the Children of Israel; الإسرائيليون = the Israelites |
-| التوراة / العهد القديم / الأناجيل / العهد الجديد | the Torah / the Old Testament / the Gospels / the New Testament |
-| التلمود | the Talmud |
-| إنجيل برنابا | the Gospel of Barnabas |
-| الحواريون / الرسل | the disciples / the apostles |
-| التثليث | the Trinity; الصلب والفداء / التكفير = the crucifix and redemption / atonement |
-| المجمع الكنسي | church council (Council of Nicaea, etc.) |
-| الملكانية / النسطورية / اليعقوبية | Melkites / Nestorians / Jacobites |
-| القراءون / السامرة / الفريسيون / الصدوقيون | Karaites / Samaritans / Pharisees / Sadducees |
-| الخوارج / الشيعة / الإمامية / الزيدية | Kharijites / the Shia / the Imamiyya / the Zaydiyya |
-| المعتزلة / الأشاعرة | the Mu'tazila / the Ash'arites |
-| السلف الصالح | the righteous predecessors (*salaf*) |
-| الإعجاز | inimitability (*i'jaz*) of the Qur'an |
-| السنة | the Sunna |
-
----
-
-## Response A
-• And that
-He said to him. Kahr
-His descendants are Ali and Fatima and their children.
-The second: If the invitee accepts the previous principle, he establishes for him that the apparent has two meanings, a meaning
-taken from the apparent wording, and this is the purpose of the policy for the masses, and a hidden meaning which is the intended
-real meaning that the apparent wording refers to, and this meaning is what the Imams have specialized in.!
-And so he gradually weakens his trust in the apparent wording until he has no support from
-reason or religion, for the seeker of truth either turns to reason, which is corrupted for him by the instruction from the infallible Imam, or turns to the text, and if he is told from the very beginning that
-he intends the shell
-the apparent text is not intended at all, he might reject it, he accepts the wording but removes its meaning from his heart
-by establishing that it has a hidden meaning in addition to its apparent meaning, and this hidden meaning is
-the original purpose of God and the real goal He intended through the apparent text.
-The third: Not declaring opposition to all common schools of thought. Rather, he chooses those who are more accepting
-of superstitions, such as the Shias of the Alids from the Rafidites and the Sufis. And the reason for this is that he
-takes into account the social nature of human beings and their tendency to belong and fear of deviating from the norm
-and imitation.
-The fourth: He makes it easy for him to oppose and deviate from the group and its beliefs and respect for
-the text and reason and accept what the caller offers him of ideas, and he establishes in himself that falsehood is
-easy to recognize, whereas truth is subtle and only the elite can grasp it, and this is the secret behind his few
-followers, for people are enemies of what they do not know, so if he sees him hesitating or fearing to deviate from
-the common, he whispers to him that so-and-so and so-and-so from the scholars and celebrities, and those who have a status in his heart,
-believe in this school secretly and they are among the callers to it, and it is better that none of them are from
-the land of the invitee so that he cannot consult them. Then he promises him positions and kingship when their
-call appears and they seize power and authority.
-If the invitee accepts all of this and the reason and text fall from him and he accepts everything he throws at him
-1050
+If the invitee accepts all of this, and his reason and textual evidence fall away, and he accepts everything that is cast at him,  
+1050 -
 
 {106}------------------------------------------------
 

@@ -1563,77 +1563,28 @@ When He forbids us from fornication, He reveals to us its harmful consequences a
 
 {101}------------------------------------------------
 
-# Translation guide: Al-Milla wa al-Nihla (Arabic to English)
+# The Departure from Truth to Deception
 
-Rules every translator (human or model) follows, so a book translated in pieces reads as one voice.
+As for those who deviate from the truth to deception and follow Satan, it is as if a person follows his enemy, and an enemy cannot guide to good. Say: "Do not follow the footsteps of Satan. Indeed, he is for you an open enemy. He only commands you to evil." <sup>(1)</sup>
 
-## Principles
-- **Faithful, complete, readable.** Translate every heading, paragraph, quotation and footnote. Do not summarise, skip, soften,  
-  sharpen or comment. The author's argument and tone are his; the translation does not endorse or correct them.
-- Natural scholarly English, not word-for-word. Keep the author's sentence rhythm where it can be done without strain.
-- The text is OCR from a scan. Silently repair obvious OCR slips (missing hamza, a swapped letter, a split word) when the  
-  meaning is clear from context. If a passage is truly unreadable, write `[illegible]` and keep going. Never invent text.
-- Keep the Markdown structure: `#`/`##`/`###` headings, paragraphs, lists, `---` rules and `<sup>` as in the source.
-- Footnotes: the source marks them `(١)`, `(٢)`…; write `(1)`, `(2)`… and keep each footnote text. Translate titles of cited  
-  Arabic works as `Transliterated Title (English gloss)` on first use in a footnote, e.g. `Al-Fitna al-Kubra (The Great Sedition)`.
-- Numbers: Western digits. Hijri years as `AH 1409`, Gregorian years as is.
+Even when the Qur'an calls us to moderation, which is an easy matter to accept, we find it also shows us the harms that result from neglecting it, in a form that repels us from both excess and deficiency. It says:
 
-## Religious formulae
-- `عليه السلام` after a prophet: `(peace be upon him)`. `ﷺ`: `(peace and blessings be upon him)`.  
-  `رضي الله عنه`: `(may God be pleased with him)`. `رحمه الله`: `(may God have mercy on him)`.  
-  Use them as the author does; do not drop or add them.
-- Names: use the conventional English form: Moses, Jesus, Mary, Abraham, Paul, Muhammad, Abu Bakr, Uthman, Ali.
+> "And do not extend your hand [in giving] entirely [out of] necessity, lest you become cursed and in loss." <sup>(2)</sup>
 
-## Quotations from scripture
-- **Qur'anic verses** (marked with ﴿ ﴾ or with a sura name and verse number in the footnote): translate faithfully into your own  
-  English, in a blockquote (`> `), followed by the reference as the source gives it, e.g. `(Al Imran 3:19)`. Do not copy any  
-  published translation word for word. Where the OCR garbled a verse, identify it from context and translate the verse itself.  
-  Add no commentary.
-- **Bible and Talmud passages quoted in Arabic**: translate from the Arabic as quoted (do not substitute a published English  
-  Bible). Mark them as blockquotes.
-- **Hadith**: translate the text; keep the narrator and source as given.
+When it commands us to forgive and do good, it shows us the noble effects that return to us. It says:
 
-## Glossary (use consistently)
-| Arabic | English |
-|---|---|
-| الملة / الملل | *milla* (religion as God revealed it) / *milal*. Gloss once per chapter, then plain *milla* |
-| النحلة / النحل | *nihla* (a claim or doctrine put forward by human beings) / *nihal*. Gloss once per chapter, then plain *nihla* |
-| الملة والنحلة | *Al-Milla wa al-Nihla* (title); in prose "milla and nihla" |
-| الوحي | revelation |
-| كلمة الله / كلمة الإنسان (البشر) | the Word of God / the word of man |
-| التحريف | alteration (*tahrif*) of scripture |
-| أهل الكتاب | People of the Book |
-| الأحبار | rabbis |
-| بنو إسرائيل | the Children of Israel; الإسرائيليون = the Israelites |
-| التوراة / العهد القديم / الأناجيل / العهد الجديد | the Torah / the Old Testament / the Gospels / the New Testament |
-| التلمود | the Talmud |
-| إنجيل برنابا | the Gospel of Barnabas |
-| الحواريون / الرسل | the disciples / the apostles |
-| التثليث | the Trinity; الصلب والفداء / التكفير = the crucifixion and redemption / atonement |
-| المجمع الكنسي | church council (Council of Nicaea, etc.) |
-| الملكانية / النسطورية / اليعقوبية | Melkites / Nestorians / Jacobites |
-| القراءون / السامرة / الفريسيون / الصدوقيون | Karaites / Samaritans / Pharisees / Sadducees |
-| الخوارج / الشيعة / الإمامية / الزيدية | Kharijites / the Shia / the Imamiyya / the Zaydiyya |
-| المعتزلة / الأشاعرة | the Mu'tazila / the Ash'arites |
-| السلف الصالح | the righteous predecessors (*salaf*) |
-| الإعجاز | inimitability (*i'jaz*) of the Qur'an |
-| السنة | the Sunna |
+> "Repel with [good] like what was repelled against you, and you will see that those who were once your enemies have become as close friends." <sup>(3)</sup>
 
+Finally, the Qur'an shows us that adhering to the Islamic moral code is not merely the basis for happiness in the Hereafter, but it is also the key to happiness, security, and prosperity in this world. It says:
 
-PAGE:
-- As for deviating from the truth to the satan, and following the devil, it is as if a person follows his enemy, and the enemy does not guide to good.  
-> "And do not follow the footsteps of Satan. Indeed, he is to you a clear enemy, and he only commands you to evil."  
-- And even when the Qur'an calls us to moderation, which is easy to accept as a principle. As experience justifies accepting it and holding fast to it, we find that it shows us the harms that result from not adopting it, in a form that repels us from excess and deficiency, saying:  
-> "And do not put your hand to your neck, nor stretch it out completely, lest you become cursed and in a wretched state." (17:29).  
-- And when it commands us to forgive and do good, it shows us its praiseworthy effects that return to us, saying:  
-> "Repel with what is best; then the one between you and whom there was enmity will become as a close friend." (41:34).  
-- Finally, the Qur'an shows us that adhering to the Islamic legislation in ethics is not only the basis for happiness in the Hereafter, but it is also the key to happiness, security, and prosperity in this world, saying:  
-> "And Allah has promised those who believed among you and did righteous deeds that He will surely grant them succession in the earth just as He granted it to those before them, and that He will surely establish their religion for them, which He has approved for them." (24:55).  
-This is a general approach that is prevalent in the Qur'an in a consistent manner in its presentation of duties, almost continuously in every command and prohibition.  
-(33) Al-Baqara 2:255  
-(34) Al-Isra' 17:29  
-(35) Sura Ad-Dukhan 44:34  
-(36) An-Nur 24:55
+> "And Allah has promised those who believed among you and did righteous deeds that He will surely grant them succession upon the earth as He granted those before them, and that He will surely establish their religion for them, just as He has established it for you, and will turn their hearts [toward Him] and will grant them peace in place of their [previous] fear. They worship Me alone, and none should be associated with Me." <sup>(4)</sup>
+
+This is a general approach prevalent in the Qur'an, with a consistent pattern in its presentation of obligations, almost continuously repeated in every command and prohibition.
+
+<sup>(1)</sup> Al-Baqarah (The Cow) 2:208.  
+<sup>(2)</sup> Al-Isra (The Night Journey) 17:29.  
+<sup>(3)</sup> Al-Furqan (The Criterion) 25:34.  
+<sup>(4)</sup> An-Nur (The Light) 24:55.
 
 {102}------------------------------------------------
 
