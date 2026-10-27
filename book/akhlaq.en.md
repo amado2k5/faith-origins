@@ -1,3 +1,37 @@
+{1}------------------------------------------------
+
+Qalam Publishing and Distribution House  
+Street of the Walls - Amara al-Sur. First Floor
+
+{2}------------------------------------------------
+
+We request all our publications from:  
+Dar Al-Qalam, Kuwait  
+Al-Sur Street - Al-Sur Building - next to the Ministry of Foreign Affairs
+
+{3}------------------------------------------------
+
+All our publications are published by:  
+Dar Al-Qalam, Kuwait  
+Al-Sur Street - Al-Sur Building - next to the Ministry of Foreign Affairs
+
+{4}------------------------------------------------
+
+# Dar Al-Qalam, Dubai  
+# Dar Al-Qalam, Kuwait  
+
+All our publications can be requested from:  
+P.O. Box: 11817 - Tel: 433886
+
+{5}------------------------------------------------
+
+# Ethics and Its Standard  
+Between Positivism and Religion
+
+{6}------------------------------------------------
+
+In the name of God, the Most Gracious, the Most Merciful
+
 {7}------------------------------------------------
 
 In the name of God, the Most Gracious, the Most Merciful
