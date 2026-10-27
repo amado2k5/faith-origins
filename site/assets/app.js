@@ -375,7 +375,7 @@ function viewBooks(app) {
   <div class="shelf">
     ${works.map(w => `
     <article class="book">
-      ${w.online && !w.reader ? '<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      ${w.reader ? `<img src="${ROOT}assets/covers/${w.reader}.jpg" width="104" height="158" alt="">` : w.online ? '<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       ${state.lang === 'ar'
         ? `<h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>

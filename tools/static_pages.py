@@ -414,9 +414,12 @@ class Site:
                      f'<h3>{esc(w["gloss"])}</h3>\n      <p class="meta" style="margin:-.2rem 0 .3rem" dir="ltr" lang="en">{esc(w["en"])}</p>\n      <details class="orig"><summary>{t("arabicTitle")}</summary><span lang="ar" dir="rtl">{esc(w["ar"])}</span></details>')
             libs = (f'<br>{t("alsoHeld")}: ' + ", ".join(f'<a href="{l["url"]}" rel="noopener">{esc(l["name"])}{f" ({esc(l["note"])})" if l.get("note") else ""}</a>' for l in w["libraries"])) if w.get("libraries") else ""
             topics = f'<p class="meta topics" lang="{lang}" dir="{"rtl" if lang == "ar" else "ltr"}">{esc(w["topics"][lang])} <em>({t("topicsFrom")})</em></p>' if w.get("topics") else ""
+            cover = (f'<img src="/assets/covers/{w["reader"]}.jpg" width="104" height="158" alt="">' if w.get('reader') else
+                     '<img src="/assets/cover.jpg" width="104" height="158" alt="">' if w.get('online') else
+                     '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>')
             cards += f"""
     <article class="book">
-      {'<img src="/assets/cover.jpg" width="104" height="158" alt="">' if w.get('online') and not w.get('reader') else '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      {cover}
       <div><span class="tag {'ok' if w.get('online') else 'seek'}">{t('available') if w.get('online') else t('notOnline')}</span>
       {title}
       <p class="meta">{'<br>'.join(esc(x) for x in self.work_lines(lang, w))}<br>{t('heldBy')}{f" ({esc(w['uoft'])})" if w.get('uoft') else ''}{libs}</p>
