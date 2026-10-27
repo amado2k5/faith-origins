@@ -282,6 +282,8 @@ async function hydrate() {
 const BOOK_FOLDERS = ['', 'book-2', 'book-3', 'book-4'];    // '' is the first book, at /book/
 const BOOK_WORK = { '': 'milla', 'book-2': 'manhaj', 'book-3': 'akhlaq', 'book-4': 'sabaiyyun' };
 async function viewRandomBook(app) {
+  // The landing page, as it was before: the author's hero, a band of quotations, the book's parts and the help section.
+  // The book is picked at random on each visit; its own data is loaded here, not the first book's.
   const folder = BOOK_FOLDERS[Math.floor(Math.random() * BOOK_FOLDERS.length)];
   const base = `${ROOT}${folder ? folder + '/' : ''}`;
   const get = f => fetch(`${base}data/${f}?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
@@ -295,30 +297,66 @@ async function viewRandomBook(app) {
   const title = en ? work.en : work.ar;
   const sections = site.toc.filter(s => 'start' in s);
   const sectionOf = n => sections.find(s => n >= s.start && n <= s.end);
-  const quotes = site.quotes || [];
+  const qs = site.quotes || [];
+  const life = `${N(site.author.born)} – ${N(site.author.died)}`;
+  const linkOf = q => { const sec = sectionOf(q.page); return sec ? `${home}${sec.slug}/#p${q.page}` : home; };
   document.title = `${title} · origins.faith`;
-  const quoteHTML = q => {
-    const sec = sectionOf(q.page);
-    const link = sec ? `${home}${sec.slug}/#p${q.page}` : home;
-    const body = en && q.en
-      ? `<blockquote lang="en" dir="ltr" class="primary">${esc(q.en)}</blockquote><details class="orig"><summary>${t('arabicOriginal')}</summary><blockquote lang="ar" dir="rtl">${esc(q.text)}</blockquote></details>`
-      : `<blockquote lang="ar" dir="rtl">${esc(q.text)}</blockquote>`;
-    return `<figure class="q">${body}<figcaption class="src"><span>${esc(title)} · ${t('page')} ${N(q.page)}</span><a href="${link}">${t('inContext')}</a></figcaption></figure>`;
-  };
+  let cur = Math.floor(Math.random() * Math.max(qs.length, 1));
   app.innerHTML = `
-    <section class="hero"><div class="wrap hero-grid">
-      <div>
-        <div class="kicker">${t('kickerHome')}</div>
-        <h1 ${en ? '' : 'lang="ar"'}>${esc(title)}</h1>
-        <p class="lede">${esc(en ? work.gloss : work.gloss)}</p>
-        <p class="row"><a class="btn" href="${home}">${t('readBook')}</a><a class="btn ghost" href="${home}full/">${t('readWhole')}</a></p>
+  <section class="hero"><div class="wrap hero-grid">
+    <div>
+      <div class="kicker">${t('kickerHome')}</div>
+      <h1 ${en ? '' : 'lang="ar"'}>${en ? 'Dr. Hamdy Abdel Aal' : 'الدكتور حمدي عبد العال'}</h1>
+      <div class="en-name">${en ? life : `Dr. Hamdy Abdel Aal · ${life}`}</div>
+      <p class="ded">${t('heroDed')}</p>
+      <div class="row">
+        <a class="btn" href="${home}">${t('readBook')}</a>
+        <a class="btn ghost" href="${home}full/">${t('readWhole')}</a>
       </div>
-      <div class="cover"><img src="${cover}" width="473" height="717" alt="${esc(title)}"></div>
-    </div></section>
-    ${quotes.length ? `<section class="wrap" style="margin-top:2.5rem"><div class="kicker">${t('quotesKick')}</div><h2>${t('quotesTitle')}</h2><div class="quotes">${quotes.map(quoteHTML).join('')}</div></section>` : ''}
-    <section class="wrap" style="margin-top:2.5rem"><div class="tiles">
+    </div>
+    <a class="cover" href="${home}" aria-label="${esc(title)}"><img src="${cover}" width="473" height="717" alt="${esc(title)}"></a>
+  </div></section>
+
+  <section class="band"><div class="wrap"><figure class="feature" id="feature" aria-live="polite"></figure></div></section>
+
+  <section class="section"><div class="wrap">
+    <div class="kicker">${t('quotesKick')}</div><h2>${t('quotesTitle')}</h2>
+    ${en ? `<p class="sans" style="font-size:.8rem;color:var(--muted)">${t('unofficial')}</p>` : ''}
+    <div class="quotes">${qs.map(q => {
+      const body = en && q.en
+        ? `<blockquote lang="en" dir="ltr" class="primary">${esc(q.en)}</blockquote><details class="orig"><summary>${t('arabicOriginal')}</summary>${arQuote(q, 'ar')}</details>`
+        : arQuote(q);
+      return `<figure class="q">${body}<figcaption class="src"><span>${esc(title)} · ${t('page')} ${N(q.page)}</span><a href="${linkOf(q)}">${t('inContext')}</a></figcaption></figure>`;
+    }).join('')}</div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="wrap">
+    <div class="orn" aria-hidden="true"><svg><use href="#book"/></svg></div>
+    <div style="margin-top:2.5rem"><div class="kicker">${t('aboutKick')}</div><h2 ${en ? '' : 'lang="ar"'}>${esc(title)}</h2>
+    <p class="lede">${esc(work.gloss)}</p></div>
+    <div class="tiles">
       ${sections.filter(s => s.slug).map(s => `<a class="tile" href="${home}${s.slug}/"><small>${t('page')} ${N(s.start)}–${N(s.end)}</small><h3>${esc(secTitle(s))}</h3></a>`).join('')}
-    </div></section>`;
+    </div>
+  </div></section>
+
+  <section class="section help"><div class="wrap help-grid">
+    <div><div class="kicker">${t('helpKick')}</div><h2>${t('helpTitle')}</h2><p class="lede">${t('helpP')}</p>
+      <ul class="checks">${t('h1').map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <p style="margin-top:1.5rem" class="row"><a class="btn" href="${issueUrl()}" rel="noopener">${t('helpBtn')}</a><a class="btn ghost" href="#/books">${t('helpBooks')}</a></p></div>
+    <a class="cover" href="#/books" style="max-width:12rem" aria-hidden="true" tabindex="-1"><img src="${cover}" alt="" loading="lazy"></a>
+  </div></section>`;
+
+  const feat = $('#feature');
+  if (!qs.length) return;
+  const show = () => {
+    const q = qs[cur];
+    const useEn = en && q.en;
+    feat.innerHTML = `${useEn ? `<blockquote lang="en" dir="ltr">${esc(q.en)}</blockquote>
+      <details class="orig"><summary>${t('arabicOriginal')}</summary>${arQuote(q, 'ar')}</details>` : arQuote(q)}
+      <figcaption>${esc(title)} · ${t('page')} ${N(q.page)} <a href="${linkOf(q)}">${t('inContext')}</a><button type="button" id="nextQ">${t('anotherQuote')}</button></figcaption>`;
+    $('#nextQ').onclick = () => { cur = (cur + 1) % qs.length; show(); };
+  };
+  show();
 }
 const lastRead = () => parseInt(store.get('lastPage'), 10) || null;
 const readHref = (page, extra = '') => `#/read/p/${page}${extra}`;
