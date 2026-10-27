@@ -1,3 +1,29 @@
+{1}------------------------------------------------
+
+Manhaj al-Salaf
+fi
+al-ʻAqidah
+Kuwait
+
+{2}------------------------------------------------
+
+In the name of God, the Most Gracious, the Most Merciful
+
+{3}------------------------------------------------
+
+Manhaj al-Salaf fi al-ʻAqidah
+Dr. Hamdy Abdel Aal
+Faculty of Sharia, Kuwait University
+
+{4}------------------------------------------------
+
+All rights reserved
+Second edition
+AH 1406 / 1986 AD
+Dar al-Qalam, Kuwait
+Al-Sur Street, behind the Ministry of Foreign Affairs, Al-Sur Building
+P.O. Box 20146 · Tel. 2458478 · 2457407 · Telegram: Tawziʻku
+
 {5}------------------------------------------------
 
 # Introduction
