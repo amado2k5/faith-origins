@@ -47,7 +47,7 @@ const I18N = {
     ch1: 'اليهودية', ch2: 'المسيحية', ch3: 'الإسلام',
     ch1d: 'النشأة، والكتب المقدسة، والعقائد، والفرق.', ch2d: 'النشأة، والأناجيل، والمجامع الكنسية، وإنجيل برنابا.', ch3d: 'القرآن الكريم، والخلاف التاريخي، والفرق الإسلامية.',
     helpKick: 'نبحث عن كتبه', helpTitle: 'هل لديك نسخة من أحد كتبه؟',
-    helpP: 'نعرف له أربعة كتب، ويتوفر منها هنا «الملة والنحلة» و«منهج السلف في العقيدة». نبحث عن نسخ الكتابين الآخرين لمسحها ضوئياً ونشرها، وعن أي كتب أو مقالات أخرى له. أي خيط يساعدنا: نسخة، أو صورة غلاف، أو رقم في فهرس مكتبة، أو اسم ناشر.',
+    helpP: 'نعرف له أربعة كتب، ويتوفر منها هنا الأربعة: «الملة والنحلة»، و«منهج السلف في العقيدة»، و«الأخلاق ومعيارها»، و«السبئيون». نبحث عن أي كتب أو مقالات أخرى له لمسحها ضوئياً ونشرها، وعن أي كتب أو مقالات أخرى له. أي خيط يساعدنا: نسخة، أو صورة غلاف، أو رقم في فهرس مكتبة، أو اسم ناشر.',
     helpBtn: 'أبلغنا عن كتاب', helpBooks: 'الكتب المعروفة',
     h1: ['نسخة ورقية أو ممسوحة من أي كتاب له', 'معلومات عن طبعة أو ناشر أو مكتبة تحتفظ بها', 'ذكريات أو صور أو مقالات عنه'],
     booksTitle: 'كتب الدكتور حمدي عبد العال', booksLead: 'الكتب المتاحة هنا، والكتب التي نبحث عنها.',
@@ -107,7 +107,7 @@ const I18N = {
     ch1: 'Judaism', ch2: 'Christianity', ch3: 'Islam',
     ch1d: 'Origins, sacred books, beliefs and sects.', ch2d: 'Origins, the Gospels, the church councils, the Gospel of Barnabas.', ch3d: 'The Qur’an, the early disputes, and the Islamic sects.',
     helpKick: 'We are searching', helpTitle: 'Do you have a copy of one of his books?',
-    helpP: 'We know of four books, and two are readable here: Al-Milla wa al-Nihla and Manhaj al-Salaf. We are looking for copies of the other two to scan and publish, and for anything else he wrote. Any lead helps: a copy, a photo of a cover, a library catalogue number, a publisher’s name.',
+    helpP: 'We know of four books, and all four are readable here: Al-Milla wa al-Nihla, Manhaj al-Salaf, Ethics and Its Criterion, and al-Sabaʼiyyun. We are looking for anything else he wrote. Any lead helps: a copy, a photo of a cover, a library catalogue number, a publisher’s name.',
     helpBtn: 'Tell us about a book', helpBooks: 'Known books',
     h1: ['A paper or scanned copy of any of his books', 'Details of an edition, publisher or library that holds one', 'Memories, photographs or articles about him'],
     booksTitle: 'The books of Dr. Hamdy Abdel Aal', booksLead: 'What is available here, and what we are still looking for.',
@@ -332,7 +332,7 @@ function viewHome(app) {
     <div class="tiles">
       ${[['ch1', 'j1', 17, 72], ['ch2', 'c1', 73, 144], ['ch3', 'i1', 145, 209]].map(([k, id, a, b]) => `
         <a class="tile" href="#/read/${id}"><small>${t('page')} ${N(a)}–${N(b)}</small><h3>${t(k)}</h3><p>${t(k + 'd')}</p></a>`).join('')}
-      <a class="tile" href="${state.lang === 'en' ? '/en' : ''}/book-2/"><small>${state.lang === 'ar' ? 'ص ٥–١١٠' : 'Pages 5–110'}</small><h3>${state.lang === 'ar' ? 'منهج السلف في العقيدة' : 'Manhaj al-Salaf fi al-Aqidah'}</h3><p>${state.lang === 'ar' ? 'كتاب ثانٍ للدكتور حمدي عبد العال: منهج السلف في العقيدة.' : 'A second book by Dr. Hamdy Abdel Aal.'}</p></a>
+      ${[["book-2", ["ص ٥–١١٠", "Pages 5–110"], ["منهج السلف في العقيدة", "Manhaj al-Salaf fi al-Aqidah"], ["كتاب ثانٍ للدكتور حمدي عبد العال: منهج السلف في العقيدة.", "A second book by Dr. Hamdy Abdel Aal."]], ["book-3", ["ص ٧–١٧٢", "Pages 7–172"], ["الأخلاق ومعيارها بين الوضعية والدين", "Ethics and Its Criterion: Between Man-Made Systems and Religion"], ["كتاب ثالث للدكتور حمدي عبد العال: الأخلاق ومعيارها.", "A third book by Dr. Hamdy Abdel Aal."]], ["book-4", ["ص ٥–١١٧", "Pages 5–117"], ["السبئيون: منهجاً وغاية", "The Saba’ites: Method and Aim"], ["كتاب رابع للدكتور حمدي عبد العال: السبئيون.", "A fourth book by Dr. Hamdy Abdel Aal."]]].map(([f, p, t, b]) => `<a class="tile" href="${state.lang === 'en' ? '/en' : ''}/${f}/"><small>${state.lang === 'ar' ? p[0] : p[1]}</small><h3>${state.lang === 'ar' ? t[0] : t[1]}</h3><p>${state.lang === 'ar' ? b[0] : b[1]}</p></a>`).join('')}
     </div>
   </div></section>
 
