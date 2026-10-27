@@ -36,7 +36,7 @@ const I18N = {
     kickerHome: 'في ذكرى المؤلف',
     heroDed: 'هذه مكتبة صغيرة لحفظ كتب الدكتور حمدي عبد العال، الذي كان أستاذاً بكلية الشريعة في جامعة الكويت، وإتاحتها للقراءة والبحث.',
     heroName: 'Dr. Hamdy Abdel Aal',
-    readBook: 'ابدأ القراءة', readWhole: 'اقرأ الكتاب كله في صفحة واحدة', searchBook: 'ابحث في الكتاب', continueRead: 'تابع القراءة',
+    readBook: 'ابدأ القراءة', readWhole: 'اقرأ الكتاب كله في صفحة واحدة', shareBook: 'شارك هذا الكتاب', copied: 'تم نسخ الرابط', searchBook: 'ابحث في الكتاب', continueRead: 'تابع القراءة',
     bookTitle: 'الملة والنحلة - في اليهودية والمسيحية والإسلام',
     bookSub: 'اليهودية · المسيحية · الإسلام',
     anotherQuote: 'اقتباس آخر', inContext: 'اقرأ في سياقه',
@@ -96,7 +96,7 @@ const I18N = {
     kickerHome: 'In memory of the author',
     heroDed: 'A small library preserving the books of Dr. Hamdy Abdel Aal, who was a professor at the Faculty of Sharia, Kuwait University, and making them readable and searchable.',
     heroName: 'حمدي عبد العال',
-    readBook: 'Start reading', readWhole: 'Read the whole book on one page', searchBook: 'Search the book', continueRead: 'Continue reading',
+    readBook: 'Start reading', readWhole: 'Read the whole book on one page', shareBook: 'Share this book', copied: 'Link copied', searchBook: 'Search the book', continueRead: 'Continue reading',
     bookTitle: 'Al-Milla wa al-Nihla: Judaism, Christianity, Islam',
     bookSub: 'الملة والنحلة - في اليهودية والمسيحية والإسلام',
     anotherQuote: 'Another quote', inContext: 'Read in context',
@@ -284,7 +284,10 @@ const BOOK_WORK = { '': 'milla', 'book-2': 'manhaj', 'book-3': 'akhlaq', 'book-4
 async function viewRandomBook(app) {
   // The landing page, as it was before: the author's hero, a band of quotations, the book's parts and the help section.
   // The book is picked at random on each visit; its own data is loaded here, not the first book's.
-  const folder = BOOK_FOLDERS[Math.floor(Math.random() * BOOK_FOLDERS.length)];
+  // ?book=book-3 (or book-2, book-4, book for the first book) opens that book; without it, a random one is picked.
+  const asked = new URLSearchParams(location.search).get('book');
+  const requested = asked === 'book' ? '' : asked;
+  const folder = BOOK_FOLDERS.includes(requested) ? requested : BOOK_FOLDERS[Math.floor(Math.random() * BOOK_FOLDERS.length)];
   const base = `${ROOT}${folder ? folder + '/' : ''}`;
   const get = f => fetch(`${base}data/${f}?v=${VERSION}`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
   const site = await get('site.json');
@@ -312,6 +315,7 @@ async function viewRandomBook(app) {
       <div class="row">
         <a class="btn" href="${home}">${t('readBook')}</a>
         <a class="btn ghost" href="${home}full/">${t('readWhole')}</a>
+        <button type="button" class="btn ghost" id="shareBook">${t('shareBook')}</button>
       </div>
     </div>
     <a class="cover" href="${home}" aria-label="${esc(title)}"><img src="${cover}" width="473" height="717" alt="${esc(title)}"></a>
@@ -346,6 +350,15 @@ async function viewRandomBook(app) {
     <a class="cover" href="#/books" style="max-width:12rem" aria-hidden="true" tabindex="-1"><img src="${cover}" alt="" loading="lazy"></a>
   </div></section>`;
 
+  $('#shareBook').onclick = async () => {
+    const url = `${location.origin}${location.pathname}?book=${folder || 'book'}`;
+    const btn = $('#shareBook');
+    try {
+      if (navigator.share) return await navigator.share({ title, url });
+      await navigator.clipboard.writeText(url);
+      btn.textContent = t('copied');
+    } catch (e) { /* cancelled or not allowed: nothing to do */ }
+  };
   const feat = $('#feature');
   if (!qs.length) return;
   const show = () => {
