@@ -43,7 +43,7 @@ def render(md, arabic=True):
     return html
 
 
-def build_book(prefix, md, en_md, toc_file, corr_file, quotes_file, out, works_id, full, extra_urls=()):
+def build_book(prefix, md, en_md, toc_file, corr_file, quotes_file, out, works_id, full, extra_urls=(), other_books=()):
     """One book: its text, contents and quotes, written to site/<out>/data and its pre-rendered pages under /<prefix>/."""
     pages = split_pages(md.read_text(encoding="utf-8"))
     corr = json.loads(corr_file.read_text(encoding="utf-8")) if corr_file.exists() else {}
@@ -116,10 +116,10 @@ def build_book(prefix, md, en_md, toc_file, corr_file, quotes_file, out, works_i
         if "start" in s and not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", s.get("slug", "")):
             fail(f"toc.json: section {s['id']} needs a lowercase slug for its URL")
     site = Site(ROOT, toc, out_pages, out_en, quotes, works, author, book=book_work, prefix=prefix, full=full,
-                src={"ar": md, "en": en_md}, toc_file=toc_file, extra_urls=extra_urls)
+                src={"ar": md, "en": en_md}, toc_file=toc_file, extra_urls=extra_urls, other_books=other_books)
     n_html = site.build()
     print(f"built /{prefix}/: {len(out_pages)} pages, {len(toc)} toc entries, {len(quotes)} quotes, {en_note}, {n_html} HTML pages" + (" + sitemap.xml + llms.txt" if full else ""))
-    return site.urls
+    return site.urls, {"prefix": prefix, "toc": toc, "work": book_work}
 
 
 # Books after the first, each in /<folder>/: (folder, text file, works.json id, toc file).
@@ -131,14 +131,16 @@ EXTRA_BOOKS = [
 
 
 def main():
-    extra_urls = []
+    extra_urls, other_books = [], []
     for folder, name, works_id in EXTRA_BOOKS:
-        extra_urls += build_book(folder, BOOK / f"{name}.md", BOOK / f"{name}.en.md", BOOK / f"{name}.toc.json",
-                                 BOOK / f"{name}.corrections.json", BOOK / f"{name}.quotes.json",
-                                 ROOT / "site" / folder / "data", works_id, False)
+        urls, info = build_book(folder, BOOK / f"{name}.md", BOOK / f"{name}.en.md", BOOK / f"{name}.toc.json",
+                                BOOK / f"{name}.corrections.json", BOOK / f"{name}.quotes.json",
+                                ROOT / "site" / folder / "data", works_id, False)
+        extra_urls += urls
+        other_books.append(info)
     # The first book, al-milla-wal-nihla, at /book/. It also writes the sitemap and llms.txt, which list every book.
     build_book("book", BOOK / "al-milla-wal-nihla.md", BOOK / "al-milla-wal-nihla.en.md", BOOK / "toc.json",
-               BOOK / "corrections.json", BOOK / "quotes.json", OUT, "milla", True, extra_urls=extra_urls)
+               BOOK / "corrections.json", BOOK / "quotes.json", OUT, "milla", True, extra_urls=extra_urls, other_books=other_books)
 
 
 if __name__ == "__main__":
