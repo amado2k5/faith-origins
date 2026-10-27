@@ -1,3 +1,42 @@
+{0}------------------------------------------------
+
+# Milla and Nihla in
+
+Judaism • Christianity • Islam
+
+Dr. Hamdi 'Abd al-'Aal
+
+Mercy, the Sharia - University, Kuwait
+
+{1}------------------------------------------------
+
+# Al-Milla wa al-Nihla <sup>Al-Milla</sup>
+
+in
+
+Judaism • Christianity • Humanity
+
+{2}------------------------------------------------
+
+Copyright reserved  
+First Edition  
+AH 1409 - 1989
+
+## Al-Qalam Publishing and Distribution House
+
+Al-Sour Street - Al-Sour Building - First Floor  
+Tel: 24574.7 - 24584.7 - Telex Distributionco  
+P.O. Box 20146 Safat 13062 Kuwait
+
+{3}------------------------------------------------
+
+# Milla and Nihla in
+
+Judaism • Christianity • Islam
+
+Dr. Hamdi 'Abd al-'Aal  
+College of Sharia - Al-Kuwait University
+
 {4}------------------------------------------------
 
 In the name of God, the Most Gracious, the Most Merciful
@@ -3374,3 +3413,56 @@ And our final prayer is: praise be to God, Lord of the worlds, who by His grace 
 - *Al-Siddiq Abu Bakr* (Abu Bakr the Truthful). Muhammad Husayn Haykal, Cairo, AH 1361.
 - *Tarikh al-Tabari* (The History of al-Tabari). Matba'at al-Istiqama, Cairo, 1939.
 - *Zad al-Ma'ad* (Provisions for the Hereafter). Dar al-Fikr, Beirut, 1972, Ibn Qayyim al-Jawziyya.
+
+{215}------------------------------------------------
+
+## Contents of the Book
+
+| 7   | Introduction                       |
+|-----|------------------------------------|
+| 9   | Preliminary                        |
+| 9   | Meaning of Milal and Nihal         |
+| 9   | Subject of the Research and Method |
+| 11  | Origin of the Naming               |
+| 17  | Chapter One: Judaism               |
+| 19  | Its Origin and Development         |
+| 25  | The Israelites in Egypt            |
+| 27  | The Israelites in Sinai            |
+| 32  | The Israelites in Palestine        |
+| 41  | Their Sacred Books                 |
+| 44  | Their Beliefs                      |
+| 48  | Branches of Judaism                |
+| 50  | Jewish Ethics                      |
+| 63  | Alteration of Their Sacred Books   |
+| 73  | Chapter Two: Christianity          |
+| 75  | Its Origin and Development         |
+| 79  | What is Christianity?              |
+| 102 | The Disciples and the Apostles     |
+| 104 | Their Books                        |
+| 111 | Their Branches                     |
+| 114 | Christianity as Established by the Church
+
+{216}------------------------------------------------
+
+127 ..... The Gospel of Barnabas
+
+145 ..... Chapter Three: Islam
+
+147 ..... Historical Introduction
+
+156 ..... The Noble Qur'an
+
+173 ..... Islamic Sects
+
+{217}------------------------------------------------
+
+In the name of God, the Most Merciful, the Most Compassionate
+
+This book was loaded from:
+
+Al-Mahdiyyin Islamic Library for Comparing Religions
+
+<http://kotob.has.it>
+
+<http://www.al-maktabeh.com>
+
