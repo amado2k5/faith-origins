@@ -344,80 +344,28 @@ Principles of Islam, by Abul A'la Mawdudi - Dar al-Risala, 1980.
 
 {24}------------------------------------------------
 
-# Translation guide: Al-Milla wa al-Nihla (Arabic to English)
-
-Rules every translator (human or model) follows, so a book translated in pieces reads as one voice.
-
-## Principles
-- **Faithful, complete, readable.** Translate every heading, paragraph, quotation and footnote. Do not summarise, skip, soften,
-  sharpen or comment. The author's argument and tone are his; the translation does not endorse or correct them.
-- Natural scholarly English, not word-for-word. Keep the author's sentence rhythm where it can be done without strain.
-- The text is OCR from a scan. Silently repair obvious OCR slips (missing hamza, a swapped letter, a split word) when the
-  meaning is clear from context. If a passage is truly unreadable, write `[illegible]` and keep going. Never invent text.
-- Keep the Markdown structure: `#`/`##`/`###` headings, paragraphs, lists, `---` rules and `<sup>` as in the source.
-- Footnotes: the source marks them `(١)`, `(٢)`…; write `(1)`, `(2)`… and keep each footnote text. Translate titles of cited
-  Arabic works as `Transliterated Title (English gloss)` on first use in a footnote, e.g. `Al-Fitna al-Kubra (The Great Sedition)`.
-- Numbers: Western digits. Hijri years as `AH 1409`, Gregorian years as is.
-
-## Religious formulae
-- `عليه السلام` after a prophet: `(peace be upon him)`. `ﷺ`: `(peace and blessings be upon him)`.
-  `رضي الله عنه`: `(may God be pleased with him)`. `رحمه الله`: `(may God have mercy on him)`.
-  Use them as the author does; do not drop or add them.
-- Names: use the conventional English form: Moses, Jesus, Mary, Abraham, Paul, Muhammad, Abu Bakr, Uthman, Ali.
-
-## Quotations from scripture
-- **Qur'anic verses** (marked with ﴿ ﴾ or with a sura name and verse number in the footnote): translate faithfully into your own
-  English, in a blockquote (`> `), followed by the reference as the source gives it, e.g. `(Al Imran 3:19)`. Do not copy any
-  published translation word for word. Where the OCR garbled a verse, identify it from context and translate the verse itself.
-  Add no commentary.
-- **Bible and Talmud passages quoted in Arabic**: translate from the Arabic as quoted (do not substitute a published English
-  Bible). Mark them as blockquotes.
-- **Hadith**: translate the text; keep the narrator and source as given.
-
-## Glossary (use consistently)
-| Arabic | English |
-|---|---|
-| الملة / الملل | *milla* (religion as God revealed it) / *milal*. Gloss once per chapter, then plain *milla* |
-| النحلة / النحل | *nihla* (a claim or doctrine put forward by human beings) / *nihal*. Gloss once per chapter, then plain *nihla* |
-| الملة والنحلة | *Al-Milla wa al-Nihla* (title); in prose "milla and nihla" |
-| الوحي | revelation |
-| كلمة الله / كلمة الإنسان (البشر) | the Word of God / the word of man |
-| التحريف | alteration (*tahrif*) of scripture |
-| أهل الكتاب | People of the Book |
-| الأحبار | rabbis |
-| بنو إسرائيل | the Children of Israel; الإسرائيليون = the Israelites |
-| التوراة / العهد القديم / الأناجيل / العهد الجديد | the Torah / the Old Testament / the Gospels / the New Testament |
-| التلمود | the Talmud |
-| إنجيل برنابا | the Gospel of Barnabas |
-| الحواريون / الرسل | the disciples / the apostles |
-| التثليث | the Trinity; الصلب والفداء / التكفير = the crucifix - ion and redemption / atonement |
-| المجمع الكنسي | church council (Council of Nicaea, etc.) |
-| الملكانية / النسطورية / اليعقوبية | Melkites / Nestorians / Jacobites |
-| القراءون / السامرة / الفريسيون / الصدوقيون | Karaites / Samaritans / Pharisees / Sadducees |
-| الخوارج / الشيعة / الإمامية / الزيدية | Kharijites / the Shia / the Imamiyya / the Zaydiyya |
-| المعتزلة / الأشاعرة | the Mu'tazila / the Ash'arites |
-| السلف الصالح | the righteous predecessors (*salaf*) |
-| الإعجاز | inimitability (*i'jaz*) of the Qur'an |
-| السنة | the Sunna |
-
----
-
-PAGE:
-
-> And it resolves their differences in the conflicting rights, and they become desirous of the reward, and they are driven by the fear of punishment to refrain from evil.
-
-These matters cannot be managed by human nature without an established religion, for it is not in human nature to agree on their mutual interests without restraint, nor to share rights without incentive, due to their desire for the diversity of benefits. And through this, what the positivist schools of thought have aimed at is corrupted, which is to limit oneself to matters of reason and to reject worship according to the laws of the prophets. (21)
-
-The scholar al-Jurjani, author of the commentary on *al-Mawaqif*, says:
-
-> The *shari'a* is what enables the necessary cooperation among human beings. This cooperation is necessary for this species, because none of them can obtain what they need for their livelihood without the participation of others of their kind. Do you not see that if a man were alone, it would not be possible for him to live well, nor would his life be good, but he must be accompanied by others of his kind, so that one may bake for another, another may grind for him, and a third may plant for both, and so on. And for this reason it is said: "Man is by nature a social animal."
-
-So when they gather in this way, there must be dealings and exchanges between them, and there must be a law that establishes justice among them and prevents oppression. And were it not for a *shari'a* to which all, whether general or particular, strong or weak, submit, each soul would strive to obtain its own benefit and neglect the benefits of others, and each eye would desire what is with another, and thus there would be conflict, strife, and differences, and disorder and oppression and chaos would prevail, and the affairs of this life and the hereafter would be disrupted, and human society would disintegrate.
-
-Therefore, it is necessary for there to be a true religion, in order to realize the concern of God for His creation. And for this reason, prophecy is among the greatest interests of man in this world and the next, because of what it contains of bringing benefit to him and removing harm from him. Thus, the existence of religion is the cause of order and happiness in this life and the hereafter. (22)
-
-Among the modern writers, the well-known writer Mustafa Sa'd al-Rafi'i says: (21) p. 19-18.  
-(22) Vol. 8, p. 222-221 - *The Book of Happiness* - Cairo, AH 1325.
+The one  
+who brings together the diverse and puts an end to their disputes over conflicting rights, and they become desirous of reward,  
+and they are guided,  
+and they are sent toward good, and they fear punishment which keeps them away from evil.  
+and they are led,  
+on the 9th, let  
+These matters are not suitable for the creation and cannot be reached without the prescribed religion, for  
+the striving  
+there is no nature in human beings to agree on their interests without restraint, nor do they share rights  
+without a motive, due to their desire for the diversity of benefits, and by this the things that the positivist schools have aimed at are corrupted, which is to limit to the matters of reason and to negate worship according to the laws of the messengers » (21)  
+And al-Sharif al-Jurjani, the author of Sharh al-Mawaqif, says:  
+and he writes that it is not  
+« The sharia is that through which the necessary cooperation of the human is fulfilled, and the cooperation  
+is necessary for this species, inasmuch as none of them can obtain what he needs for his livelihood without  
+the participation of his fellow beings. Do you not see that if a man were alone, it would not be convenient for him or his life would not be well-ordered to that extent, and most importantly,  
+his livelihood would not be possible, but rather he must be with others of his kind, so that one bakes for another, another grinds  
+and others till for them, and so on. And for this reason it was said: man is by nature a social being.  
+So when they gather in this way, there must be dealings and exchanges between them, and there must be a law that establishes justice among them and prevents oppression, and were it not for a sharia to which the general and the particular, the strong and the weak, submit, each soul would strive to obtain its own benefit and neglect the benefit of others, and each eye would look toward what is with another, and thus there would be disputes, quarrels, and differences, and chaos and disorder and oppression and anarchy would prevail, and the affairs of this life and the hereafter would be disrupted, and the human society would disintegrate.  
+Therefore, the existence of a true religion is necessary, in realization of God's concern for His creation; and for this reason, prophecy is one of the greatest interests of man in this world and the next, due to what it contains of bringing him every benefit and removing every harm, so the existence of religion is the cause of order and happiness in this life and the hereafter » (22).  
+Among the moderns, the well-known writer Mustafa Sa'd al-Rafi'i says: (Etiquette  
+(21) p. 19-18.  
+(22) vol. 8, p. 222-221 - Al-Sa'ada Press - Cairo 1325 AH
 
 {25}------------------------------------------------
 
@@ -1028,17 +976,14 @@ So, the method of substituting reason for revelation in establishing religious b
 
 {55}------------------------------------------------
 
-> "Our Lord, and none remembers except those of understanding." (3:32)
+> "Our Lord, and none remembers except those of understanding." (32)  
+They take the "wa" (و) as a conjunction in the verse: "And those who are well grounded in knowledge," and on this basis, the learned by the explicit verse are invited to engage in rational inquiry into what is ambiguous in religious texts to uncover their true meanings and determine the will of God in them. As for the methodology of the Salaf in avoiding debate and rational inquiry in matters of belief, it was due to the nature of their era, in which the Muslims had no need for debate and argumentation. After them, however, innovations multiplied, and enemies of Islam and its concealed adversaries increased, spreading doubts and suspicions. Religious scholars became obligated to defend against these, to refute falsehood, and to establish the truth, and all of this relies more on reason than on narration, which the opponent and the defiant cannot accept.
 
-They make the "wa" (و) a conjunction in the verse: "And those who are firmly rooted in knowledge," and on this basis, the scholars are called upon by the verse to engage in rational inquiry into the ambiguous religious texts to uncover their true meanings and determine the will of God in them. As for the methodology of the Salaf in avoiding debate and rational inquiry in matters of belief, that was due to the nature of their era, in which the Muslims had no need for debate and argumentation. After them, however, innovations multiplied and the enemies of Islam and its conspirators increased, spreading doubts and suspicions. Religious scholars are thus required to defend against these, to refute doubts, to disprove falsehood, and to establish the truth, and all of this relies more on reason than on narration, which the opponent and the defiant cannot accept.
+From this particular understanding of the verse's implication and their mistaken analysis of the position of the Companions and the righteous predecessors, they have given free rein to their reason to investigate whatever they wish to investigate without any single constraint.
 
-From this special interpretation of the verse, and their erroneous analysis of the stance of the Companions and the righteous predecessors, they have given free rein to their intellects to investigate whatever they wish, without any restraint or limit.
+**Rebuttal to these arguments:**
 
-**Rebuttal of these arguments:**
-
-Their position contains a fallacy, a misjudgment of the matter, and a failure to grasp the appropriate methodology in matters of belief. The "wa" (و) in the noble verse may not be a conjunction but rather a resumption, especially given the numerous evidences and abundant proofs from the Book and the Sunna, which affirm that the divine essence and its attributes transcend human comprehension. The intellect can only grasp what the revelation has depicted and conveyed. This domain is therefore bound by faith and submission, not by observation and thought. The criterion of sound thought and firm knowledge is submission to the limitations and acceptance of revelation in these matters. The phrase "Allahu Akbar" (God is greater), which the Muslim repeats in his prayer morning and evening, means that He is greater than being reached by the senses or His grandeur being comprehended by the intellect or analogy. Rather, He is greater than His grandeur being understood by others, and greater than being known by others, for none knows God, exalted is He, except God. Thus, the limit of the knowledge of His servants is that they know that it is impossible for them to know Him truly, and none knows this except God.
-
-(32) Al-Imran 3:7.
+This stance of theirs contains fallacy, misjudgment, and a lack of understanding of the appropriate methodology in matters of belief. The "wa" (و) in the noble verse could just as well be for resumption rather than conjunction, especially given the numerous evidences and abundant proofs from the Book and the Sunna, which affirm that the divine essence and its attributes transcend human comprehension. Reason can only grasp what revelation has depicted and described. The field here is bound to faith and surrender, not to observation and thought. The criterion for sound thought and being well grounded in knowledge is surrender to the limitations of human understanding and submission to revelation in these matters. The Muslim's repeated declaration in prayer, "Allah is greater" (الله أكبر), means that He is greater than what can be reached by the senses or His majesty comprehended by reason and analogy. Rather, He is greater than His majesty being comprehended by others, and greater than being known by others, for indeed, only Allah knows Allah, blessed and exalted be He. The limit of His servants' knowledge is that they know that it is impossible for them to truly know Him, and they know that (32) Al Imran 3:7.
 
 {56}------------------------------------------------
 
