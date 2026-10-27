@@ -122,14 +122,23 @@ def build_book(prefix, md, en_md, toc_file, corr_file, quotes_file, out, works_i
     return site.urls
 
 
+# Books after the first, each in /<folder>/: (folder, text file, works.json id, toc file).
+EXTRA_BOOKS = [
+    ("book-2", "manhaj-al-salaf", "manhaj"),
+    ("book-3", "akhlaq", "akhlaq"),
+    ("book-4", "sabaiyyun", "sabaiyyun"),
+]
+
+
 def main():
-    # The second book, manhaj al-salaf fi al-aqidah, at /book-2/ (no quotes yet, its own folder of data).
-    book2_urls = build_book("book-2", BOOK / "manhaj-al-salaf.md", BOOK / "manhaj-al-salaf.en.md", BOOK / "manhaj-al-salaf.toc.json",
-                            BOOK / "manhaj-al-salaf.corrections.json", BOOK / "manhaj-al-salaf.quotes.json",
-                            ROOT / "site" / "book-2" / "data", "manhaj", False)
-    # The first book, al-milla-wal-nihla, at /book/. It also writes the sitemap and llms.txt, which list both books.
+    extra_urls = []
+    for folder, name, works_id in EXTRA_BOOKS:
+        extra_urls += build_book(folder, BOOK / f"{name}.md", BOOK / f"{name}.en.md", BOOK / f"{name}.toc.json",
+                                 BOOK / f"{name}.corrections.json", BOOK / f"{name}.quotes.json",
+                                 ROOT / "site" / folder / "data", works_id, False)
+    # The first book, al-milla-wal-nihla, at /book/. It also writes the sitemap and llms.txt, which list every book.
     build_book("book", BOOK / "al-milla-wal-nihla.md", BOOK / "al-milla-wal-nihla.en.md", BOOK / "toc.json",
-               BOOK / "corrections.json", BOOK / "quotes.json", OUT, "milla", True, extra_urls=book2_urls)
+               BOOK / "corrections.json", BOOK / "quotes.json", OUT, "milla", True, extra_urls=extra_urls)
 
 
 if __name__ == "__main__":

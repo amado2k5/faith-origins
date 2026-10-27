@@ -48,6 +48,8 @@
   },
   {
     "id": "sabaiyyun",
+    "reader": "book-4",
+    "online": true,
     "ar": "السبئيون: منهجاً وغاية",
     "en": "al-Sabaʼiyūn : manhajan wa-ghāyah",
     "gloss": "The Saba’ites: Method and Aim",
@@ -73,6 +75,8 @@
   },
   {
     "id": "akhlaq",
+    "reader": "book-3",
+    "online": true,
     "ar": "الأخلاق ومعيارها بين الوضعية والدين",
     "en": "al-Akhlāq wa-miʻyāruhā bayna al-waḍʻīyah wa-al-dīn",
     "gloss": "Ethics and Its Criterion: Between Man-Made Systems and Religion",

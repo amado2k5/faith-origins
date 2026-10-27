@@ -18,6 +18,7 @@ from urllib.parse import quote
 
 ORIGIN = "https://origins.faith"
 LANGS = ("ar", "en")
+EXTRA_BOOK_TILES = [["book-2", ["ص ٥–١١٠", "Pages 5–110"], ["منهج السلف في العقيدة", "Manhaj al-Salaf fi al-Aqidah"], ["كتاب ثانٍ للدكتور حمدي عبد العال: منهج السلف في العقيدة.", "A second book by Dr. Hamdy Abdel Aal."]], ["book-3", ["ص ٧–١٧٢", "Pages 7–172"], ["الأخلاق ومعيارها بين الوضعية والدين", "Ethics and Its Criterion: Between Man-Made Systems and Religion"], ["كتاب ثالث للدكتور حمدي عبد العال: الأخلاق ومعيارها.", "A third book by Dr. Hamdy Abdel Aal."]], ["book-4", ["ص ٥–١١٧", "Pages 5–117"], ["السبئيون: منهجاً وغاية", "The Saba’ites: Method and Aim"], ["كتاب رابع للدكتور حمدي عبد العال: السبئيون.", "A fourth book by Dr. Hamdy Abdel Aal."]]]
 SHORT_TITLE = {"ar": "الملة والنحلة", "en": "Al-Milla wa al-Nihla"}
 AUTHOR_NAME = {"ar": "حمدي عبد العال", "en": "Hamdy Abdel Aal"}
 KEYWORDS = {
@@ -245,12 +246,14 @@ class Site:
     <figcaption class="src"><span>{esc(self.t(lang, "bookTitle"))} · {self.t(lang, "page")} {num(q["page"], lang)}</span><a href="{self.page_href(lang, q["page"])}">{self.t(lang, "inContext")}</a></figcaption>
   </figure>"""
 
-    def book2_tile(self, lang):
-        """A link to the second book from the home page."""
+    def book_tiles(self, lang):
+        """Home-page tiles linking to the books after the first one."""
         ar = lang == "ar"
-        return (f'<a class="tile" href="{self.base(lang)}book-2/"><small>{"ص ٥–١١٠" if ar else "Pages 5–110"}</small>'
-                f'<h3>{"منهج السلف في العقيدة" if ar else "Manhaj al-Salaf fi al-Aqidah"}</h3>'
-                f'<p>{"كتاب ثانٍ للدكتور حمدي عبد العال: منهج السلف في العقيدة." if ar else "A second book by Dr. Hamdy Abdel Aal."}</p></a>')
+        out = ""
+        for folder, pages, titles, blurbs in EXTRA_BOOK_TILES:
+            out += (f'<a class="tile" href="{self.base(lang)}{folder}/"><small>{pages[0] if ar else pages[1]}</small>'
+                    f'<h3>{titles[0] if ar else titles[1]}</h3><p>{blurbs[0] if ar else blurbs[1]}</p></a>')
+        return out
 
     def view_home(self, lang):
         t = lambda k: self.t(lang, k)
@@ -292,7 +295,7 @@ class Site:
     <p class="lede">{t('aboutP1')}</p></div>
     <div class="tiles">
       {tiles}
-      {self.book2_tile(lang)}
+      {self.book_tiles(lang)}
     </div>
   </div></section>
 
