@@ -290,7 +290,7 @@ class Site:
   </div></section>
 
   <section class="section" style="padding-top:0"><div class="wrap">
-    <div class="orn" aria-hidden="true"><svg><use href="#star"/></svg></div>
+    <div class="orn" aria-hidden="true"><svg><use href="#book"/></svg></div>
     <div style="margin-top:2.5rem"><div class="kicker">{t('aboutKick')}</div><h2 {ar_lang}>{esc(t('bookTitle'))}</h2>
     <p class="lede">{t('aboutP1')}</p></div>
     <div class="tiles">
@@ -436,7 +436,7 @@ class Site:
             topics = f'<p class="meta topics" lang="{lang}" dir="{"rtl" if lang == "ar" else "ltr"}">{esc(w["topics"][lang])} <em>({t("topicsFrom")})</em></p>' if w.get("topics") else ""
             cover = (f'<img src="/assets/covers/{w["reader"]}.jpg" width="104" height="158" alt="">' if w.get('reader') else
                      '<img src="/assets/cover.jpg" width="104" height="158" alt="">' if w.get('online') else
-                     '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>')
+                     '<div class="ph" aria-hidden="true"><svg><use href="#book"/></svg></div>')
             cards += f"""
     <article class="book">
       {cover}
@@ -455,7 +455,7 @@ class Site:
   <div class="wrap"><div class="page-head"><div class="kicker">{t('navBooks')}</div><h1>{t('booksTitle')}</h1><p class="lede">{t('booksLead')}</p></div>
   <div class="shelf">
     {cards}
-    <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
+    <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#book"/></svg></div>
       <div><span class="tag seek">{t('seeking')}</span><h3>{t('moreBooks')}</h3>
       <p class="meta">{t('moreBooksMeta')}</p><a class="btn ghost" href="{self.issue_url(lang)}" rel="noopener">{t('report')}</a></div></article>
   </div>

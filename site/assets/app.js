@@ -355,7 +355,7 @@ function viewHome(app) {
   </div></section>
 
   <section class="section" style="padding-top:0"><div class="wrap">
-    <div class="orn" aria-hidden="true"><svg><use href="#star"/></svg></div>
+    <div class="orn" aria-hidden="true"><svg><use href="#book"/></svg></div>
     <div style="margin-top:2.5rem"><div class="kicker">${t('aboutKick')}</div><h2 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(t('bookTitle'))}</h2>
     <p class="lede">${t('aboutP1')}</p></div>
     <div class="tiles">
@@ -404,7 +404,7 @@ function viewBooks(app) {
   <div class="shelf">
     ${works.map(w => `
     <article class="book">
-      ${w.reader ? `<img src="${ROOT}assets/covers/${w.reader}.jpg" width="104" height="158" alt="">` : w.online ? '<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      ${w.reader ? `<img src="${ROOT}assets/covers/${w.reader}.jpg" width="104" height="158" alt="">` : w.online ? `<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">` : '<div class="ph" aria-hidden="true"><svg><use href="#book"/></svg></div>'}
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       ${state.lang === 'ar'
         ? `<h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
@@ -420,7 +420,7 @@ function viewBooks(app) {
         ${w.publisherUrl ? `<a class="chip" href="${w.publisherUrl}" rel="noopener">${t('pubPage')}</a>` : ''}
         <a class="chip" href="${worldcatUrl(w)}" rel="noopener">${t('worldcat')}</a>
         <a class="chip" href="${w.neelwafurat}" rel="noopener">${t('neel')}</a></p></div></article>`).join('')}
-    <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>
+    <article class="book"><div class="ph" aria-hidden="true"><svg><use href="#book"/></svg></div>
       <div><span class="tag seek">${t('seeking')}</span><h3>${t('moreBooks')}</h3>
       <p class="meta">${t('moreBooksMeta')}</p><a class="btn ghost" href="${issueUrl()}" rel="noopener">${t('report')}</a></div></article>
   </div>
