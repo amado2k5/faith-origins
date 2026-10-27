@@ -313,7 +313,7 @@ async function viewRandomBook(app) {
         <p class="lede">${esc(en ? work.gloss : work.gloss)}</p>
         <p class="row"><a class="btn" href="${home}">${t('readBook')}</a><a class="btn ghost" href="${home}full/">${t('readWhole')}</a></p>
       </div>
-      <img class="cover" src="${cover}" width="473" height="717" alt="${esc(title)}">
+      <div class="cover"><img src="${cover}" width="473" height="717" alt="${esc(title)}"></div>
     </div></section>
     ${quotes.length ? `<section class="wrap" style="margin-top:2.5rem"><div class="kicker">${t('quotesKick')}</div><h2>${t('quotesTitle')}</h2><div class="quotes">${quotes.map(quoteHTML).join('')}</div></section>` : ''}
     <section class="wrap" style="margin-top:2.5rem"><div class="tiles">
