@@ -1,3 +1,29 @@
+{1}------------------------------------------------
+
+# The Sabaeans  
+Method and Goal
+
+{2}------------------------------------------------
+
+In the name of God, the Most Gracious, the Most Merciful  
+> «The Epoch. Indeed, humanity is in loss, except for those who have faith and do righteous deeds, and enjoin one another to truth, and enjoin one another to patience.»  
+The Truthful God.
+
+{3}------------------------------------------------
+
+# The Sabaeans
+## Method and Aim
+Dr. Hamdi 'Aid al-Jalil  
+College of Sharia - Kuwait University
+
+{4}------------------------------------------------
+
+# First Edition  
+1405 AH - 1985 CE  
+All rights reserved for printing, publishing, and distribution.  
+Kuwait - Al-Sur Street - Al-Sur Building - First Floor  
+P.O. Box: 20146 - Tel: 2458478/2457471 - Telex: Tawze3Ku
+
 {5}------------------------------------------------
 
 # Introduction

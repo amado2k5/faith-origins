@@ -1,16 +1,128 @@
 [
-  {"id": "intro", "slug": "introduction", "ar": "المقدمة", "en": "Introduction", "start": 5, "end": 10, "group": "front"},
-  {"id": "s1", "slug": "abdullah-ibn-saba", "ar": "عبد الله بن سبأ", "en": "Abdullah ibn Saba'", "start": 11, "end": 34, "group": "m1"},
-  {"id": "s2", "slug": "occultation-and-return", "ar": "الغيبة والرجعة", "en": "The occultation and the return", "start": 35, "end": 40, "group": "m1"},
-  {"id": "s3", "slug": "imamate", "ar": "الإمامة", "en": "The imamate", "start": 41, "end": 52, "group": "m1"},
-  {"id": "s4", "slug": "sanctity-of-the-imam", "ar": "تقديس الإمام", "en": "The sanctification of the imam", "start": 53, "end": 58, "group": "m1"},
-  {"id": "s5", "slug": "taqiyya", "ar": "التقية", "en": "Taqiyya (dissimulation)", "start": 59, "end": 62, "group": "m1"},
-  {"id": "s6", "slug": "bada", "ar": "البداء", "en": "Bada’ (change of divine decree)", "start": 63, "end": 64, "group": "m1"},
-  {"id": "s7", "slug": "incarnation-and-transmigration", "ar": "الحلول والتناسخ", "en": "Incarnation and transmigration", "start": 65, "end": 68, "group": "m1"},
-  {"id": "s8", "slug": "method-of-interpretation", "ar": "منهج التأويل", "en": "The method of interpretation", "start": 69, "end": 76, "group": "m1"},
-  {"id": "s9", "slug": "forging-of-writings", "ar": "تزييف الرسائل", "en": "The forging of writings", "start": 77, "end": 82, "group": "m1"},
-  {"id": "s10", "slug": "shedding-of-blood", "ar": "سفك الدماء", "en": "The shedding of blood", "start": 83, "end": 94, "group": "m1"},
-  {"id": "s11", "slug": "making-of-the-propagandists", "ar": "صنع الدعاة", "en": "The making of the propagandists", "start": 95, "end": 108, "group": "m1"},
-  {"id": "s12", "slug": "conclusion", "ar": "الخاتمة", "en": "Conclusion", "start": 109, "end": 114, "group": "m1"},
-  {"id": "s13", "slug": "references", "ar": "المراجع", "en": "References", "start": 115, "end": 117, "group": "m1"}
+  {
+    "id": "intro",
+    "slug": "introduction",
+    "ar": "المقدمة",
+    "en": "Introduction",
+    "start": 1,
+    "end": 10,
+    "group": "front"
+  },
+  {
+    "id": "s1",
+    "slug": "abdullah-ibn-saba",
+    "ar": "عبد الله بن سبأ",
+    "en": "Abdullah ibn Saba'",
+    "start": 11,
+    "end": 34,
+    "group": "m1"
+  },
+  {
+    "id": "s2",
+    "slug": "occultation-and-return",
+    "ar": "الغيبة والرجعة",
+    "en": "The occultation and the return",
+    "start": 35,
+    "end": 40,
+    "group": "m1"
+  },
+  {
+    "id": "s3",
+    "slug": "imamate",
+    "ar": "الإمامة",
+    "en": "The imamate",
+    "start": 41,
+    "end": 52,
+    "group": "m1"
+  },
+  {
+    "id": "s4",
+    "slug": "sanctity-of-the-imam",
+    "ar": "تقديس الإمام",
+    "en": "The sanctification of the imam",
+    "start": 53,
+    "end": 58,
+    "group": "m1"
+  },
+  {
+    "id": "s5",
+    "slug": "taqiyya",
+    "ar": "التقية",
+    "en": "Taqiyya (dissimulation)",
+    "start": 59,
+    "end": 62,
+    "group": "m1"
+  },
+  {
+    "id": "s6",
+    "slug": "bada",
+    "ar": "البداء",
+    "en": "Bada’ (change of divine decree)",
+    "start": 63,
+    "end": 64,
+    "group": "m1"
+  },
+  {
+    "id": "s7",
+    "slug": "incarnation-and-transmigration",
+    "ar": "الحلول والتناسخ",
+    "en": "Incarnation and transmigration",
+    "start": 65,
+    "end": 68,
+    "group": "m1"
+  },
+  {
+    "id": "s8",
+    "slug": "method-of-interpretation",
+    "ar": "منهج التأويل",
+    "en": "The method of interpretation",
+    "start": 69,
+    "end": 76,
+    "group": "m1"
+  },
+  {
+    "id": "s9",
+    "slug": "forging-of-writings",
+    "ar": "تزييف الرسائل",
+    "en": "The forging of writings",
+    "start": 77,
+    "end": 82,
+    "group": "m1"
+  },
+  {
+    "id": "s10",
+    "slug": "shedding-of-blood",
+    "ar": "سفك الدماء",
+    "en": "The shedding of blood",
+    "start": 83,
+    "end": 94,
+    "group": "m1"
+  },
+  {
+    "id": "s11",
+    "slug": "making-of-the-propagandists",
+    "ar": "صنع الدعاة",
+    "en": "The making of the propagandists",
+    "start": 95,
+    "end": 108,
+    "group": "m1"
+  },
+  {
+    "id": "s12",
+    "slug": "conclusion",
+    "ar": "الخاتمة",
+    "en": "Conclusion",
+    "start": 109,
+    "end": 114,
+    "group": "m1"
+  },
+  {
+    "id": "s13",
+    "slug": "references",
+    "ar": "المراجع",
+    "en": "References",
+    "start": 115,
+    "end": 117,
+    "group": "m1"
+  }
 ]
