@@ -12,6 +12,7 @@ const ROOT = HTML.root || '';                       // '/' on pages below the si
 const PAGE_LANG = HTML.pageLang || null;            // the language the URL fixes (/en/…, or a pre-rendered Arabic page)
 const STATIC = HTML.static || null;                 // pre-rendered view: 'read:<section>' | 'index' | 'author' | 'books'
 const APP = PAGE_LANG === 'en' ? '/en/' : '/';      // where the hash routes live, from a pre-rendered page
+const BOOK_BASE = HTML.bookBase || 'book';         // URL folder of the book: 'book' (the first book) or 'book-2'
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -46,7 +47,7 @@ const I18N = {
     ch1: 'اليهودية', ch2: 'المسيحية', ch3: 'الإسلام',
     ch1d: 'النشأة، والكتب المقدسة، والعقائد، والفرق.', ch2d: 'النشأة، والأناجيل، والمجامع الكنسية، وإنجيل برنابا.', ch3d: 'القرآن الكريم، والخلاف التاريخي، والفرق الإسلامية.',
     helpKick: 'نبحث عن كتبه', helpTitle: 'هل لديك نسخة من أحد كتبه؟',
-    helpP: 'نعرف له أربعة كتب، ولا يتوفر منها هنا إلا «الملة والنحلة». نبحث عن نسخ الكتب الثلاثة الأخرى لمسحها ضوئياً ونشرها، وعن أي كتب أو مقالات أخرى له. أي خيط يساعدنا: نسخة، أو صورة غلاف، أو رقم في فهرس مكتبة، أو اسم ناشر.',
+    helpP: 'نعرف له أربعة كتب، ويتوفر منها هنا «الملة والنحلة» و«منهج السلف في العقيدة». نبحث عن نسخ الكتابين الآخرين لمسحها ضوئياً ونشرها، وعن أي كتب أو مقالات أخرى له. أي خيط يساعدنا: نسخة، أو صورة غلاف، أو رقم في فهرس مكتبة، أو اسم ناشر.',
     helpBtn: 'أبلغنا عن كتاب', helpBooks: 'الكتب المعروفة',
     h1: ['نسخة ورقية أو ممسوحة من أي كتاب له', 'معلومات عن طبعة أو ناشر أو مكتبة تحتفظ بها', 'ذكريات أو صور أو مقالات عنه'],
     booksTitle: 'كتب الدكتور حمدي عبد العال', booksLead: 'الكتب المتاحة هنا، والكتب التي نبحث عنها.',
@@ -106,7 +107,7 @@ const I18N = {
     ch1: 'Judaism', ch2: 'Christianity', ch3: 'Islam',
     ch1d: 'Origins, sacred books, beliefs and sects.', ch2d: 'Origins, the Gospels, the church councils, the Gospel of Barnabas.', ch3d: 'The Qur’an, the early disputes, and the Islamic sects.',
     helpKick: 'We are searching', helpTitle: 'Do you have a copy of one of his books?',
-    helpP: 'We know of four books, and only Al-Milla wa al-Nihla is readable here. We are looking for copies of the other three to scan and publish, and for anything else he wrote. Any lead helps: a copy, a photo of a cover, a library catalogue number, a publisher’s name.',
+    helpP: 'We know of four books, and two are readable here: Al-Milla wa al-Nihla and Manhaj al-Salaf. We are looking for copies of the other two to scan and publish, and for anything else he wrote. Any lead helps: a copy, a photo of a cover, a library catalogue number, a publisher’s name.',
     helpBtn: 'Tell us about a book', helpBooks: 'Known books',
     h1: ['A paper or scanned copy of any of his books', 'Details of an edition, publisher or library that holds one', 'Memories, photographs or articles about him'],
     booksTitle: 'The books of Dr. Hamdy Abdel Aal', booksLead: 'What is available here, and what we are still looking for.',
@@ -229,7 +230,7 @@ function applyI18n() {
   const th = d.dataset.theme;
   $('#themeBtn').title = $('#themeBtn').ariaLabel = `${t('theme' + th[0].toUpperCase() + th.slice(1))}`;
   if (!STATIC) document.title = state.lang === 'ar' ? 'حمدي عبد العال · origins.faith' : 'Hamdy Abdel Aal · origins.faith';
-  $('[data-contents]')?.setAttribute('href', state.lang === 'en' ? '/en/book/' : '/book/');
+  $('[data-contents]')?.setAttribute('href', `${state.lang === 'en' ? '/en/' : '/'}${BOOK_BASE}/`);
 }
 
 /* ---------- router ---------- */
@@ -279,7 +280,7 @@ async function hydrate() {
 const lastRead = () => parseInt(store.get('lastPage'), 10) || null;
 const readHref = (page, extra = '') => `#/read/p/${page}${extra}`;
 const slugOf = id => state.site.toc.find(s => s.id === id).slug;
-const secHref = id => STATIC ? `${APP}book/${slugOf(id)}/` : `#/read/${id}`;
+const secHref = id => STATIC ? `${APP}${BOOK_BASE}/${slugOf(id)}/` : `#/read/${id}`;
 const pageHref = p => {
   if (!STATIC) return readHref(p);
   const s = state.byPage.get(p);
@@ -331,6 +332,7 @@ function viewHome(app) {
     <div class="tiles">
       ${[['ch1', 'j1', 17, 72], ['ch2', 'c1', 73, 144], ['ch3', 'i1', 145, 209]].map(([k, id, a, b]) => `
         <a class="tile" href="#/read/${id}"><small>${t('page')} ${N(a)}–${N(b)}</small><h3>${t(k)}</h3><p>${t(k + 'd')}</p></a>`).join('')}
+      <a class="tile" href="${state.lang === 'en' ? '/en' : ''}/book-2/"><small>${state.lang === 'ar' ? 'ص ٥–١١٠' : 'Pages 5–110'}</small><h3>${state.lang === 'ar' ? 'منهج السلف في العقيدة' : 'Manhaj al-Salaf fi al-Aqidah'}</h3><p>${state.lang === 'ar' ? 'كتاب ثانٍ للدكتور حمدي عبد العال: منهج السلف في العقيدة.' : 'A second book by Dr. Hamdy Abdel Aal.'}</p></a>
     </div>
   </div></section>
 
@@ -373,7 +375,7 @@ function viewBooks(app) {
   <div class="shelf">
     ${works.map(w => `
     <article class="book">
-      ${w.online ? '<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      ${w.online && !w.reader ? '<img src="${ROOT}assets/cover.jpg" width="104" height="158" alt="">' : '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
       <div><span class="tag ${w.online ? 'ok' : 'seek'}">${w.online ? t('available') : t('notOnline')}</span>
       ${state.lang === 'ar'
         ? `<h3 lang="ar" dir="rtl">${esc(w.ar)}</h3>
@@ -383,7 +385,7 @@ function viewBooks(app) {
       <details class="orig"><summary>${t('arabicTitle')}</summary><span lang="ar" dir="rtl">${esc(w.ar)}</span></details>`}
       <p class="meta">${workLines(w).map(esc).join('<br>')}<br>${t('heldBy')}${w.uoft ? ` (${esc(w.uoft)})` : ''}${w.libraries?.length ? `<br>${t('alsoHeld')}: ${w.libraries.map(l => `<a href="${l.url}" rel="noopener">${esc(l.name)}${l.note ? ` (${esc(l.note)})` : ''}</a>`).join(', ')}` : ''}</p>
       ${w.topics ? `<p class="meta topics" lang="${state.lang}" dir="${state.lang === 'ar' ? 'rtl' : 'ltr'}">${esc(w.topics[state.lang])} <em>(${t('topicsFrom')})</em></p>` : ''}
-      <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="#/read">${t('readNow')}</a>` : ''}
+      <p class="row" style="gap:.4rem">${w.online ? `<a class="btn" href="${w.reader ? `${state.lang === 'en' ? '/en' : ''}/${w.reader}/` : '#/read'}">${t('readNow')}</a>` : ''}
         <a class="chip" href="${UOFT_AUTHOR}" rel="noopener">${t('uoft')}</a>
         ${w.scan ? `<a class="chip" href="${w.scan.url}" rel="noopener">${t('scanChip')}</a>` : ''}
         ${w.publisherUrl ? `<a class="chip" href="${w.publisherUrl}" rel="noopener">${t('pubPage')}</a>` : ''}

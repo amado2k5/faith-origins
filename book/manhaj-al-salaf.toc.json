@@ -1,0 +1,101 @@
+[
+  {
+    "id": "intro",
+    "slug": "preface",
+    "ar": "مقدمة",
+    "en": "Preface",
+    "start": 5,
+    "end": 6,
+    "group": "front"
+  },
+  {
+    "id": "m1",
+    "slug": "religion-definition",
+    "ar": "الدين",
+    "en": "Religion",
+    "start": 7,
+    "end": 28,
+    "group": "m1"
+  },
+  {
+    "id": "m2",
+    "slug": "islam-religion-with-god",
+    "ar": "الدين عند الله الإسلام",
+    "en": "Religion with God is Islam",
+    "start": 29,
+    "end": 30,
+    "group": "m2"
+  },
+  {
+    "id": "m3",
+    "slug": "creed-definition",
+    "ar": "العقيدة",
+    "en": "Creed: definition and sources",
+    "start": 31,
+    "end": 37,
+    "group": "m3"
+  },
+  {
+    "id": "m4",
+    "slug": "tawhid",
+    "ar": "التوحيد",
+    "en": "Tawhid",
+    "start": 38,
+    "end": 59,
+    "group": "m4"
+  },
+  {
+    "id": "m5",
+    "slug": "taqlid-and-reasoning",
+    "ar": "التقليد والنظر",
+    "en": "Imitation and reasoning",
+    "start": 60,
+    "end": 63,
+    "group": "m5"
+  },
+  {
+    "id": "m6",
+    "slug": "islam-and-iman",
+    "ar": "الإسلام والإيمان",
+    "en": "Islam and iman",
+    "start": 64,
+    "end": 73,
+    "group": "m6"
+  },
+  {
+    "id": "m7",
+    "slug": "quranic-proofs-of-gods-existence",
+    "ar": "منهج القرآن في الاستدلال على وجود الله",
+    "en": "The Qur'anic method of proving God's existence",
+    "start": 74,
+    "end": 86,
+    "group": "m7"
+  },
+  {
+    "id": "m8",
+    "slug": "gods-names-and-attributes",
+    "ar": "صفات الله وأسماؤه الحسنى",
+    "en": "God's names and attributes",
+    "start": 87,
+    "end": 92,
+    "group": "m8"
+  },
+  {
+    "id": "m9",
+    "slug": "effect-of-faith-on-the-muslim",
+    "ar": "أثر الإيمان بالله على حياة المسلم",
+    "en": "The effect of faith in God on a Muslim's life",
+    "start": 93,
+    "end": 97,
+    "group": "m9"
+  },
+  {
+    "id": "m10",
+    "slug": "qadar",
+    "ar": "القضاء والقدر",
+    "en": "Divine decree and predestination",
+    "start": 98,
+    "end": 110,
+    "group": "m10"
+  }
+]
