@@ -1,5 +1,5 @@
 [
-  {"id": "preface", "slug": "epigraph-and-preface", "ar": "الاستهلال والمقدمة", "en": "Epigraph and preface", "start": 5, "end": 8, "group": "front"},
+  {"id": "preface", "slug": "epigraph-and-preface", "ar": "الاستهلال والمقدمة", "en": "Epigraph and preface", "start": 4, "end": 8, "group": "front"},
   {"id": "intro", "slug": "introduction", "ar": "تمهيد", "en": "Introduction: milla and nihla", "start": 9, "end": 16, "group": "front"},
 
   {"id": "ch1", "ar": "الفصل الأول: اليهودية", "en": "Chapter 1: Judaism", "heading": true, "group": "ch1"},
