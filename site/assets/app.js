@@ -288,23 +288,37 @@ async function viewRandomBook(app) {
   const site = await get('site.json');
   const pages = await (state.lang === 'en' && site.hasEnglish ? get('pages-en.json') : get('pages.json'));
   const work = site.works.find(w => w.id === BOOK_WORK[folder]);
-  const prefix = state.lang === 'en' ? '/en/' : '/';
+  const en = state.lang === 'en';
+  const prefix = en ? '/en/' : '/';
+  const home = `${prefix}${folder || 'book'}/`;
   const cover = folder ? `${ROOT}assets/covers/${folder}.jpg` : `${ROOT}assets/cover.jpg`;
-  const title = state.lang === 'ar' ? work.ar : work.en;
+  const title = en ? work.en : work.ar;
+  const sections = site.toc.filter(s => 'start' in s);
+  const sectionOf = n => sections.find(s => n >= s.start && n <= s.end);
+  const quotes = site.quotes || [];
   document.title = `${title} · origins.faith`;
+  const quoteHTML = q => {
+    const sec = sectionOf(q.page);
+    const link = sec ? `${home}${sec.slug}/#p${q.page}` : home;
+    const body = en && q.en
+      ? `<blockquote lang="en" dir="ltr" class="primary">${esc(q.en)}</blockquote><details class="orig"><summary>${t('arabicOriginal')}</summary><blockquote lang="ar" dir="rtl">${esc(q.text)}</blockquote></details>`
+      : `<blockquote lang="ar" dir="rtl">${esc(q.text)}</blockquote>`;
+    return `<figure class="q">${body}<figcaption class="src"><span>${esc(title)} · ${t('page')} ${N(q.page)}</span><a href="${link}">${t('inContext')}</a></figcaption></figure>`;
+  };
   app.innerHTML = `
-    <section class="wrap" style="padding-top:2rem">
-      <div class="page-head" style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
-        <img src="${cover}" width="160" height="243" alt="" style="border-radius:4px">
-        <div><div class="kicker">${esc(t('kickerHome'))}</div><h1 ${state.lang === 'ar' ? 'lang="ar"' : ''}>${esc(title)}</h1>
-        <p class="lede">${esc(work.gloss)}</p></div>
+    <section class="hero"><div class="wrap hero-grid">
+      <div>
+        <div class="kicker">${t('kickerHome')}</div>
+        <h1 ${en ? '' : 'lang="ar"'}>${esc(title)}</h1>
+        <p class="lede">${esc(en ? work.gloss : work.gloss)}</p>
+        <p class="row"><a class="btn" href="${home}">${t('readBook')}</a><a class="btn ghost" href="${home}full/">${t('readWhole')}</a></p>
       </div>
-      ${site.toc.map(s => s.heading
-        ? `<h2 class="ch">${esc(secTitle(s))}</h2>`
-        : `<section id="${s.id}"><h3><a href="${prefix}${folder || 'book'}/${s.slug}/">${esc(secTitle(s))}</a></h3>` +
-          Array.from({ length: s.end - s.start + 1 }, (_, i) => s.start + i).filter(n => pages[n])
-            .map(n => `<div class="page" id="p${n}"><span class="pg">${N(n)}</span>${pages[n]}</div>`).join('') + '</section>').join('')}
-    </section>`;
+      <img class="cover" src="${cover}" width="473" height="717" alt="${esc(title)}">
+    </div></section>
+    ${quotes.length ? `<section class="wrap" style="margin-top:2.5rem"><div class="kicker">${t('quotesKick')}</div><h2>${t('quotesTitle')}</h2><div class="quotes">${quotes.map(quoteHTML).join('')}</div></section>` : ''}
+    <section class="wrap" style="margin-top:2.5rem"><div class="tiles">
+      ${sections.filter(s => s.slug).map(s => `<a class="tile" href="${home}${s.slug}/"><small>${t('page')} ${N(s.start)}–${N(s.end)}</small><h3>${esc(secTitle(s))}</h3></a>`).join('')}
+    </div></section>`;
 }
 const lastRead = () => parseInt(store.get('lastPage'), 10) || null;
 const readHref = (page, extra = '') => `#/read/p/${page}${extra}`;
