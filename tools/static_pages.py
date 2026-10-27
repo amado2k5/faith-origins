@@ -90,17 +90,22 @@ def clip(s, n=155):
 
 
 class Site:
-    def __init__(self, root, toc, pages, pages_en, quotes, works, author):
+    def __init__(self, root, toc, pages, pages_en, quotes, works, author, book=None, prefix="book", full=True, src=None, toc_file=None, extra_urls=()):
         self.root = root
         self.site = root / "site"
+        self.prefix = prefix        # URL folder of this book: /book/ (the first book) or /book-2/
+        self.full = full            # False: only this book's own pages (no home, author, books, sitemap or llms.txt)
+        self.src = src or {"ar": root / "book" / "al-milla-wal-nihla.md", "en": root / "book" / "al-milla-wal-nihla.en.md"}
+        self.toc_file = toc_file or root / "book" / "toc.json"
         self.toc = toc
         self.sections = [s for s in toc if "start" in s]
         self.pages = {"ar": pages, "en": pages_en}
         self.quotes, self.works, self.author = quotes, works, author
-        self.book = next(w for w in works if w.get("online"))
+        self.book = book or next(w for w in works if w.get("online"))
         self.i18n, self.c = read_app(self.site / "assets" / "app.js")
         self.template = (self.site / "index.html").read_text(encoding="utf-8")
         self.urls = []      # (path, {lang: url}, lastmod)
+        self.extra_urls = list(extra_urls)  # another book's pages, listed in this site's sitemap
 
     # ---------- URLs ----------
     @staticmethod
@@ -109,7 +114,7 @@ class Site:
 
     def path(self, lang, kind, sec=None):
         b = self.base(lang)
-        return {"home": b, "index": f"{b}book/", "author": f"{b}author/", "books": f"{b}books/"}.get(kind) or f"{b}book/{sec['slug']}/"
+        return {"home": b, "index": f"{b}{self.prefix}/", "author": f"{b}author/", "books": f"{b}books/"}.get(kind) or f"{b}{self.prefix}/{sec['slug']}/"
 
     def sec_by_page(self, p):
         return next(s for s in self.sections if s["start"] <= p <= s["end"])
@@ -120,6 +125,15 @@ class Site:
     # ---------- shared bits ----------
     def t(self, lang, k):
         return self.i18n[lang][k]
+
+    def book_title(self, lang):
+        """The first book uses the interface string; another book uses its own title."""
+        if self.prefix == "book":
+            return self.t(lang, "bookTitle")
+        return self.book["ar"] if lang == "ar" else self.book["en"]
+
+    def short_title(self, lang):
+        return SHORT_TITLE[lang] if self.prefix == "book" else self.book_title(lang)
 
     def sec_title(self, lang, s):
         return s["ar"] if lang == "ar" else s["en"]
@@ -193,14 +207,14 @@ class Site:
         h = h.replace('id="langBtn" type="button" class="icon-btn lang-btn" aria-label="Language">EN<',
                       f'id="langBtn" type="button" class="icon-btn lang-btn" aria-label="Language">{esc(self.t(lang, "langBtn"))}<')
         b = self.base(lang)
-        h = re.sub(r'href="/(?:en/)?book/" data-contents', f'href="{b}book/" data-contents', h)
+        h = re.sub(r'href="/(?:en/)?book/" data-contents', f'href="{b}{self.prefix}/" data-contents', h)
         if kind == "home" and lang == "ar":
             return h    # site/index.html itself: the app as it always was
-        attrs = f'lang="{lang}" dir="{"rtl" if lang == "ar" else "ltr"}" data-root="/" data-page-lang="{lang}"'
+        attrs = f'lang="{lang}" dir="{"rtl" if lang == "ar" else "ltr"}" data-root="{"/" if self.prefix == "book" else f"/{self.prefix}/"}" data-book-base="{self.prefix}" data-page-lang="{lang}"'
         if kind != "home":
             attrs += f' data-static="{"read:" + sec["id"] if kind == "read" else kind}"'
             # Static pages link to static pages; the hash routes of the app live at / and /en/.
-            for route, target in (("#/books", f"{b}books/"), ("#/author", f"{b}author/"), ("#/read", f"{b}book/"), ("#/", b)):
+            for route, target in (("#/books", f"{b}books/"), ("#/author", f"{b}author/"), ("#/read", f"{b}{self.prefix}/"), ("#/", b)):
                 h = h.replace(f'href="{route}"', f'href="{target}"')
             nav = {"read": "read", "index": "read", "author": "author", "books": "books"}[kind]
             h = h.replace(f'data-nav="{nav}"', f'data-nav="{nav}" aria-current="page"')
@@ -230,6 +244,13 @@ class Site:
     {body}
     <figcaption class="src"><span>{esc(self.t(lang, "bookTitle"))} · {self.t(lang, "page")} {num(q["page"], lang)}</span><a href="{self.page_href(lang, q["page"])}">{self.t(lang, "inContext")}</a></figcaption>
   </figure>"""
+
+    def book2_tile(self, lang):
+        """A link to the second book from the home page."""
+        ar = lang == "ar"
+        return (f'<a class="tile" href="{self.base(lang)}book-2/"><small>{"ص ٥–١١٠" if ar else "Pages 5–110"}</small>'
+                f'<h3>{"منهج السلف في العقيدة" if ar else "Manhaj al-Salaf fi al-Aqidah"}</h3>'
+                f'<p>{"كتاب ثانٍ للدكتور حمدي عبد العال: منهج السلف في العقيدة." if ar else "A second book by Dr. Hamdy Abdel Aal."}</p></a>')
 
     def view_home(self, lang):
         t = lambda k: self.t(lang, k)
@@ -271,6 +292,7 @@ class Site:
     <p class="lede">{t('aboutP1')}</p></div>
     <div class="tiles">
       {tiles}
+      {self.book2_tile(lang)}
     </div>
   </div></section>
 
@@ -306,7 +328,7 @@ class Site:
                     out += f'<ol class="works">{"".join(items)}</ol>'
                     items = []
                 group = s["group"]
-                if not s.get("heading"):
+                if not s.get("heading") and group in t("groups"):
                     out += f'<h2 style="margin-top:2rem;font-size:1.5rem">{esc(t("groups")[group])}</h2>'
             if s.get("heading"):
                 out += f'<h2 style="margin-top:2rem;font-size:1.5rem">{esc(self.sec_title(lang, s))}</h2>'
@@ -315,7 +337,7 @@ class Site:
         if items:
             out += f'<ol class="works">{"".join(items)}</ol>'
         return f"""
-  <div class="wrap"><div class="page-head"><div class="kicker">{t('tocTitle')}</div><h1 {'lang="ar"' if lang == 'ar' else ''}>{esc(t('bookTitle'))}</h1>
+  <div class="wrap"><div class="page-head"><div class="kicker">{t('tocTitle')}</div><h1 {'lang="ar"' if lang == 'ar' else ''}>{esc(self.book_title(lang))}</h1>
     <div class="sans" style="color:var(--muted)">{esc(AUTHOR_NAME[lang])} · {esc(t('pubPlace'))} · {self.book['year']}</div></div>
   <div class="prose"><p>{t('aboutP1')}</p></div>
   {out}
@@ -391,12 +413,12 @@ class Site:
             topics = f'<p class="meta topics" lang="{lang}" dir="{"rtl" if lang == "ar" else "ltr"}">{esc(w["topics"][lang])} <em>({t("topicsFrom")})</em></p>' if w.get("topics") else ""
             cards += f"""
     <article class="book">
-      {'<img src="/assets/cover.jpg" width="104" height="158" alt="">' if w.get('online') else '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
+      {'<img src="/assets/cover.jpg" width="104" height="158" alt="">' if w.get('online') and not w.get('reader') else '<div class="ph" aria-hidden="true"><svg><use href="#star"/></svg></div>'}
       <div><span class="tag {'ok' if w.get('online') else 'seek'}">{t('available') if w.get('online') else t('notOnline')}</span>
       {title}
       <p class="meta">{'<br>'.join(esc(x) for x in self.work_lines(lang, w))}<br>{t('heldBy')}{f" ({esc(w['uoft'])})" if w.get('uoft') else ''}{libs}</p>
       {topics}
-      <p class="row" style="gap:.4rem">{f'<a class="btn" href="{self.path(lang, "index")}">{t("readNow")}</a>' if w.get('online') else ''}
+      <p class="row" style="gap:.4rem">{f'<a class="btn" href="{self.base(lang)}{w.get("reader", "book")}/">{t("readNow")}</a>' if w.get('online') else ''}
         <a class="chip" href="{esc(self.c['UOFT_AUTHOR'])}" rel="noopener">{t('uoft')}</a>
         {f'<a class="chip" href="{w["scan"]["url"]}" rel="noopener">{t("scanChip")}</a>' if w.get('scan') else ''}
         {f'<a class="chip" href="{w["publisherUrl"]}" rel="noopener">{t("pubPage")}</a>' if w.get('publisherUrl') else ''}
@@ -441,25 +463,25 @@ class Site:
     # ---------- build ----------
     def build(self):
         book = self.root / "book"
-        src = {"ar": book / "al-milla-wal-nihla.md", "en": book / "al-milla-wal-nihla.en.md"}
-        meta = [book / "toc.json", book / "works.json", book / "author.json"]
+        src = self.src
+        meta = [self.toc_file, book / "works.json", book / "author.json"]
         app = [self.site / "index.html", self.site / "assets" / "app.js"]
         for lang in LANGS:
             t = lambda k: self.t(lang, k)
             site_name = {"@type": "WebSite", "@id": f"{ORIGIN}/#website", "name": "origins.faith", "url": f"{ORIGIN}{self.base(lang)}",
                          "inLanguage": lang, "alternateName": AUTHOR_NAME[lang], "description": t("heroDed"), "about": self.person(lang)}
-            self.write(lang, "home", self.shell(lang, "home", self.view_home(lang),
+            if self.full: self.write(lang, "home", self.shell(lang, "home", self.view_home(lang),
                        f"{AUTHOR_NAME[lang]} · {SHORT_TITLE[lang]} · origins.faith", t("heroDed"), site_name, "website"),
                        app + meta + [book / "quotes.json"])
             self.write(lang, "index", self.shell(lang, "index", self.view_index(lang),
-                       f"{t('bookTitle')} · {t('tocTitle')} · {AUTHOR_NAME[lang]}", clip(t("aboutP1"), 300), self.book_ld(lang), "book"),
+                       f"{self.book_title(lang)} · {t('tocTitle')} · {AUTHOR_NAME[lang]}", clip(t("aboutP1"), 300), self.book_ld(lang), "book"),
                        app + meta)
             for s in self.sections:
                 text = plain("".join(self.pages[lang][str(p)] for p in range(s["start"], s["end"] + 1) if str(p) in self.pages[lang]))
                 if text.startswith(self.sec_title(lang, s)):
                     text = text[len(self.sec_title(lang, s)):].lstrip(" :")
-                grp = self.t(lang, "groups")[s["group"]]
-                title = f"{self.sec_title(lang, s)} · {grp} · {SHORT_TITLE[lang]}" if s["group"] in ("ch1", "ch2", "ch3") else f"{self.sec_title(lang, s)} · {SHORT_TITLE[lang]} · {AUTHOR_NAME[lang]}"
+                grp = self.t(lang, "groups").get(s["group"], "")
+                title = f"{self.sec_title(lang, s)} · {grp} · {self.short_title(lang)}" if s["group"] in ("ch1", "ch2", "ch3") else f"{self.sec_title(lang, s)} · {self.short_title(lang)} · {AUTHOR_NAME[lang]}"
                 url = f"{ORIGIN}{self.path(lang, 'read', s)}"
                 ld = {"@type": "Chapter", "@id": f"{url}#chapter", "name": self.sec_title(lang, s), "url": url, "inLanguage": lang,
                       "position": self.sections.index(s) + 1, "pageStart": s["start"], "pageEnd": s["end"],
@@ -467,7 +489,7 @@ class Site:
                       "isPartOf": self.book_ld(lang, with_parts=False)}
                 self.write(lang, "read", self.shell(lang, "read", self.view_read(lang, s), title, clip(f"{self.sec_title(lang, s)}: {text}"), ld, "article",
                            sec=s, keywords=[self.sec_title(lang, s)]), [src[lang], book / "corrections.json"] + meta + app, sec=s)
-            self.write(lang, "author", self.shell(lang, "author", self.view_author(lang), f"{t('authorTitle')} · {t('authorKick')} · origins.faith",
+            if self.full: self.write(lang, "author", self.shell(lang, "author", self.view_author(lang), f"{t('authorTitle')} · {t('authorKick')} · origins.faith",
                        clip(t("authorP1"), 300), self.person(lang), "profile"), app + meta)
             books_ld = {"@type": "CollectionPage", "name": t("booksTitle"), "url": f"{ORIGIN}{self.path(lang, 'books')}", "inLanguage": lang,
                         "about": {"@id": f"{ORIGIN}{self.path(lang, 'author')}#person"},
@@ -477,15 +499,16 @@ class Site:
                                                                               "author": {"@type": "Person", "name": AUTHOR_NAME[lang]},
                                                                               "sameAs": [u for u in (w.get("publisherUrl"), w.get("neelwafurat")) if u]}}
                             for i, w in enumerate(self.works)]}}
-            self.write(lang, "books", self.shell(lang, "books", self.view_books(lang), f"{t('booksTitle')} · origins.faith", t("booksLead"), books_ld, "website"),
+            if self.full: self.write(lang, "books", self.shell(lang, "books", self.view_books(lang), f"{t('booksTitle')} · origins.faith", t("booksLead"), books_ld, "website"),
                        app + meta)
-        self.write_sitemap()
-        self.write_llms()
+        if self.full:
+            self.write_sitemap()
+            self.write_llms()
         return 2 * len(self.urls)
 
     def write_sitemap(self):
         rows = []
-        for path, alts, mod in self.urls:
+        for path, alts, mod in self.urls + self.extra_urls:
             links = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{ORIGIN}{alts[l]}"/>' for l in LANGS) + \
                     f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{ORIGIN}{alts["ar"]}"/>'
             for l in LANGS:

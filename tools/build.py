@@ -43,9 +43,10 @@ def render(md, arabic=True):
     return html
 
 
-def main():
-    pages = split_pages((BOOK / "al-milla-wal-nihla.md").read_text(encoding="utf-8"))
-    corr = json.loads((BOOK / "corrections.json").read_text(encoding="utf-8"))
+def build_book(prefix, md, en_md, toc_file, corr_file, quotes_file, out, works_id, full, extra_urls=()):
+    """One book: its text, contents and quotes, written to site/<out>/data and its pre-rendered pages under /<prefix>/."""
+    pages = split_pages(md.read_text(encoding="utf-8"))
+    corr = json.loads(corr_file.read_text(encoding="utf-8")) if corr_file.exists() else {}
     for key, c in corr.items():
         if key.startswith("_"):
             continue
@@ -61,7 +62,7 @@ def main():
                 fail(f"correction for page {n}: line not found: {line!r}")
             pages[n] = pages[n].replace(line, "")
 
-    toc = json.loads((BOOK / "toc.json").read_text(encoding="utf-8"))
+    toc = json.loads(toc_file.read_text(encoding="utf-8"))
     covered, prev_end = [], None
     for s in toc:
         if "start" not in s:
@@ -75,7 +76,7 @@ def main():
         fail(f"pages missing from the book text: {missing}")
 
     quotes = []
-    for q in json.loads((BOOK / "quotes.json").read_text(encoding="utf-8")):
+    for q in (json.loads(quotes_file.read_text(encoding="utf-8")) if quotes_file.exists() else []):
         if flat(q["text"]) not in flat(pages[q["page"]]):
             fail(f"quote not found on page {q['page']}: {q['text'][:40]}…")
         quotes.append({**q, "text": tidy(q["text"])})
@@ -86,10 +87,12 @@ def main():
         for k in ("id", "ar", "en", "gloss", "year", "publisher", "place", "neelwafurat"):
             if k not in w:
                 fail(f"works.json: {w.get('id', '?')} lacks {k}")
+    book_work = next(w for w in works if w["id"] == works_id) if works_id else None
 
     out_pages = {str(n): render(pages[n]) for n in covered if flat(re.sub(r"<[^>]+>", "", render(pages[n])))}
+    OUT = out
     OUT.mkdir(parents=True, exist_ok=True)
-    en_file = BOOK / "al-milla-wal-nihla.en.md"
+    en_file = en_md
     (OUT / "pages.json").write_text(json.dumps(out_pages, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (OUT / "site.json").write_text(json.dumps({"toc": toc, "quotes": quotes, "firstPage": covered[0], "lastPage": covered[-1], "hasEnglish": en_file.exists(), "works": works, "author": author},
                                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -112,8 +115,21 @@ def main():
     for s in toc:
         if "start" in s and not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", s.get("slug", "")):
             fail(f"toc.json: section {s['id']} needs a lowercase slug for its URL")
-    n_html = Site(ROOT, toc, out_pages, out_en, quotes, works, author).build()
-    print(f"built {len(out_pages)} pages, {len(toc)} toc entries, {len(quotes)} quotes, {en_note}, {n_html} HTML pages + sitemap.xml + llms.txt")
+    site = Site(ROOT, toc, out_pages, out_en, quotes, works, author, book=book_work, prefix=prefix, full=full,
+                src={"ar": md, "en": en_md}, toc_file=toc_file, extra_urls=extra_urls)
+    n_html = site.build()
+    print(f"built /{prefix}/: {len(out_pages)} pages, {len(toc)} toc entries, {len(quotes)} quotes, {en_note}, {n_html} HTML pages" + (" + sitemap.xml + llms.txt" if full else ""))
+    return site.urls
+
+
+def main():
+    # The second book, manhaj al-salaf fi al-aqidah, at /book-2/ (no quotes yet, its own folder of data).
+    book2_urls = build_book("book-2", BOOK / "manhaj-al-salaf.md", BOOK / "manhaj-al-salaf.en.md", BOOK / "manhaj-al-salaf.toc.json",
+                            BOOK / "manhaj-al-salaf.corrections.json", BOOK / "manhaj-al-salaf.quotes.json",
+                            ROOT / "site" / "book-2" / "data", "manhaj", False)
+    # The first book, al-milla-wal-nihla, at /book/. It also writes the sitemap and llms.txt, which list both books.
+    build_book("book", BOOK / "al-milla-wal-nihla.md", BOOK / "al-milla-wal-nihla.en.md", BOOK / "toc.json",
+               BOOK / "corrections.json", BOOK / "quotes.json", OUT, "milla", True, extra_urls=book2_urls)
 
 
 if __name__ == "__main__":

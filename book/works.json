@@ -1,6 +1,8 @@
 [
   {
     "id": "manhaj",
+    "reader": "book-2",
+    "online": true,
     "ar": "منهج السلف في العقيدة",
     "en": "Manhaj al-salaf fī al-ʻaqīdah",
     "gloss": "The Method of the Righteous Predecessors in Creed",
