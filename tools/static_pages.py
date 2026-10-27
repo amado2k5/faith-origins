@@ -115,7 +115,7 @@ class Site:
 
     def path(self, lang, kind, sec=None):
         b = self.base(lang)
-        return {"home": b, "index": f"{b}{self.prefix}/", "author": f"{b}author/", "books": f"{b}books/"}.get(kind) or f"{b}{self.prefix}/{sec['slug']}/"
+        return {"home": b, "index": f"{b}{self.prefix}/", "full": f"{b}{self.prefix}/full/", "author": f"{b}author/", "books": f"{b}books/"}.get(kind) or f"{b}{self.prefix}/{sec['slug']}/"
 
     def sec_by_page(self, p):
         return next(s for s in self.sections if s["start"] <= p <= s["end"])
@@ -217,7 +217,7 @@ class Site:
             # Static pages link to static pages; the hash routes of the app live at / and /en/.
             for route, target in (("#/books", f"{b}books/"), ("#/author", f"{b}author/"), ("#/read", f"{b}{self.prefix}/"), ("#/", b)):
                 h = h.replace(f'href="{route}"', f'href="{target}"')
-            nav = {"read": "read", "index": "read", "author": "author", "books": "books"}[kind]
+            nav = {"read": "read", "index": "read", "full": "read", "author": "author", "books": "books"}[kind]
             h = h.replace(f'data-nav="{nav}"', f'data-nav="{nav}" aria-current="page"')
             h = re.sub(r"\n?<noscript>.*?</noscript>", "", h, flags=re.S)
         h = re.sub(r"<html[^>]*>", f"<html {attrs}>", h, count=1)
@@ -344,7 +344,27 @@ class Site:
     <div class="sans" style="color:var(--muted)">{esc(AUTHOR_NAME[lang])} · {esc(t('pubPlace'))} · {self.book['year']}</div></div>
   <div class="prose"><p>{t('aboutP1')}</p></div>
   {out}
-  <p class="row" style="margin:2rem 0 3rem"><a class="btn" href="{self.path(lang, 'read', self.sections[0])}">{t('readBook')}</a><a class="btn ghost" href="{self.path(lang, 'author')}">{t('navAuthor')}</a></p></div>"""
+  <p class="row" style="margin:2rem 0 3rem"><a class="btn" href="{self.path(lang, 'read', self.sections[0])}">{t('readBook')}</a><a class="btn ghost" href="{self.path(lang, 'full')}">{t('readWhole')}</a><a class="btn ghost" href="{self.path(lang, 'author')}">{t('navAuthor')}</a></p></div>"""
+
+    def view_full(self, lang):
+        """The whole book on one page, for reading in one go in the browser."""
+        t = lambda k: self.t(lang, k)
+        body = ""
+        for s in self.toc:
+            if s.get("heading"):
+                body += f'<h2 class="ch">{esc(self.sec_title(lang, s))}</h2>'
+                continue
+            if "start" not in s:
+                continue
+            body += f'<section id="{s["id"]}"><h3><a href="{self.path(lang, "read", s)}">{esc(self.sec_title(lang, s))}</a></h3>'
+            for n in range(s["start"], s["end"] + 1):
+                if str(n) in self.pages[lang]:
+                    body += f'<div class="page" id="p{n}"><span class="pg">{num(n, lang)}</span>{self.pages[lang][str(n)]}</div>'
+            body += "</section>"
+        return f"""
+  <div class="wrap"><div class="page-head"><div class="kicker">{t('tocTitle')}</div><h1 {'lang="ar"' if lang == 'ar' else ''}>{esc(self.book_title(lang))}</h1>
+    <p class="row"><a class="btn ghost" href="{self.path(lang, 'index')}">{t('tocTitle')}</a></p></div>
+  {body}</div>"""
 
     def view_read(self, lang, sec):
         t = lambda k: self.t(lang, k)
@@ -479,6 +499,9 @@ class Site:
             if self.full: self.write(lang, "home", self.shell(lang, "home", self.view_home(lang),
                        f"{AUTHOR_NAME[lang]} · {SHORT_TITLE[lang]} · origins.faith", t("heroDed"), site_name, "website"),
                        app + meta + [book / "quotes.json"])
+            self.write(lang, "full", self.shell(lang, "full", self.view_full(lang),
+                       f"{self.book_title(lang)} · {t('readWhole')} · {AUTHOR_NAME[lang]}", clip(f"{self.book_title(lang)}: {t('readWhole')}", 300), self.book_ld(lang), "book"),
+                       app + meta + [src[lang]])
             self.write(lang, "index", self.shell(lang, "index", self.view_index(lang),
                        f"{self.book_title(lang)} · {t('tocTitle')} · {AUTHOR_NAME[lang]}", clip(t("aboutP1"), 300), self.book_ld(lang), "book"),
                        app + meta)
