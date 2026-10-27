@@ -1,16 +1,128 @@
 [
-  {"id": "intro", "slug": "introduction", "ar": "مقدمة", "en": "Introduction", "start": 7, "end": 10, "group": "front"},
-  {"id": "a1", "slug": "definition-of-ethics", "ar": "تعريف الأخلاق", "en": "Definition of ethics", "start": 11, "end": 19, "group": "m1"},
-  {"id": "a2", "slug": "aim-of-ethics", "ar": "الغاية في علم الأخلاق", "en": "The aim of the science of ethics", "start": 20, "end": 22, "group": "m1"},
-  {"id": "a3", "slug": "ethics-practical-and-normative", "ar": "الأخلاق علم عملي ومعياري", "en": "Ethics as a practical and normative science", "start": 23, "end": 27, "group": "m1"},
-  {"id": "a4", "slug": "importance-of-ethics", "ar": "أهمية علم الأخلاق", "en": "The importance of ethics", "start": 28, "end": 36, "group": "m1"},
-  {"id": "a5", "slug": "moral-responsibility-and-reward", "ar": "المسئولية الأخلاقية والجزاء", "en": "Moral responsibility and reward", "start": 37, "end": 44, "group": "m1"},
-  {"id": "a6", "slug": "moral-standard-in-greek-philosophy", "ar": "المعيار الخلقي في الفلسفة اليونانية", "en": "The moral standard in Greek philosophy", "start": 45, "end": 68, "group": "m2"},
-  {"id": "a7", "slug": "moral-standard-in-modern-philosophy", "ar": "المعيار الخلقي في الفلسفة الحديثة", "en": "The moral standard in modern philosophy", "start": 69, "end": 88, "group": "m3"},
-  {"id": "a8", "slug": "moral-standard-in-islam", "ar": "المعيار الخلقي في الإسلام", "en": "The moral standard in Islam", "start": 89, "end": 102, "group": "m4"},
-  {"id": "a9", "slug": "standard-of-islamic-ethics", "ar": "معيار الأخلاق الإسلامية", "en": "The standard of Islamic ethics", "start": 103, "end": 125, "group": "m4"},
-  {"id": "a10", "slug": "behaviour-in-islam", "ar": "ما يتعلق بالسلوك", "en": "Conduct in Islam", "start": 126, "end": 139, "group": "m4"},
-  {"id": "a11", "slug": "rights-and-duties", "ar": "الحقوق والواجبات", "en": "Rights and duties", "start": 140, "end": 146, "group": "m4"},
-  {"id": "a12", "slug": "duties", "ar": "الواجبات", "en": "Duties", "start": 147, "end": 166, "group": "m4"},
-  {"id": "a13", "slug": "complete-moral-personality-in-islam", "ar": "الشخصية الأخلاقية الكاملة في الإسلام", "en": "The complete moral personality in Islam", "start": 167, "end": 172, "group": "m4"}
+  {
+    "id": "intro",
+    "slug": "introduction",
+    "ar": "مقدمة",
+    "en": "Introduction",
+    "start": 1,
+    "end": 10,
+    "group": "front"
+  },
+  {
+    "id": "a1",
+    "slug": "definition-of-ethics",
+    "ar": "تعريف الأخلاق",
+    "en": "Definition of ethics",
+    "start": 11,
+    "end": 19,
+    "group": "m1"
+  },
+  {
+    "id": "a2",
+    "slug": "aim-of-ethics",
+    "ar": "الغاية في علم الأخلاق",
+    "en": "The aim of the science of ethics",
+    "start": 20,
+    "end": 22,
+    "group": "m1"
+  },
+  {
+    "id": "a3",
+    "slug": "ethics-practical-and-normative",
+    "ar": "الأخلاق علم عملي ومعياري",
+    "en": "Ethics as a practical and normative science",
+    "start": 23,
+    "end": 27,
+    "group": "m1"
+  },
+  {
+    "id": "a4",
+    "slug": "importance-of-ethics",
+    "ar": "أهمية علم الأخلاق",
+    "en": "The importance of ethics",
+    "start": 28,
+    "end": 36,
+    "group": "m1"
+  },
+  {
+    "id": "a5",
+    "slug": "moral-responsibility-and-reward",
+    "ar": "المسئولية الأخلاقية والجزاء",
+    "en": "Moral responsibility and reward",
+    "start": 37,
+    "end": 44,
+    "group": "m1"
+  },
+  {
+    "id": "a6",
+    "slug": "moral-standard-in-greek-philosophy",
+    "ar": "المعيار الخلقي في الفلسفة اليونانية",
+    "en": "The moral standard in Greek philosophy",
+    "start": 45,
+    "end": 68,
+    "group": "m2"
+  },
+  {
+    "id": "a7",
+    "slug": "moral-standard-in-modern-philosophy",
+    "ar": "المعيار الخلقي في الفلسفة الحديثة",
+    "en": "The moral standard in modern philosophy",
+    "start": 69,
+    "end": 88,
+    "group": "m3"
+  },
+  {
+    "id": "a8",
+    "slug": "moral-standard-in-islam",
+    "ar": "المعيار الخلقي في الإسلام",
+    "en": "The moral standard in Islam",
+    "start": 89,
+    "end": 102,
+    "group": "m4"
+  },
+  {
+    "id": "a9",
+    "slug": "standard-of-islamic-ethics",
+    "ar": "معيار الأخلاق الإسلامية",
+    "en": "The standard of Islamic ethics",
+    "start": 103,
+    "end": 125,
+    "group": "m4"
+  },
+  {
+    "id": "a10",
+    "slug": "behaviour-in-islam",
+    "ar": "ما يتعلق بالسلوك",
+    "en": "Conduct in Islam",
+    "start": 126,
+    "end": 139,
+    "group": "m4"
+  },
+  {
+    "id": "a11",
+    "slug": "rights-and-duties",
+    "ar": "الحقوق والواجبات",
+    "en": "Rights and duties",
+    "start": 140,
+    "end": 146,
+    "group": "m4"
+  },
+  {
+    "id": "a12",
+    "slug": "duties",
+    "ar": "الواجبات",
+    "en": "Duties",
+    "start": 147,
+    "end": 166,
+    "group": "m4"
+  },
+  {
+    "id": "a13",
+    "slug": "complete-moral-personality-in-islam",
+    "ar": "الشخصية الأخلاقية الكاملة في الإسلام",
+    "en": "The complete moral personality in Islam",
+    "start": 167,
+    "end": 172,
+    "group": "m4"
+  }
 ]
